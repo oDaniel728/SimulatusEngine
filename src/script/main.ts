@@ -1,4 +1,6 @@
 import "../styles/main.scss";
+import { forEachElementWithClass } from "./simulatus/utils/elementUtils";
 
-let message: string = "Hello, world!";
-console.log(message);
+forEachElementWithClass(":game-title", $ => {
+    $.textContent = "Simulatus Engine";
+});
