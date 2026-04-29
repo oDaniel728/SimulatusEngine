@@ -1,0 +1,29 @@
+$bg: #f3f5f9;
+$text: #1f2937;
+$accent: #2563eb;
+
+:root {
+  color: $text;
+  background-color: $bg;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+h1 {
+  margin: 0;
+  color: $accent;
+}
+
+.board {
+  width: 1280px;
+  height: 720px;
+  border: 2px dashed rgba(31, 41, 55, 0.35);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7);
+}
