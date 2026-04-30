@@ -35,4 +35,14 @@ export default class Board extends BoardElement<HTMLDivElement> {
     public applyAnimation(anim: Animation): HTMLStyleElement {
         return this.applyCSS(anim.export());
     }
+
+    public setDocumentFavicon(iconUrl: string): void {
+        let link: HTMLLinkElement | null = document.querySelector("link[rel~='icon']");
+        if (!link) {
+            link = document.createElement("link");
+            link.rel = "icon";
+            document.head.appendChild(link);
+        }
+        link.href = iconUrl;
+    }
 }

@@ -1,9 +1,20 @@
 import Identifier from "./Identifier";
+import LanguageProvider from "./providers/LanguageProvider";
 import Registries from "./Registries";
 
+type registryMap = {
+    [Registries.LANGUAGE]: string;
+}
+
 export default class Registry {
-    public static registries: Map<Registries, Map<Identifier, any>> = new Map();
-    public static register<T>(registry: Registries, id: Identifier, value: T): void {
+    protected static registries: Map<keyof registryMap, Map<Identifier, any>> = new Map();
+
+    public static get languageRegistry(): Map<Identifier, string> {
+        return this.registries.get(Registries.LANGUAGE) as Map<Identifier, string> || new Map();
+    }
+    
+    public static register<K extends keyof registryMap, V extends registryMap[K]>(registry: K, id: Identifier, value: V): void {
+
         if (!this.registries.has(registry)) {
             this.registries.set(registry, new Map());
         }
@@ -12,8 +23,8 @@ export default class Registry {
     }
 
 
-    public static get<T>(registry: Registries, id: Identifier): T | undefined
-    public static get<T>(registry: Registries): Map<Identifier, T> | undefined
+    public static get<K extends keyof registryMap>(registry: K, id: Identifier): registryMap[K] | undefined
+    public static get<K extends keyof registryMap>(registry: K): Map<Identifier, registryMap[K]> | undefined
 
     public static get<T>(registry: Registries, id?: Identifier): T | Map<Identifier, T> | undefined {
         const reg = this.registries.get(registry);
