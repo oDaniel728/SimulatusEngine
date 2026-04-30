@@ -28,6 +28,7 @@
     "vite-plugin-singlefile": "^2.3.3"
   },
   "dependencies": {
-    "csstype": "^3.2.3"
+    "csstype": "^3.2.3",
+    "ts-key-enum": "^3.0.13"
   }
 }

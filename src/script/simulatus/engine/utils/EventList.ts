@@ -1,3 +1,7 @@
+type EventListenerProps = {
+    once?: boolean;
+}
+
 export default class EventList<F extends (...args: any[]) => void> {
     private events: F[];
 
@@ -5,15 +9,16 @@ export default class EventList<F extends (...args: any[]) => void> {
         this.events = [];
     }
 
-    public add(event: F): void {
-        this.events.push(event);
-    }
-    public once(event: F): void {
-        const wrapper: F = ((...args: Parameters<F>) => {
-            event(...args);
-            this.remove(wrapper);
-        }) as F;
-        this.add(wrapper);
+    public addEventListener(event: F, props?: EventListenerProps): void {
+        if (props?.once) {
+            const wrapper: F = ((...args: Parameters<F>) => {
+                event(...args);
+                this.remove(wrapper);
+            }) as F;
+            this.events.push(wrapper);
+        } else {
+            this.events.push(event);
+        }
     }
     public async wait(): Promise<Parameters<F>> {
         return new Promise<Parameters<F>>((resolve) => {
@@ -21,7 +26,7 @@ export default class EventList<F extends (...args: any[]) => void> {
                 resolve(args);
                 this.remove(wrapper);
             }) as F;
-            this.add(wrapper);
+            this.addEventListener(wrapper);
         });
     }
 

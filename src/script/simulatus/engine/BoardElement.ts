@@ -1,6 +1,6 @@
 import * as CSS from "csstype";
-import BoardDOMEvents from "./engine/BoardDOMEvents";
-import Vector2 from "./engine/game/Vector2";
+import BoardDOMEvents from "./BoardDOMEvents";
+import Vector2 from "./game/Vector2";
 import BoardKeyboardHandler from "./BoardKeyboardHandler";
 
 export default class BoardElement<E extends HTMLElement = HTMLElement> {

@@ -1,4 +1,4 @@
-import BoardElement from "./BoardElement";
+import BoardElement from "../BoardElement";
 import Animation from "./Animation";
 
 export default class Board extends BoardElement<HTMLDivElement> {
