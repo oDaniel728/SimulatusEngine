@@ -189,5 +189,5 @@ export default class BoardElement<E extends HTMLElement = HTMLElement> {
 
         setTimeout(this.initOnLoop.bind(this), 1000 / 60); // 60 FPS
     }
-
+    
 }

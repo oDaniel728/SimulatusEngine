@@ -1,31 +1,31 @@
 import "../styles/main.scss";
+import Animation from "./simulatus/Animation";
 import Board from "./simulatus/Board";
-import BoardElement from "./simulatus/BoardElement";
-import { changeDocumentCSSVariable, changeElementCSSProperty, changeElementCSSVariable, forEachElementWithClass } from "./simulatus/utils/elementUtils";
+import Shape2 from "./simulatus/game/Shape2";
 
-forEachElementWithClass(":game-title", $ => {
-    $.textContent = "Simulatus Engine";
-});
-
-class Cube extends BoardElement {
-    public x: number = 100;
-    public y: number = 100;
-
+class Cube extends Shape2 {
     constructor() {
         super();
-        this.removeStyles();
-        this.style.position = "absolute";
-        this.style.top = `${this.y}px`;
-        this.style.left = `${this.x}px`;
-        this.style.width = "100px";
-        this.style.height = "100px";
-        this.style.backgroundColor = "#ff0000";
-        this.style.border = 0;
-    }
+        
+        this.area.x = 100;
+        this.area.y = 100;
 
-    protected onLoop(): void {
-        this.style.top = `${this.y}px`;
-        this.style.left = `${this.x}px`;
+        this.area.w = 100;
+        this.area.h = 100;
+
+        this.color = "red";
+    }
+}
+
+class RotateAnimation extends Animation {
+    constructor() {
+        super("rotate");
+        this.addTimestamp(0, {
+            transform: "rotate(0deg)"
+        });
+        this.addTimestamp(100, {
+            transform: "rotate(360deg)"
+        });
     }
 }
 
@@ -39,6 +39,8 @@ class GameBoard extends Board {
 
 function init() {
     const root = new GameBoard();
+    const rotateAnim = new RotateAnimation();
+    root.applyAnimation(rotateAnim);
 
     const cube = new Cube();
     cube.setParent(root);
@@ -46,13 +48,18 @@ function init() {
     root.events.onLoop(() => {
         const keysPressed = root.events.keysPressed;
         if (keysPressed.has("ArrowUp") || keysPressed.has("w"))
-            cube.y -= 10;
+            cube.pos.up(10);
         else if (keysPressed.has("ArrowDown") || keysPressed.has("s"))
-            cube.y += 10;
+            cube.pos.down(10);
         if (keysPressed.has("ArrowLeft") || keysPressed.has("a"))
-            cube.x -= 10;
+            cube.pos.left(10);
         else if (keysPressed.has("ArrowRight") || keysPressed.has("d"))
-            cube.x += 10;
+            cube.pos.right(10);
+    });
+    root.events.onKeyDown(ev => {
+        if (ev.code.toLowerCase() === "space") {
+            cube.playAnimation(rotateAnim)
+        }
     });
 }
 
