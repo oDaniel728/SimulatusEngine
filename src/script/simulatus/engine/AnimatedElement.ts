@@ -1,5 +1,5 @@
 import Animation from "./Animation";
-import BoardElement from "../BoardElement";
+import BoardElement from "./BoardElement";
 
 export default class AnimatedElement<E extends HTMLElement = HTMLDivElement> extends BoardElement<E> {
     private activeAnimations: { anim: Animation; uniqueName: string; styleElement: HTMLStyleElement }[] = [];

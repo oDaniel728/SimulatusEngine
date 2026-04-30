@@ -1,4 +1,4 @@
-import BoardElement from "../BoardElement";
+import BoardElement from "./BoardElement";
 
 export default class BoardDOMEvents {
     private board: BoardElement<HTMLElement>;
