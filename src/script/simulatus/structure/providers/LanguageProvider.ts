@@ -1,10 +1,11 @@
 import Identifier from "../Identifier";
 import Registries from "../Registries";
-import Registry from "../Registry";
+import Registry, { registryMap } from "../Registry";
 
 export default class LanguageProvider {
-    public static languages = new Map<string, Map<Identifier, string>>();
-    public static get langauges(): Map<string, Map<Identifier, string>> {}
+    public static get languages(): Map<string, Map<Identifier, string>> {
+        return Registry.get(Registries.LANGUAGE) as unknown as Map<string, Map<Identifier, string>>;
+    }
     public static knownLanguages: Set<string> = new Set();
     public static currentLanguage: string = "en_us";
     

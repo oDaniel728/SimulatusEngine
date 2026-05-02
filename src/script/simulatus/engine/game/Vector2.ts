@@ -65,4 +65,8 @@ export default class Vector2 {
     public toString(): string {
         return `Vector2(${this.x}, ${this.y})`;
     }
+        
+    public clone(): Vector2 {
+        return new Vector2(this.x, this.y);
+    }
 }

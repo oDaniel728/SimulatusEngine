@@ -1,8 +1,6 @@
 import Identifier from "@simulatus/structure/Identifier";
 import LanguageProvider from "@simulatus/structure/providers/LanguageProvider";
 import BaseLoader from "../BaseLoader";
-import Registries from "@simulatus/structure/Registries";
-import Registry from "@simulatus/structure/Registry";
 
 export default class LangProvider extends LanguageProvider {
     public static registerLang(id: Identifier, data: Record<string, string> = {}): void {

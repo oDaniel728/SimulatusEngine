@@ -8,6 +8,7 @@ export default class BoardElement<E extends HTMLElement = HTMLElement> {
     public events: BoardDOMEvents;
     private _anchorPoint: Vector2 = new Vector2(0, 0);
     public keyboardHandler: BoardKeyboardHandler;
+    public static Instances = new Set<BoardElement>();
 
     constructor();
     constructor(board: E);
@@ -22,7 +23,7 @@ export default class BoardElement<E extends HTMLElement = HTMLElement> {
         this.syncAnchorPoint();
 
         this.keyboardHandler = new BoardKeyboardHandler(this as unknown as BoardElement<HTMLElement>);
-        this.initOnLoop();
+        BoardElement.Instances.add(this);
     }
 
     public getElement(): E {
@@ -69,6 +70,10 @@ export default class BoardElement<E extends HTMLElement = HTMLElement> {
     }
 
     public appendChild(child: HTMLElement | BoardElement<HTMLElement>, id?: string, classes?: string[]): void {
+        if (child instanceof BoardElement) {
+            child.onAddedAsChild(this);
+        }
+
         const childElement = this.unwrap(child);
         if (id) {
             childElement.id = id;
@@ -80,6 +85,9 @@ export default class BoardElement<E extends HTMLElement = HTMLElement> {
     }
 
     public removeChild(child: HTMLElement | BoardElement<HTMLElement>): void {
+        if (child instanceof BoardElement) {
+            child.onRemovedAsChild(this);
+        }
         this.el.removeChild(this.unwrap(child));
     }
 
@@ -209,11 +217,14 @@ export default class BoardElement<E extends HTMLElement = HTMLElement> {
 
     protected onLoop(): void {}
 
-    private initOnLoop(): void {
+    public initOnLoop(): void {
         this.onLoop();
         [...this.events.listenersOfLoop].forEach((v) => { v(); });
 
         setTimeout(this.initOnLoop.bind(this), 1000 / 60); // 60 FPS
+    }
+    public static initAllLoops(): void {
+        BoardElement.Instances.forEach((instance) => instance.initOnLoop());
     }
 
     public get zIndex(): number {
@@ -224,4 +235,18 @@ export default class BoardElement<E extends HTMLElement = HTMLElement> {
         this.setStyleProperty("zIndex", value.toString());
     }
 
+    protected onAddedAsChild(parent: BoardElement<HTMLElement>): void {}
+    protected onRemovedAsChild(parent: BoardElement<HTMLElement>): void {}
+
+    public toString(): string {
+        return `BoardElement(${this.el.tagName}${this.el.id ? `#${this.el.id}` : ""}${this.el.className ? `.${this.el.className.split(" ").join(".")}` : ""})`;
+    }
+
+    public destroy(): void {
+        this.events.listenersOfLoop.clear();
+        BoardElement.Instances.delete(this);
+        if (this.el.parentElement) {
+            this.el.parentElement.removeChild(this.el);
+        }
+    }
 }
