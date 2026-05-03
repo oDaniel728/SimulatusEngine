@@ -14,7 +14,10 @@ export default class ScoreText extends BoardTextElement {
 
     protected onAddedAsChild(parent: BoardElement<HTMLElement>): void {
         super.onAddedAsChild(parent);
-        this.text = Text.literal(10);
         BaseLoader.LOGGER.info("ScoreText added to board.");
+    }
+    
+    protected onLoop(): void {
+        this.text = Text.literal(BaseLoader.SESSION.get("score"));
     }
 }

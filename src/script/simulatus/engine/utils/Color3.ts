@@ -205,6 +205,14 @@ export default class Color3 {
             this.a
         );
     }
+    public applyDarkness(factor: number): Color3 {
+        return new Color3(
+            Math.max(0, this.r * (1 - factor)),
+            Math.max(0, this.g * (1 - factor)),
+            Math.max(0, this.b * (1 - factor)),
+            this.a
+        );
+    }
 
     public applySaturation(factor: number): Color3 {
         const gray = 0.299 * this.r + 0.587 * this.g + 0.114 * this.b;

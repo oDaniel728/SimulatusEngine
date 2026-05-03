@@ -1,5 +1,8 @@
 {
     "base:text": "Hello, World!",
     "base:loading": "Loading...",
-    "base:title": "Simulatus Game Engine"
+    "base:title": "Simulatus Game Engine",
+    "base:increment_score_button": "Increment Score",
+    "base:change_language_to_english_button": "Change Language to English",
+    "base:change_language_to_portuguese_button": "Change Language to Portuguese"
 }

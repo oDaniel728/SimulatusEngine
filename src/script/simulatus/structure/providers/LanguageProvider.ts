@@ -3,6 +3,7 @@ import Registries from "../Registries";
 import Registry, { registryMap } from "../Registry";
 import AssetProvider from "./AssetProvider";
 import ObjectAsset from "../assets/ObjectAsset";
+import EventList from "@simulatus/engine/utils/EventList";
 
 const languageAssetModules = import.meta.glob('../../../game/**/assets/lang/*.json') as Record<string, () => Promise<unknown>>;
 
@@ -12,6 +13,8 @@ export default class LanguageProvider {
     }
     public static knownLanguages: Set<string> = new Set();
     public static currentLanguage: string = "en_us";
+
+    public static onLanguageChange = new EventList<(lang: string) => void>();
     
     public static registerLanguage(lang: string): void {
         this.knownLanguages.add(lang);
@@ -71,7 +74,9 @@ export default class LanguageProvider {
             console.warn(`Language '${lang}' has not been loaded yet.`);
             return;
         }
+        console.info(`Switching to language '${lang}'.`);
         LanguageProvider.currentLanguage = lang;
+        LanguageProvider.onLanguageChange.trigger(lang);
     }
 
     public static getCurrentLanguage(): string {

@@ -1,3 +1,4 @@
+import BoardElement from "../BoardElement";
 import Vector2 from "../game/Vector2";
 import EventList from "./EventList";
 import * as CSS from "csstype";
@@ -6,6 +7,32 @@ type StylableHTMLElement = { style: CSS.Properties };
 type hasElement = { getElement(): HTMLElement };
 
 export default class Mouse {
+
+    public static readonly Util = class {
+        public static isInsideOfBoardElement(bel: BoardElement): boolean {
+            const rect = bel.getElement().getBoundingClientRect();
+            const mousePos = Mouse.getMousePosition();
+            return (
+                mousePos.x >= rect.left &&
+                mousePos.x <= rect.right &&
+                mousePos.y >= rect.top &&
+                mousePos.y <= rect.bottom
+            );
+        }
+        public static isInsideOfElement(element: hasElement | HTMLElement): boolean {
+            if ("getElement" in element) {
+                element = element.getElement();
+            }
+            const rect = element.getBoundingClientRect();
+            const mousePos = Mouse.getMousePosition();
+            return (
+                mousePos.x >= rect.left &&
+                mousePos.x <= rect.right &&
+                mousePos.y >= rect.top &&
+                mousePos.y <= rect.bottom
+            );
+        }
+    }
 
     public static readonly BUTTON = {
         LEFT: 0,
@@ -70,6 +97,9 @@ export default class Mouse {
     }
 
     private static onMouseDown(event: MouseEvent): void {
+        this.position.x = event.clientX;
+        this.position.y = event.clientY;
+
         if (event.button === 0 || event.button === 1 || event.button === 2) {
             event.preventDefault();
         }

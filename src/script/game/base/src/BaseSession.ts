@@ -8,7 +8,7 @@ export type BaseSessionData = {
 
 export default class BaseSession extends Session<BaseSessionData> {
     constructor() {
-        super(Identifier.of(BaseLoader.ID, "base_session"), { score: 0 });
+        super(Identifier.of("base", "base_session"), { score: 0 });
     }
 
     public incrementScore(amount: number): void {

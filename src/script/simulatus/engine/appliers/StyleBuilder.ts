@@ -385,6 +385,29 @@ class AnimationBuilder extends Builder {
     }
 }
 
+class AlignmentBuilder extends Builder {
+    private horizontalValue: "left" | "center" | "right" = "left";
+    private verticalValue: "top" | "center" | "bottom" = "top";
+
+    public get style(): Properties {
+        return {
+            display: "flex",
+            justifyContent: this.horizontalValue === "left" ? "flex-start" : this.horizontalValue === "center" ? "center" : "flex-end",
+            alignItems: this.verticalValue === "top" ? "flex-start" : this.verticalValue === "center" ? "center" : "flex-end",
+        } as Properties;
+    }
+
+    public horizontal(value: "left" | "center" | "right"): this {
+        this.horizontalValue = value;
+        return this;
+    }
+
+    public vertical(value: "top" | "center" | "bottom"): this {
+        this.verticalValue = value;
+        return this;
+    }
+}
+
 export default class StyleBuilder implements Applier {
 
     public style = {} as Properties;
@@ -433,6 +456,10 @@ export default class StyleBuilder implements Applier {
 
     public buildBackground(generator: (builder: BackgroundBuilder) => void): this {
         return this.applyBuilder(BackgroundBuilder, generator);
+    }
+
+    public buildAlignment(generator: (builder: AlignmentBuilder) => void): this {
+        return this.applyBuilder(AlignmentBuilder, generator);
     }
 
     public setContent(content: string): this {

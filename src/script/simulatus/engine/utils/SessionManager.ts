@@ -2,7 +2,7 @@ import Identifier from "@simulatus/structure/Identifier";
 import Session from "./Session";
 
 export default class SessionManager {
-    public static saveSession<S extends Session<any>>(session: S): void {
+    public static saveSession<T extends Record<string, any>>(session: Session<T>): void {
         try {
             const serialized = JSON.stringify(session.getData());
             localStorage.setItem(`simulatus_session_${session.id}`, serialized);
@@ -11,14 +11,14 @@ export default class SessionManager {
         }
     }
 
-    public static loadSession<S extends Session<any>>(id: Identifier, defaultData: S["getData"]): S | null {
+    public static loadSession<T extends Record<string, any>>(id: Identifier, defaultData: T): Session<T> | null {
         try {
             const serialized = localStorage.getItem(`simulatus_session_${id}`);
             if (!serialized) {
                 return null;
             }
-            const data = JSON.parse(serialized);
-            return new Session(id, data) as S;
+            const data = JSON.parse(serialized) as T;
+            return new Session(id, data);
         } catch (error) {
             console.error("Error loading session:", error);
             return null;

@@ -5,6 +5,7 @@ import LangProvider from "./providers/LangProvider";
 import BaseBoard from "./BaseBoard";
 import Loader from "@simulatus/structure/Loader";
 import BoardElement from "@simulatus/engine/BoardElement";
+import BaseSession from "./BaseSession";
 
 const wait = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -13,10 +14,13 @@ export default class BaseLoader extends Loader {
     public static readonly LOGGER = new Logger(this.ID);
     public static BOARD = new BaseBoard();
 
+    public static readonly SESSION = new BaseSession();
+
     public static async main(): Promise<void> {
         this.LOGGER.info("Loaded main function called.");
 
         await LangProvider.useLanguage("pt_br");
+        this.SESSION.load();
 
         this.LOGGER.info(Text.translatable(Identifier.of(this.ID, "text")));
     }

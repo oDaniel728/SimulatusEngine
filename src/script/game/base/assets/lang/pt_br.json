@@ -1,5 +1,8 @@
 {
     "base:text": "Olá, mundo!",
     "base:loading": "Carregando...",
-    "base:title": "Simulatus Engine de Jogos"
+    "base:title": "Simulatus Engine de Jogos",
+    "base:increment_score_button": "Incrementar Pontuação",
+    "base:change_language_to_english_button": "Alterar idioma para inglês",
+    "base:change_language_to_portuguese_button": "Alterar idioma para português"
 }
