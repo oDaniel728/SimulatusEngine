@@ -3,9 +3,9 @@ import Registries from "../Registries";
 import Registry, { registryMap } from "../Registry";
 import AssetProvider from "./AssetProvider";
 import ObjectAsset from "../assets/ObjectAsset";
-import EventList from "@simulatus/engine/utils/EventList";
+import EventList from "core/engine/utils/EventList";
 
-const languageAssetModules = import.meta.glob('../../../game/**/assets/lang/*.json') as Record<string, () => Promise<unknown>>;
+const languageAssetModules = import.meta.glob('../../../script/game/**/assets/lang/*.json') as Record<string, () => Promise<unknown>>;
 
 export default class LanguageProvider {
     public static get languages(): Map<string, Map<Identifier, string>> {

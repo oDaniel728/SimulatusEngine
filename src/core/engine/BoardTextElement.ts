@@ -1,5 +1,5 @@
-import Text from "@simulatus/elements/Text";
-import LanguageProvider from "@simulatus/structure/providers/LanguageProvider";
+import Text from "core/elements/Text";
+import LanguageProvider from "core/structure/providers/LanguageProvider";
 import BoardElement from "./BoardElement";
 
 export default class BoardTextElement extends BoardElement<HTMLDivElement> {

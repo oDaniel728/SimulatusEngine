@@ -1,7 +1,7 @@
-import Identifier from "@simulatus/structure/Identifier";
-import LanguageProvider from "@simulatus/structure/providers/LanguageProvider";
+import Identifier from "core/structure/Identifier";
+import LanguageProvider from "core/structure/providers/LanguageProvider";
 import BaseLoader from "../BaseLoader";
-import Registerable from "@simulatus/structure/Registerable";
+import Registerable from "core/structure/Registerable";
 
 export default class LangProvider extends LanguageProvider implements Registerable {
     public static async register(): Promise<void> {

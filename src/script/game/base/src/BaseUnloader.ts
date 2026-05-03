@@ -1,4 +1,4 @@
-import Unloader from "@simulatus/structure/Unloader";
+import Unloader from "core/structure/Unloader";
 import BaseSession from "./BaseSession";
 import BaseLoader from "./BaseLoader";
 

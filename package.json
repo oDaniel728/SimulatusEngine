@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "vite",
-    "build": "echo \"Building...\" && tsc --noEmit && vite build && echo \"Copying scripts...\" && cp src/script/ -r build/script && echo \"Removing source files...\" && rm build/script/simulatus/ -r && rm build/script/game/**/src/ -rf",
+    "build": "echo \"Building...\" && tsc --noEmit && vite build && echo \"Copying scripts...\" && cp src/script/ -r build/script && echo \"Removing source files...\" && rm build/script/game/**/src/ -rf",
     "run": "vite preview",
     "typecheck": "tsc --noEmit"
   },

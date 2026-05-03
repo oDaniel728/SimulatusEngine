@@ -1,7 +1,7 @@
 import BoardElement from "./BoardElement";
 import Animation from "./Animation";
-import Text from "@simulatus/elements/Text";
-import ImageAsset from "@simulatus/structure/assets/ImageAsset";
+import Text from "core/elements/Text";
+import ImageAsset from "core/structure/assets/ImageAsset";
 
 export default class Board extends BoardElement<HTMLDivElement> {
     constructor(board: HTMLDivElement | string) {

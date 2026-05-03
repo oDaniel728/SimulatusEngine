@@ -1,15 +1,15 @@
-import Text from "@simulatus/elements/Text";
-import BoardElement from "@simulatus/engine/BoardElement";
-import Area2 from "@simulatus/engine/game/Area2";
-import Vector2 from "@simulatus/engine/game/Vector2";
+import Text from "core/elements/Text";
+import BoardElement from "core/engine/BoardElement";
+import Area2 from "core/engine/game/Area2";
+import Vector2 from "core/engine/game/Vector2";
 import BaseLoader from "../../BaseLoader";
-import BackgroundColorApplier from "@simulatus/engine/appliers/BackgroundColorApplier";
-import Color3 from "@simulatus/engine/utils/Color3";
-import ColorApplier from "@simulatus/engine/appliers/ColorApplier";
-import StyleBuilder from "@simulatus/engine/appliers/StyleBuilder";
-import BoardTextElement from "@simulatus/engine/BoardTextElement";
-import Identifier from "@simulatus/structure/Identifier";
-import Mouse from "@simulatus/engine/utils/Mouse";
+import BackgroundColorApplier from "core/engine/appliers/BackgroundColorApplier";
+import Color3 from "core/engine/utils/Color3";
+import ColorApplier from "core/engine/appliers/ColorApplier";
+import StyleBuilder from "core/engine/appliers/StyleBuilder";
+import BoardTextElement from "core/engine/BoardTextElement";
+import Identifier from "core/structure/Identifier";
+import Mouse from "core/engine/utils/Mouse";
 
 export default class Button extends BoardTextElement {
     private area = new Area2(new Vector2(20, 60), new Vector2(200, 40), new Vector2(0, -1));

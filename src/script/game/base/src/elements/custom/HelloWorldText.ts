@@ -1,8 +1,8 @@
-import Text from "@simulatus/elements/Text";
-import BoardTextElement from "@simulatus/engine/BoardTextElement";
+import Text from "core/elements/Text";
+import BoardTextElement from "core/engine/BoardTextElement";
 import HelloWorldTextBoardApplier from "../../boardAppliers/custom/HelloWorldTextBoardApplier";
-import Identifier from "@simulatus/structure/Identifier";
-import BoardElement from "@simulatus/engine/BoardElement";
+import Identifier from "core/structure/Identifier";
+import BoardElement from "core/engine/BoardElement";
 import BaseLoader from "../../BaseLoader";
 
 export default class HelloWorldText extends BoardTextElement {

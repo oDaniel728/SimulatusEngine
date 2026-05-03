@@ -1,4 +1,4 @@
-import ImageAsset from "@simulatus/structure/assets/ImageAsset";
+import ImageAsset from "core/structure/assets/ImageAsset";
 import BoardElement from "./BoardElement";
 import Vector2 from "./game/Vector2";
 import Color3 from "./utils/Color3";

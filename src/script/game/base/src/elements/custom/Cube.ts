@@ -1,9 +1,9 @@
-import BoardElement from "@simulatus/engine/BoardElement";
+import BoardElement from "core/engine/BoardElement";
 import BaseLoader from "../../BaseLoader";
-import Area2 from "@simulatus/engine/game/Area2";
-import Vector2 from "@simulatus/engine/game/Vector2";
-import Mouse from "@simulatus/engine/utils/Mouse";
-import Color3 from "@simulatus/engine/utils/Color3";
+import Area2 from "core/engine/game/Area2";
+import Vector2 from "core/engine/game/Vector2";
+import Mouse from "core/engine/utils/Mouse";
+import Color3 from "core/engine/utils/Color3";
 import CubeBoardApplier from "../../boardAppliers/custom/CubeBoardApplier";
 
 export default class Cube extends BoardElement {

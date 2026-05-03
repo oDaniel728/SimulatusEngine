@@ -2,12 +2,12 @@ import BasePreLoader from "@game/base/src/BasePreLoader";
 import BaseDOMLoader from "@game/base/src/BaseDOMLoader";
 import BaseLoader from "@game/base/src/BaseLoader";
 import "./styles/main.scss";
-import Loader from "@simulatus/structure/Loader";
-import PreLoader from "@simulatus/structure/PreLoader";
-import DOMLoader from "@simulatus/structure/DOMLoader";
-import Unloader from "@simulatus/structure/Unloader";
+import Loader from "core/structure/Loader";
+import PreLoader from "core/structure/PreLoader";
+import DOMLoader from "core/structure/DOMLoader";
+import Unloader from "core/structure/Unloader";
 import BaseUnloader from "@game/base/src/BaseUnloader";
-import BoardElement from "@simulatus/engine/BoardElement";
+import BoardElement from "core/engine/BoardElement";
 
 //#region 
 

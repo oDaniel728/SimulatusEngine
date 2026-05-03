@@ -1,4 +1,4 @@
-import Identifier from "@simulatus/structure/Identifier";
+import Identifier from "core/structure/Identifier";
 import SessionManager from "./SessionManager";
 
 export default class Session<T extends Record<string, any>> {

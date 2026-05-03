@@ -1,8 +1,8 @@
-import Identifier from "@simulatus/structure/Identifier";
-import AssetProvider from "@simulatus/structure/providers/AssetProvider";
+import Identifier from "core/structure/Identifier";
+import AssetProvider from "core/structure/providers/AssetProvider";
 import BaseLoader from "../BaseLoader";
-import ImageAsset from "@simulatus/structure/assets/ImageAsset";
-import Asset from "@simulatus/structure/assets/Asset";
+import ImageAsset from "core/structure/assets/ImageAsset";
+import Asset from "core/structure/assets/Asset";
 
 export default class BaseAssetProvider {
     public static async ICON() {

@@ -1,6 +1,6 @@
-import PreLoader from "@simulatus/structure/PreLoader";
-import Registry from "@simulatus/structure/Registry";
-import Mouse from "@simulatus/engine/utils/Mouse";
+import PreLoader from "core/structure/PreLoader";
+import Registry from "core/structure/Registry";
+import Mouse from "core/engine/utils/Mouse";
 import LangProvider from "./providers/LangProvider";
 import BaseAssetProvider from "./providers/BaseAssetProvider";
 

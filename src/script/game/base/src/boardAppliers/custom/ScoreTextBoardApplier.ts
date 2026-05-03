@@ -1,6 +1,6 @@
-import BoardElement from "@simulatus/engine/BoardElement";
-import BoardApplier from "@simulatus/engine/appliers/BoardApplier";
-import StyleBuilder from "@simulatus/engine/appliers/StyleBuilder";
+import BoardElement from "core/engine/BoardElement";
+import BoardApplier from "core/engine/appliers/BoardApplier";
+import StyleBuilder from "core/engine/appliers/StyleBuilder";
 
 export default class ScoreTextBoardApplier implements BoardApplier {
 

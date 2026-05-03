@@ -1,4 +1,4 @@
-import DOMLoader from "@simulatus/structure/DOMLoader";
+import DOMLoader from "core/structure/DOMLoader";
 import BaseBoard from "./BaseBoard";
 import BaseLoader from "./BaseLoader";
 import Cube from "./elements/custom/Cube";

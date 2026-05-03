@@ -1,4 +1,4 @@
-import Identifier from "@simulatus/structure/Identifier";
+import Identifier from "core/structure/Identifier";
 import Session from "./Session";
 
 export default class SessionManager {

@@ -1,10 +1,10 @@
-import Text from "@simulatus/elements/Text";
-import Identifier from "@simulatus/structure/Identifier";
-import Logger from "@simulatus/structure/Logger";
+import Text from "core/elements/Text";
+import Identifier from "core/structure/Identifier";
+import Logger from "core/structure/Logger";
 import LangProvider from "./providers/LangProvider";
 import BaseBoard from "./BaseBoard";
-import Loader from "@simulatus/structure/Loader";
-import BoardElement from "@simulatus/engine/BoardElement";
+import Loader from "core/structure/Loader";
+import BoardElement from "core/engine/BoardElement";
 import BaseSession from "./BaseSession";
 
 const wait = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));

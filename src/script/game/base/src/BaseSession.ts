@@ -1,5 +1,5 @@
-import Session from "@simulatus/engine/utils/Session";
-import Identifier from "@simulatus/structure/Identifier";
+import Session from "core/engine/utils/Session";
+import Identifier from "core/structure/Identifier";
 import BaseLoader from "./BaseLoader";
 
 export type BaseSessionData = {

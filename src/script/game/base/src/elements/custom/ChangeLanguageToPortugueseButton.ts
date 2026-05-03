@@ -1,10 +1,10 @@
-import Text from "@simulatus/elements/Text";
+import Text from "core/elements/Text";
 import ChangeLanguageButton from "./ChangeLanguageButton";
 import BaseLoader from "../../BaseLoader";
-import Identifier from "@simulatus/structure/Identifier";
-import Color3 from "@simulatus/engine/utils/Color3";
-import Area2 from "@simulatus/engine/game/Area2";
-import Vector2 from "@simulatus/engine/game/Vector2";
+import Identifier from "core/structure/Identifier";
+import Color3 from "core/engine/utils/Color3";
+import Area2 from "core/engine/game/Area2";
+import Vector2 from "core/engine/game/Vector2";
 
 export default class ChangeLanguageToPortugueseButton extends ChangeLanguageButton {
     constructor() {

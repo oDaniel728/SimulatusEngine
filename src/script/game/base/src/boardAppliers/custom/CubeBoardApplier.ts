@@ -1,7 +1,7 @@
-import Applier from "@simulatus/engine/appliers/Applier";
-import Color3 from "@simulatus/engine/utils/Color3";
-import Easing from "@simulatus/engine/utils/Easing";
-import StyleBuilder from "@simulatus/engine/appliers/StyleBuilder";
+import Applier from "core/engine/appliers/Applier";
+import Color3 from "core/engine/utils/Color3";
+import Easing from "core/engine/utils/Easing";
+import StyleBuilder from "core/engine/appliers/StyleBuilder";
 import { Properties } from "csstype";
 
 export default class CubeBoardApplier implements Applier {
