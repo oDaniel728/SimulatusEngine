@@ -2,7 +2,7 @@
 node_modules/
 
 # Build output
-dist/
+build/
 
 # Logs
 logs/
@@ -24,7 +24,7 @@ pnpm-debug.log*
 *.temp
 
 # Editor and OS files
-.vscode/
+# .vscode/
 .idea/
 .DS_Store
 Thumbs.db

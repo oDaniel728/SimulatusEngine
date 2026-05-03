@@ -1,0 +1,39 @@
+{
+    /*
+      # material-icon-theme
+      - Muda o ícone da pasta "simulatus" para o ícone de TypeScript.
+      ? isso é feito para facilitar a identificação visual da pasta 
+       "simulatus" no explor
+    */
+    "material-icon-theme.folders.associations": {
+        "simulatus": "typescript"
+    },
+
+    /*
+      # Altamente recomendado:
+      - Ativa a exibição de pastas de forma compactada, ou seja,
+        se uma pasta tiver apenas uma subpasta, ela será exibida 
+        como uma única pasta. 
+      - Isso ajuda a reduzir a quantidade de pastas exibidas e 
+        torna a navegação mais eficiente.
+      ? se `false`: "game" > "base"
+      ? se `true`: "game/base"
+    */
+    "explorer.compactFolders": true,
+    
+    /*
+      # files.exclude - Quais arquivos não devem aparecer no VSCode.
+        "<fp>": boolean ? mostrado : escondido
+    */
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/node_modules": true,
+        "**/vite-env.d.ts": true
+    },
+
+    "liveServer.settings.root": "/build"
+}
