@@ -1,5 +1,7 @@
 import BoardElement from "./BoardElement";
 import Animation from "./Animation";
+import Text from "@simulatus/elements/Text";
+import ImageAsset from "@simulatus/structure/assets/ImageAsset";
 
 export default class Board extends BoardElement<HTMLDivElement> {
     constructor(board: HTMLDivElement | string) {
@@ -11,8 +13,8 @@ export default class Board extends BoardElement<HTMLDivElement> {
         return null;
     }
 
-    public setDocumentTitle(title: string): void {
-        document.title = title;
+    public setDocumentTitle(title: Text): void {
+        document.title = title.toString();
     }
 
     public changeResolution(width: number, height: number): void {
@@ -36,13 +38,13 @@ export default class Board extends BoardElement<HTMLDivElement> {
         return this.applyCSS(anim.export());
     }
 
-    public setDocumentFavicon(iconUrl: string): void {
+    public setDocumentFavicon(asset: ImageAsset): void {
         let link: HTMLLinkElement | null = document.querySelector("link[rel~='icon']");
         if (!link) {
             link = document.createElement("link");
             link.rel = "icon";
             document.head.appendChild(link);
         }
-        link.href = iconUrl;
+        link.href = asset.url;
     }
 }

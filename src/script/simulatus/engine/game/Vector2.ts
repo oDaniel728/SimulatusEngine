@@ -1,10 +1,36 @@
 export default class Vector2 {
-    public x: number;
-    public y: number;
 
-    constructor(x: number = 0, y: number = 0) {
-        this.x = x;
-        this.y = y;
+    private _x!: number;
+    private _y!: number;
+
+    private _cb!: (() => void) | undefined;
+    private get cb() { return this._cb || (() => {}); }
+
+    public get x(): number {
+        return this._x;
+    }
+
+    public set x(value: number) {
+        this._x = value;
+        this.cb();
+    }
+
+    public get y(): number {
+        return this._y;
+    }
+
+    public set y(value: number) {
+        this._y = value;
+        this.cb();
+    }
+
+    constructor();
+    constructor(x: number, y: number);
+    constructor(x: number, y: number, cb: () => void);
+    constructor(x: number = 0, y: number = 0, cb?: () => void) {
+        this._x = x;
+        this._y = y;
+        this._cb = cb;
     }
 
     public add(other: Vector2): Vector2

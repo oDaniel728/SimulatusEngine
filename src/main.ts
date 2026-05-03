@@ -31,8 +31,9 @@ export class GameInjector {
 
 async function main(): Promise<void> {
     console.log("Hello, Simulatus Engine!");
-
+    
     await GameInjector.inject(BasePreLoader, BaseLoader, BaseDOMLoader, BaseUnloader);
+    document.getElementById("loading")?.classList.add("hidden");
     BoardElement.initAllLoops();
 }
 

@@ -1,5 +1,5 @@
 import Board from "@simulatus/engine/Board";
-import Cube from "./custom/cube";
+import Cube from "./elements/custom/Cube";
 
 export default class BaseBoard extends Board {
     constructor() {

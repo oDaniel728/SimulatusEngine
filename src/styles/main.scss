@@ -40,5 +40,34 @@ h1 {
 }
 
 .board * {
-    position: relative;
+    position: absolute;
+}
+
+// CARREGAMENTO
+.loading {
+    background-color: #000000c5;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: $text;
+    position: fixed;
+    z-index: 999999999999999999999;
+}
+.loading >ul >li.warn {
+    color: #ffae00;
+}
+.loading >ul >li.error {
+    color: #e90000;
+}
+.loading >ul >li.log {
+    color: $text;
+}
+.loading.hidden {
+    display: none;
+}
+.loading >ul >li {
+    list-style: none;
 }

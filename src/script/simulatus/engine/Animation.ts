@@ -1,5 +1,8 @@
 import * as CSS from "csstype";
 import Easing from "./utils/Easing";
+import BoardElement from "./BoardElement";
+import Applier from "./appliers/Applier";
+import BoardApplier from "./appliers/BoardApplier";
 
 type AnimationDirection = CSS.Properties["animationDirection"];
 type AnimationFillMode = CSS.Properties["animationFillMode"];

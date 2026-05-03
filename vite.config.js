@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import { resolve } from "path";
 import { viteSingleFile } from "vite-plugin-singlefile";
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
     root: "src",
     resolve: {
         alias: {
@@ -12,9 +12,18 @@ export default defineConfig({
             "@game/": resolve(__dirname, "src/script/game")
         }
     },
-    build: {
-        outDir: "../dist",
-        emptyOutDir: true
+    server: {
+        fs: {
+            strict: false
+        },
+        watch: {
+            ignored: ["**/build/**"]
+        }
     },
-    plugins: [viteSingleFile()]
-});
+    build: {
+        outDir: "../build",
+        emptyOutDir: true,
+        assetsInlineLimit: 10000000
+    },
+    plugins: command === "build" ? [viteSingleFile()] : []
+}));

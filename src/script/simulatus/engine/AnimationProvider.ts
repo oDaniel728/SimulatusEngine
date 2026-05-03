@@ -1,13 +1,18 @@
 import Animation from "./Animation";
 import BoardElement from "./BoardElement";
 
-export default class AnimatedElement<E extends HTMLElement = HTMLDivElement> extends BoardElement<E> {
+export default class AnimationProvider {
     private activeAnimations: { anim: Animation; uniqueName: string; styleElement: HTMLStyleElement }[] = [];
+    private element: BoardElement<HTMLElement>;
 
-    constructor() {
-        super();
+    constructor(element: BoardElement<HTMLElement>) {
+        this.element = element;
     }
 
+    public getElement(): BoardElement<HTMLElement> {
+        return this.element;
+    }
+    
     private createUniqueAnimationName(anim: Animation): string {
         const base = anim.name.replace(/[^a-zA-Z0-9_-]/g, "_");
         const suffix = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);

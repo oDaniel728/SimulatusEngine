@@ -1,13 +1,23 @@
+import Applier from "../appliers/Applier";
 import Vector2 from "./Vector2";
+import * as CSS from "csstype";
 
-export default class Area2 {
+type StylableHTMLElement = { style: CSS.Properties };
+
+export default class Area2 implements Applier {
     public position: Vector2;
     public size: Vector2;
+    public anchorPoint: Vector2;
     public _callback: () => void = () => {};
 
-    constructor(position: Vector2 = new Vector2(), size: Vector2 = new Vector2()) {
+    constructor();
+    constructor(position: Vector2);
+    constructor(position: Vector2, size: Vector2);
+    constructor(position: Vector2, size: Vector2, anchorPoint: Vector2);
+    constructor(position: Vector2 = new Vector2(), size: Vector2 = new Vector2(), anchorPoint: Vector2 = new Vector2(0, 0)) {
         this.position = position;
         this.size = size;
+        this.anchorPoint = anchorPoint;
     }
 
     public get x(): number { return this.position.x; }
@@ -50,10 +60,25 @@ export default class Area2 {
     }
 
     public getCenter(): Vector2 {
-        return new Vector2(this.position.x + this.size.x / 2, this.position.y + this.size.y / 2);
+        return new Vector2(
+            this.left - (this.size.x * this.anchorPoint.x),
+            this.top - (this.size.y * this.anchorPoint.y)
+        );
     }
 
     public toString(): string {
-        return `Area2(position: ${this.position.toString()}, size: ${this.size.toString()})`;
+        return `Area2(position: ${this.position.toString()}, size: ${this.size.toString()}, anchorPoint: ${this.anchorPoint.toString()})`;
+    }
+
+    public applyToElement(element: StylableHTMLElement): void {
+        this.applyCenterToElement(element)
+    }
+    public applyCenterToElement(element: StylableHTMLElement): void {
+        const center = this.getCenter();
+        element.style.position = "absolute";
+        element.style.left = `${center.x}px`;
+        element.style.top = `${center.y}px`;
+        element.style.width = `${this.size.x}px`;
+        element.style.height = `${this.size.y}px`;
     }
 }

@@ -1,9 +1,10 @@
 import Identifier from "./Identifier";
-import LanguageProvider from "./providers/LanguageProvider";
 import Registries from "./Registries";
+import Asset from "./assets/Asset";
 
 export type registryMap = {
     [Registries.LANGUAGE]: Map<string, Map<Identifier, string>>;
+    [Registries.ASSET]: Map<Identifier, Asset>;
 }
 
 export default class Registry {
@@ -15,6 +16,7 @@ export default class Registry {
 
     public static init(): void {
         this.registries.set(Registries.LANGUAGE, new Map());
+        this.registries.set(Registries.ASSET, new Map());
     }
     
     public static register<K extends keyof registryMap, V extends registryMap[K]>(registry: K, id: Identifier, value: V): void {
@@ -30,13 +32,23 @@ export default class Registry {
     public static get<K extends keyof registryMap>(registry: K): registryMap[K]
 
     public static get<T>(registry: Registries, id?: Identifier): T | Map<Identifier, T>{
+        console.log(`Getting registry '${registry}'${id ? ` with id '${id}'` : ""}...`);
         const reg = this.registries.get(registry);
         if (!reg) {
             console.warn(`Registry '${registry}' not found.`);
             return id ? undefined as unknown as T : new Map() as unknown as Map<Identifier, T>;
         }
         if (id) {
-            const value = reg.get(id);
+            let value = reg.get(id);
+            if (value === undefined) {
+                const searchKey = id.toString();
+                for (const existingKey of (reg as Map<Identifier, unknown>).keys()) {
+                    if (existingKey.toString() === searchKey) {
+                        value = (reg as Map<Identifier, unknown>).get(existingKey);
+                        break;
+                    }
+                }
+            }
             if (value === undefined) {
                 console.warn(`Identifier '${id}' not found in registry '${registry}'.`);
                 return undefined as unknown as T;

@@ -1,6 +1,10 @@
 import Identifier from "../Identifier";
 import Registries from "../Registries";
 import Registry, { registryMap } from "../Registry";
+import AssetProvider from "./AssetProvider";
+import ObjectAsset from "../assets/ObjectAsset";
+
+const languageAssetModules = import.meta.glob('../../../game/**/assets/lang/*.json') as Record<string, () => Promise<unknown>>;
 
 export default class LanguageProvider {
     public static get languages(): Map<string, Map<Identifier, string>> {
@@ -15,35 +19,51 @@ export default class LanguageProvider {
 
     public static async loadLanguages(namespace: string): Promise<void> {
         for (const lang of this.knownLanguages) {
-            await this.loadLanguage(lang, `/script/game/${namespace}/assets/lang/`);
+            await this.loadLanguage(lang, namespace);
         }
     }
 
-    public static async loadLanguage(lang: string, path: string): Promise<void> {
-        if (this.languages.has(lang)) return;
+    public static async loadLanguage(lang: string, namespace: string): Promise<void> {
         try {
-            const response = await fetch(path + lang + ".json");
-            if (!response.ok) {
-                console.warn(`Language file for '${lang}' not found at ${path + lang + ".json"}`);
+            const asset = await AssetProvider.loadAsset(Identifier.of(namespace, `/lang/${lang}.json`));
+            if (!(asset instanceof ObjectAsset)) {
+                console.warn(`Language asset '${lang}' is not a JSON object asset.`);
                 return;
             }
-            const data: Record<string, string> = await response.json();
-            const tmp = [];
-            for (const [key, value] of Object.entries(data)) {
-                const [namespace, name] = key.split(":");
-                if (!namespace || !name) {
-                    console.warn(`Invalid key '${key}' in language file for '${lang}'. Expected format 'namespace:name'.`);
+            const data = await asset.load();
+            if (typeof data !== "object" || data === null || Array.isArray(data)) {
+                console.warn(`Invalid language JSON in '${lang}' for namespace '${namespace}'.`);
+                return;
+            }
+
+            const existing = this.languages.get(lang) ?? new Map<Identifier, string>();
+            for (const [key, value] of Object.entries(data as Record<string, unknown>)) {
+                if (typeof value !== "string") {
                     continue;
                 }
-                tmp.push([Identifier.fromString(key), value] as [Identifier, string]);
-            };
-            this.languages.set(
-                lang, 
-                new Map(tmp)
-            );
+                const identifier = this.buildNamespacedIdentifier(namespace, key);
+                if (!identifier) {
+                    console.warn(`Invalid key '${key}' in language file for '${lang}'. Expected format 'namespace:name' or local key.`);
+                    continue;
+                }
+                existing.set(identifier, value);
+            }
+
+            this.languages.set(lang, existing);
         } catch (error) {
             console.error(`Error loading language '${lang}':`, error);
         }
+    }
+
+    private static buildNamespacedIdentifier(namespace: string, key: string): Identifier | null {
+        if (key.includes(":")) {
+            try {
+                return Identifier.fromString(key);
+            } catch {
+                return null;
+            }
+        }
+        return Identifier.of(namespace, key);
     }
 
     public static async useLanguage(lang: string): Promise<void> {

@@ -2,6 +2,12 @@ import * as CSS from "csstype";
 import BoardDOMEvents from "./BoardDOMEvents";
 import Vector2 from "./game/Vector2";
 import BoardKeyboardHandler from "./BoardKeyboardHandler";
+import Applier from "./appliers/Applier";
+import BoardApplier from "./appliers/BoardApplier";
+
+type StylableHTMLElement = { style: CSS.Properties };
+type ValidApplier = Applier | BoardApplier;
+type ClassOf<T> = new (...args: any[]) => T;
 
 export default class BoardElement<E extends HTMLElement = HTMLElement> {
     private el: E;
@@ -9,6 +15,15 @@ export default class BoardElement<E extends HTMLElement = HTMLElement> {
     private _anchorPoint: Vector2 = new Vector2(0, 0);
     public keyboardHandler: BoardKeyboardHandler;
     public static Instances = new Set<BoardElement>();
+
+    private _opacity: number = 1;
+    public get opacity(): number {
+        return this._opacity;
+    }
+    public set opacity(value: number) {
+        this._opacity = Math.max(0, Math.min(1, value));
+        this.setStyleProperty("opacity", this._opacity.toString());
+    }
 
     constructor();
     constructor(board: E);
@@ -237,6 +252,7 @@ export default class BoardElement<E extends HTMLElement = HTMLElement> {
 
     protected onAddedAsChild(parent: BoardElement<HTMLElement>): void {}
     protected onRemovedAsChild(parent: BoardElement<HTMLElement>): void {}
+    protected deconstructor(): void {}
 
     public toString(): string {
         return `BoardElement(${this.el.tagName}${this.el.id ? `#${this.el.id}` : ""}${this.el.className ? `.${this.el.className.split(" ").join(".")}` : ""})`;
@@ -248,5 +264,23 @@ export default class BoardElement<E extends HTMLElement = HTMLElement> {
         if (this.el.parentElement) {
             this.el.parentElement.removeChild(this.el);
         }
+        this.deconstructor();
     }
+    public get remove(): typeof this.destroy {
+        return this.destroy;
+    }
+
+    public apply(applyable: ValidApplier | ClassOf<ValidApplier>): void {
+        if (typeof applyable === "function") {
+            applyable = new applyable();
+        }
+        
+        if ("applyToBoardElement" in applyable) {
+            applyable.applyToBoardElement(this);
+        }
+        if ("applyToElement" in applyable) {
+            applyable.applyToElement(this as unknown as StylableHTMLElement);
+        }
+    }
+
 }
