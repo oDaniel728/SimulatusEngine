@@ -113,9 +113,26 @@ npm run build
 This script does:
 
 1. `tsc --noEmit` to type-check the project.
-2. `vite build` to generate production assets into `build/`.
+2. `npx vite build` to generate production assets into `build/`.
 3. Copy `src/script/` into `build/script/`.
 4. Remove nested `src/` folders inside `build/script/game/**/src/`.
+
+This produces the normal production bundle, where Vite may combine and optimize code into a final HTML/JS/CSS output.
+
+### Build without bundling
+
+Use:
+
+```bash
+npm run build:js
+```
+
+This script performs a JS/CSS-only compilation without the production bundling step:
+
+1. `tsc --noEmit false --outDir build/js` compiles TypeScript into JavaScript under `build/js`.
+2. `npx sass src/styles/main.scss build/js/main.css` compiles the SCSS into CSS.
+
+This is useful for inspecting the generated code and assets in a non-bundled form. It does not produce the same single-file/obfuscated production output as `npm run build`.
 
 ### Run development server
 
