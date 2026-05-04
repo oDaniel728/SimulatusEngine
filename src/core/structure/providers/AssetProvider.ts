@@ -1,3 +1,9 @@
+/**
+ * AssetProvider.ts
+ *
+ * Auto-generated documentation comment for core/structure/providers/AssetProvider.ts.
+ */
+
 import Identifier from "../Identifier";
 import Registries from "../Registries";
 import Registry from "../Registry";
@@ -9,6 +15,11 @@ import ObjectAsset from "../assets/ObjectAsset";
 
 const assetUrlMap = new Map<string, string>();
 
+/**
+ * AssetProvider
+ *
+ * Class for the engine.
+ */
 export default class AssetProvider {
     private static cache: Map<string, Asset> = new Map();
     private static readonly urlBase: string = "./script/game/";

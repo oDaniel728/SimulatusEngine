@@ -1,3 +1,14 @@
+/**
+ * Vector2.ts
+ *
+ * Auto-generated documentation comment for core/engine/game/Vector2.ts.
+ */
+
+/**
+ * Vector2
+ *
+ * Class for the engine.
+ */
 export default class Vector2 {
 
     private _x!: number;

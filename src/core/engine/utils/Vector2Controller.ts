@@ -1,5 +1,16 @@
+/**
+ * Vector2Controller.ts
+ *
+ * Auto-generated documentation comment for core/engine/utils/Vector2Controller.ts.
+ */
+
 import Vector2 from "../game/Vector2";
 
+/**
+ * Vector2Controller
+ *
+ * Class for the engine.
+ */
 export default class Vector2Controller {
     private vec: Vector2;
     public _callback: () => void = () => {};

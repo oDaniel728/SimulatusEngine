@@ -1,8 +1,19 @@
+/**
+ * BoardImageElement.ts
+ *
+ * Auto-generated documentation comment for core/engine/BoardImageElement.ts.
+ */
+
 import ImageAsset from "core/structure/assets/ImageAsset";
 import BoardElement from "./BoardElement";
 import Vector2 from "./game/Vector2";
 import Color3 from "./utils/Color3";
 
+/**
+ * BoardImageElement
+ *
+ * Class for the engine.
+ */
 export default class BoardImageElement extends BoardElement<HTMLDivElement> {
     private _texture!: ImageAsset;
     private _textureOffset!: Vector2;

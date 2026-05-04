@@ -1,3 +1,9 @@
+/**
+ * main.ts
+ *
+ * Auto-generated documentation comment for main.ts.
+ */
+
 import BasePreLoader from "@game/base/src/BasePreLoader";
 import BaseDOMLoader from "@game/base/src/BaseDOMLoader";
 import BaseLoader from "@game/base/src/BaseLoader";
@@ -11,6 +17,11 @@ import BoardElement from "core/engine/BoardElement";
 
 //#region 
 
+/**
+ * GameInjector
+ *
+ * Class for the engine.
+ */
 export class GameInjector {
     public static async inject(
         preLoader: typeof PreLoader,

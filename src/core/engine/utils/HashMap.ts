@@ -6,6 +6,11 @@
  * @typeParam K - Tipo das chaves
  * @typeParam V - Tipo dos valores
  */
+/**
+ * HashMap
+ *
+ * Class for the engine.
+ */
 export default class HashMap<K, V> {
     private hmap: Map<K, V>;
 

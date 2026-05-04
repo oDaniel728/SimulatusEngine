@@ -1,3 +1,14 @@
+/**
+ * Identifier.ts
+ *
+ * Auto-generated documentation comment for core/structure/Identifier.ts.
+ */
+
+/**
+ * Identifier
+ *
+ * Class for the engine.
+ */
 export default class Identifier {
     public constructor(
         public namespace: string, 

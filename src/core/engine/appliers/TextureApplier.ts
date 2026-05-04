@@ -1,7 +1,18 @@
+/**
+ * TextureApplier.ts
+ *
+ * Auto-generated documentation comment for core/engine/appliers/TextureApplier.ts.
+ */
+
 import BoardApplier from "./BoardApplier";
 import BoardElement from "../BoardElement";
 import ImageAsset from "../../structure/assets/ImageAsset";
 
+/**
+ * TextureApplier
+ *
+ * Class for the engine.
+ */
 export default class TextureApplier implements BoardApplier {
     private _texture: ImageAsset;
     private _repeat: string = "no-repeat";

@@ -1,3 +1,9 @@
+/**
+ * elementUtils.ts
+ *
+ * Auto-generated documentation comment for core/engine/utils/elementUtils.ts.
+ */
+
 import type * as CSS from "csstype";
 
 type valuesOf<T> = T[keyof T];

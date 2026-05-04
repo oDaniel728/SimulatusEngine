@@ -1,6 +1,17 @@
+/**
+ * ImageAsset.ts
+ *
+ * Auto-generated documentation comment for core/structure/assets/ImageAsset.ts.
+ */
+
 import Asset from "./Asset";
 import Identifier from "../Identifier";
 
+/**
+ * ImageAsset
+ *
+ * Class for the engine.
+ */
 export default class ImageAsset extends Asset {
     public readonly element: HTMLImageElement;
 

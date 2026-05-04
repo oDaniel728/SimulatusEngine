@@ -1,3 +1,9 @@
+/**
+ * ChangeLanguageToPortugueseButton.ts
+ *
+ * Auto-generated documentation comment for script/game/base/src/elements/custom/ChangeLanguageToPortugueseButton.ts.
+ */
+
 import Text from "core/elements/Text";
 import ChangeLanguageButton from "./ChangeLanguageButton";
 import BaseLoader from "../../BaseLoader";
@@ -6,6 +12,11 @@ import Color3 from "core/engine/utils/Color3";
 import Area2 from "core/engine/game/Area2";
 import Vector2 from "core/engine/game/Vector2";
 
+/**
+ * ChangeLanguageToPortugueseButton
+ *
+ * Class for the engine.
+ */
 export default class ChangeLanguageToPortugueseButton extends ChangeLanguageButton {
     constructor() {
         super(

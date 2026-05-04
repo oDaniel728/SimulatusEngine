@@ -1,6 +1,17 @@
+/**
+ * SizeApplier.ts
+ *
+ * Auto-generated documentation comment for core/engine/appliers/SizeApplier.ts.
+ */
+
 import { Properties } from "csstype";
 import Applier from "./Applier";
 
+/**
+ * SizeApplier
+ *
+ * Class for the engine.
+ */
 export default class SizeApplier implements Applier {
     private _width: Properties["width"] = "auto";
     private _height: Properties["height"] = "auto";

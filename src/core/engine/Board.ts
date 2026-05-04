@@ -1,8 +1,19 @@
+/**
+ * Board.ts
+ *
+ * Auto-generated documentation comment for core/engine/Board.ts.
+ */
+
 import BoardElement from "./BoardElement";
 import Animation from "./Animation";
 import Text from "core/elements/Text";
 import ImageAsset from "core/structure/assets/ImageAsset";
 
+/**
+ * Board
+ *
+ * Class for the engine.
+ */
 export default class Board extends BoardElement<HTMLDivElement> {
     constructor(board: HTMLDivElement | string) {
         super(typeof board === "string" ? document.querySelector(board) as HTMLDivElement : board);

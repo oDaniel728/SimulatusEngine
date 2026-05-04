@@ -1,6 +1,17 @@
+/**
+ * Session.ts
+ *
+ * Auto-generated documentation comment for core/engine/utils/Session.ts.
+ */
+
 import Identifier from "core/structure/Identifier";
 import SessionManager from "./SessionManager";
 
+/**
+ * Session
+ *
+ * Class for the engine.
+ */
 export default class Session<T extends Record<string, any>> {
     private data: T;
     private readonly initialData: T;

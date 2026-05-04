@@ -1,6 +1,17 @@
+/**
+ * PositionApplier.ts
+ *
+ * Auto-generated documentation comment for core/engine/appliers/PositionApplier.ts.
+ */
+
 import { Properties } from "csstype";
 import Applier from "./Applier";
 
+/**
+ * PositionApplier
+ *
+ * Class for the engine.
+ */
 export default class PositionApplier implements Applier {
     private _position: Properties["position"] = "absolute";
     private _top: Properties["top"] = "0px";

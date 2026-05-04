@@ -1,6 +1,17 @@
+/**
+ * SessionManager.ts
+ *
+ * Auto-generated documentation comment for core/engine/utils/SessionManager.ts.
+ */
+
 import Identifier from "core/structure/Identifier";
 import Session from "./Session";
 
+/**
+ * SessionManager
+ *
+ * Class for the engine.
+ */
 export default class SessionManager {
     public static saveSession<T extends Record<string, any>>(session: Session<T>): void {
         try {

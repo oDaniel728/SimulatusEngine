@@ -1,3 +1,9 @@
+/**
+ * BaseLoader.ts
+ *
+ * Auto-generated documentation comment for script/game/base/src/BaseLoader.ts.
+ */
+
 import Text from "core/elements/Text";
 import Identifier from "core/structure/Identifier";
 import Logger from "core/structure/Logger";
@@ -9,6 +15,11 @@ import BaseSession from "./BaseSession";
 
 const wait = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));
 
+/**
+ * BaseLoader
+ *
+ * Class for the engine.
+ */
 export default class BaseLoader extends Loader {
     public static readonly ID = "base";
     public static readonly LOGGER = new Logger(this.ID);

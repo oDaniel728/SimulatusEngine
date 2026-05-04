@@ -1,7 +1,18 @@
+/**
+ * EventList.ts
+ *
+ * Auto-generated documentation comment for core/engine/utils/EventList.ts.
+ */
+
 type EventListenerProps = {
     once?: boolean;
 }
 
+/**
+ * EventList
+ *
+ * Class for the engine.
+ */
 export default class EventList<F extends (...args: any[]) => void> {
     private events: F[];
 

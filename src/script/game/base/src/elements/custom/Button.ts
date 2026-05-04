@@ -1,3 +1,9 @@
+/**
+ * Button.ts
+ *
+ * Auto-generated documentation comment for script/game/base/src/elements/custom/Button.ts.
+ */
+
 import Text from "core/elements/Text";
 import BoardElement from "core/engine/BoardElement";
 import Area2 from "core/engine/game/Area2";
@@ -11,6 +17,11 @@ import BoardTextElement from "core/engine/BoardTextElement";
 import Identifier from "core/structure/Identifier";
 import Mouse from "core/engine/utils/Mouse";
 
+/**
+ * Button
+ *
+ * Class for the engine.
+ */
 export default class Button extends BoardTextElement {
     private area = new Area2(new Vector2(20, 60), new Vector2(200, 40), new Vector2(0, -1));
     private bg = new BackgroundColorApplier(Color3.RED)

@@ -1,3 +1,9 @@
+/**
+ * StyleBuilder.ts
+ *
+ * Auto-generated documentation comment for core/engine/appliers/StyleBuilder.ts.
+ */
+
 import { Properties, StandardLonghandPropertiesHyphen } from "csstype";
 import Applier from "./Applier";
 import Color3 from "../utils/Color3";
@@ -408,6 +414,11 @@ class AlignmentBuilder extends Builder {
     }
 }
 
+/**
+ * StyleBuilder
+ *
+ * Class for the engine.
+ */
 export default class StyleBuilder implements Applier {
 
     public style = {} as Properties;

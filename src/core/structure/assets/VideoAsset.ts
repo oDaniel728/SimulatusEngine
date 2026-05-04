@@ -1,6 +1,17 @@
+/**
+ * VideoAsset.ts
+ *
+ * Auto-generated documentation comment for core/structure/assets/VideoAsset.ts.
+ */
+
 import Asset from "./Asset";
 import Identifier from "../Identifier";
 
+/**
+ * VideoAsset
+ *
+ * Class for the engine.
+ */
 export default class VideoAsset extends Asset {
     public readonly element: HTMLVideoElement;
 

@@ -1,3 +1,9 @@
+/**
+ * BoardElement.ts
+ *
+ * Auto-generated documentation comment for core/engine/BoardElement.ts.
+ */
+
 import * as CSS from "csstype";
 import BoardDOMEvents from "./BoardDOMEvents";
 import Vector2 from "./game/Vector2";
@@ -9,6 +15,11 @@ type StylableHTMLElement = { style: CSS.Properties };
 type ValidApplier = Applier | BoardApplier;
 type ClassOf<T> = new (...args: any[]) => T;
 
+/**
+ * BoardElement
+ *
+ * Class for the engine.
+ */
 export default class BoardElement<E extends HTMLElement = HTMLElement> {
     private el: E;
     public events: BoardDOMEvents;

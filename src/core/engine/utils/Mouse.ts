@@ -1,3 +1,9 @@
+/**
+ * Mouse.ts
+ *
+ * Auto-generated documentation comment for core/engine/utils/Mouse.ts.
+ */
+
 import BoardElement from "../BoardElement";
 import Vector2 from "../game/Vector2";
 import EventList from "./EventList";
@@ -6,6 +12,11 @@ import * as CSS from "csstype";
 type StylableHTMLElement = { style: CSS.Properties };
 type hasElement = { getElement(): HTMLElement };
 
+/**
+ * Mouse
+ *
+ * Class for the engine.
+ */
 export default class Mouse {
 
     public static readonly Util = class {

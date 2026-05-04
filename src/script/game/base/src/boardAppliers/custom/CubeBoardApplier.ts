@@ -1,9 +1,20 @@
+/**
+ * CubeBoardApplier.ts
+ *
+ * Auto-generated documentation comment for script/game/base/src/boardAppliers/custom/CubeBoardApplier.ts.
+ */
+
 import Applier from "core/engine/appliers/Applier";
 import Color3 from "core/engine/utils/Color3";
 import Easing from "core/engine/utils/Easing";
 import StyleBuilder from "core/engine/appliers/StyleBuilder";
 import { Properties } from "csstype";
 
+/**
+ * CubeBoardApplier
+ *
+ * Class for the engine.
+ */
 export default class CubeBoardApplier implements Applier {
     private style = new StyleBuilder()
         .buildBorder(g => g.radius("10000px"))

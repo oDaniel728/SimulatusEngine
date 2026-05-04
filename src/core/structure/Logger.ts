@@ -1,3 +1,9 @@
+/**
+ * Logger.ts
+ *
+ * Auto-generated documentation comment for core/structure/Logger.ts.
+ */
+
 type ConvertibleToString = { toString(): string };
 
 const appendMessage = (str: string, situation: "log" | "warn" | "error"): void => {
@@ -11,6 +17,11 @@ const appendMessage = (str: string, situation: "log" | "warn" | "error"): void =
 
 };
 
+/**
+ * Logger
+ *
+ * Class for the engine.
+ */
 export default class Logger {
 
     constructor(private _id: string) {

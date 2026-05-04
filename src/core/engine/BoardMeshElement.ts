@@ -1,9 +1,20 @@
+/**
+ * BoardMeshElement.ts
+ *
+ * Auto-generated documentation comment for core/engine/BoardMeshElement.ts.
+ */
+
 import BoardElement from "./BoardElement";
 import Area2 from "./game/Area2";
 import * as CSS from "csstype";
 import Vector2 from "./game/Vector2";
 type CSSColor = CSS.Properties["backgroundColor"];
 
+/**
+ * BoardMeshElement
+ *
+ * Class for the engine.
+ */
 export default class BoardMeshElement extends BoardElement<HTMLElement> {
     public static readonly svgNS: string = "http://www.w3.org/2000/svg";
 

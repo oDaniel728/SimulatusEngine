@@ -1,3 +1,9 @@
+/**
+ * Text.ts
+ *
+ * Auto-generated documentation comment for core/elements/Text.ts.
+ */
+
 import Identifier from "../structure/Identifier";
 import LanguageProvider from "../structure/providers/LanguageProvider";
 
@@ -5,6 +11,11 @@ type LITERAL = "literal";
 type TRANSLATABLE = "translatable";
 type TEXT = LITERAL | TRANSLATABLE;
 
+/**
+ * Text
+ *
+ * Class for the engine.
+ */
 export default class Text<T extends LITERAL|TRANSLATABLE = TEXT> {
     protected static alreadyExists = false;
     protected static Instances = new Set<Text>();

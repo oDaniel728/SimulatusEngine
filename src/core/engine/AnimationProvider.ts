@@ -1,6 +1,17 @@
+/**
+ * AnimationProvider.ts
+ *
+ * Auto-generated documentation comment for core/engine/AnimationProvider.ts.
+ */
+
 import Animation from "./Animation";
 import BoardElement from "./BoardElement";
 
+/**
+ * AnimationProvider
+ *
+ * Class for the engine.
+ */
 export default class AnimationProvider {
     private activeAnimations: { anim: Animation; uniqueName: string; styleElement: HTMLStyleElement }[] = [];
     private element: BoardElement<HTMLElement>;

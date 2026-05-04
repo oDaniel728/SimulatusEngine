@@ -1,3 +1,9 @@
+/**
+ * Color3.ts
+ *
+ * Auto-generated documentation comment for core/engine/utils/Color3.ts.
+ */
+
 import * as CSS from "csstype";
 
 type NotUndefined<T> = T extends undefined ? never : T;
@@ -21,6 +27,11 @@ const NAMED_COLORS = {
     brown: "#a52a2a"
 }
 
+/**
+ * Color3
+ *
+ * Class for the engine.
+ */
 export default class Color3 {
 
     public static readonly TRANSPARENT = new Color3(0, 0, 0, 0);

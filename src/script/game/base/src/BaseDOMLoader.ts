@@ -1,3 +1,9 @@
+/**
+ * BaseDOMLoader.ts
+ *
+ * Auto-generated documentation comment for script/game/base/src/BaseDOMLoader.ts.
+ */
+
 import DOMLoader from "core/structure/DOMLoader";
 import BaseBoard from "./BaseBoard";
 import BaseLoader from "./BaseLoader";
@@ -8,6 +14,11 @@ import ScoreIncrementButton from "./elements/custom/ScoreIncrementButton";
 import ChangeLanguageToEnglishButton from "./elements/custom/ChangeLanguageToEnglishButton";
 import ChangeLanguageToPortugueseButton from "./elements/custom/ChangeLanguageToPortugueseButton";
 
+/**
+ * BaseDOMLoader
+ *
+ * Class for the engine.
+ */
 export default class BaseDOMLoader extends DOMLoader {
     public static readonly CUBE = new Cube();
     public static readonly HELLO_WORLD_TEXT = new HelloWorldText();

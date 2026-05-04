@@ -1,5 +1,16 @@
+/**
+ * SoundTrack.ts
+ *
+ * Auto-generated documentation comment for core/structure/assets/SoundTrack.ts.
+ */
+
 import SoundAsset from "./SoundAsset";
 
+/**
+ * Track
+ *
+ * Abstract class for the engine.
+ */
 export abstract class Track {
     public volume: number;
     public muted: boolean;
@@ -31,6 +42,11 @@ export abstract class Track {
     protected abstract applyVolume(): void;
 }
 
+/**
+ * SoundTrack
+ *
+ * Class for the engine.
+ */
 export class SoundTrack extends Track {
     protected currentAudio: HTMLAudioElement | null = null;
     protected currentSound: SoundAsset | null = null;
@@ -77,6 +93,11 @@ export class SoundTrack extends Track {
     }
 }
 
+/**
+ * PlaylistSoundTrack
+ *
+ * Class for the engine.
+ */
 export class PlaylistSoundTrack extends SoundTrack {
     private playlist: SoundAsset[] = [];
     private currentIndex: number = 0;
@@ -110,6 +131,11 @@ export class PlaylistSoundTrack extends SoundTrack {
     }
 }
 
+/**
+ * SoundEffectsSoundTrack
+ *
+ * Class for the engine.
+ */
 export class SoundEffectsSoundTrack extends SoundTrack {
     private activeSounds: HTMLAudioElement[] = [];
 

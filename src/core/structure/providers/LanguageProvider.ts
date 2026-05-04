@@ -1,3 +1,9 @@
+/**
+ * LanguageProvider.ts
+ *
+ * Auto-generated documentation comment for core/structure/providers/LanguageProvider.ts.
+ */
+
 import Identifier from "../Identifier";
 import Registries from "../Registries";
 import Registry, { registryMap } from "../Registry";
@@ -7,6 +13,11 @@ import EventList from "core/engine/utils/EventList";
 
 const languageAssetModules = import.meta.glob('../../../script/game/**/assets/lang/*.json') as Record<string, () => Promise<unknown>>;
 
+/**
+ * LanguageProvider
+ *
+ * Class for the engine.
+ */
 export default class LanguageProvider {
     public static get languages(): Map<string, Map<Identifier, string>> {
         return Registry.get(Registries.LANGUAGE) as unknown as Map<string, Map<Identifier, string>>;

@@ -1,9 +1,20 @@
+/**
+ * BaseAssetProvider.ts
+ *
+ * Auto-generated documentation comment for script/game/base/src/providers/BaseAssetProvider.ts.
+ */
+
 import Identifier from "core/structure/Identifier";
 import AssetProvider from "core/structure/providers/AssetProvider";
 import BaseLoader from "../BaseLoader";
 import ImageAsset from "core/structure/assets/ImageAsset";
 import Asset from "core/structure/assets/Asset";
 
+/**
+ * BaseAssetProvider
+ *
+ * Class for the engine.
+ */
 export default class BaseAssetProvider {
     public static async ICON() {
         return await this.load<ImageAsset>("textures/icon.ico");

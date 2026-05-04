@@ -1,3 +1,9 @@
+/**
+ * Cube.ts
+ *
+ * Auto-generated documentation comment for script/game/base/src/elements/custom/Cube.ts.
+ */
+
 import BoardElement from "core/engine/BoardElement";
 import BaseLoader from "../../BaseLoader";
 import Area2 from "core/engine/game/Area2";
@@ -6,6 +12,11 @@ import Mouse from "core/engine/utils/Mouse";
 import Color3 from "core/engine/utils/Color3";
 import CubeBoardApplier from "../../boardAppliers/custom/CubeBoardApplier";
 
+/**
+ * Cube
+ *
+ * Class for the engine.
+ */
 export default class Cube extends BoardElement {
     public area: Area2 = new Area2(
         new Vector2(0, 0), 

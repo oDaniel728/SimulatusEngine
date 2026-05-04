@@ -1,9 +1,20 @@
+/**
+ * Area2.ts
+ *
+ * Auto-generated documentation comment for core/engine/game/Area2.ts.
+ */
+
 import Applier from "../appliers/Applier";
 import Vector2 from "./Vector2";
 import * as CSS from "csstype";
 
 type StylableHTMLElement = { style: CSS.Properties };
 
+/**
+ * Area2
+ *
+ * Class for the engine.
+ */
 export default class Area2 implements Applier {
     public position: Vector2;
     public size: Vector2;

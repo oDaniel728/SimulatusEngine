@@ -1,7 +1,18 @@
+/**
+ * ImageApplier.ts
+ *
+ * Auto-generated documentation comment for core/engine/appliers/ImageApplier.ts.
+ */
+
 import { Properties } from "csstype";
 import BoardApplier from "./BoardApplier";
 import BoardElement from "../BoardElement";
 
+/**
+ * ImageApplier
+ *
+ * Class for the engine.
+ */
 export default class ImageApplier implements BoardApplier {
 
     private _url: string;

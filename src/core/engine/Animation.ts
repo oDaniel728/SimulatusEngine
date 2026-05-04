@@ -1,3 +1,9 @@
+/**
+ * Animation.ts
+ *
+ * Auto-generated documentation comment for core/engine/Animation.ts.
+ */
+
 import * as CSS from "csstype";
 import Easing from "./utils/Easing";
 import BoardElement from "./BoardElement";
@@ -8,6 +14,11 @@ type AnimationDirection = CSS.Properties["animationDirection"];
 type AnimationFillMode = CSS.Properties["animationFillMode"];
 type AnimationPlayState = CSS.Properties["animationPlayState"];
 
+/**
+ * Animation
+ *
+ * Class for the engine.
+ */
 export default class Animation {
     public name: string;
     public steps: Map<string, CSS.Properties>;

@@ -1,7 +1,18 @@
+/**
+ * BoardTextElement.ts
+ *
+ * Auto-generated documentation comment for core/engine/BoardTextElement.ts.
+ */
+
 import Text from "core/elements/Text";
 import LanguageProvider from "core/structure/providers/LanguageProvider";
 import BoardElement from "./BoardElement";
 
+/**
+ * BoardTextElement
+ *
+ * Class for the engine.
+ */
 export default class BoardTextElement extends BoardElement<HTMLDivElement> {
     private _text: Text = Text.EMPTY;
     private readonly languageChangeListener: (lang: string) => void;

@@ -1,5 +1,16 @@
+/**
+ * BoardDOMEvents.ts
+ *
+ * Auto-generated documentation comment for core/engine/BoardDOMEvents.ts.
+ */
+
 import BoardElement from "./BoardElement";
 
+/**
+ * BoardDOMEvents
+ *
+ * Class for the engine.
+ */
 export default class BoardDOMEvents {
     private board: BoardElement<HTMLElement>;
     public keysPressed: Set<string> = new Set();

@@ -1,3 +1,9 @@
+/**
+ * Registry.ts
+ *
+ * Auto-generated documentation comment for core/structure/Registry.ts.
+ */
+
 import Identifier from "./Identifier";
 import Registries from "./Registries";
 import Asset from "./assets/Asset";
@@ -7,6 +13,11 @@ export type registryMap = {
     [Registries.ASSET]: Map<Identifier, Asset>;
 }
 
+/**
+ * Registry
+ *
+ * Class for the engine.
+ */
 export default class Registry {
     protected static registries: Map<keyof registryMap, any> = new Map();
 

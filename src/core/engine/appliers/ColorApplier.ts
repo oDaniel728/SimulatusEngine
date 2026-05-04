@@ -1,7 +1,18 @@
+/**
+ * ColorApplier.ts
+ *
+ * Auto-generated documentation comment for core/engine/appliers/ColorApplier.ts.
+ */
+
 import { Properties } from "csstype";
 import Applier from "./Applier";
 import Color3 from "../utils/Color3";
 
+/**
+ * ColorApplier
+ *
+ * Class for the engine.
+ */
 export default class ColorApplier implements Applier {
     private _color: Properties["color"] = "inherit";
 

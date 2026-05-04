@@ -1,6 +1,17 @@
+/**
+ * BoardKeyboardHandler.ts
+ *
+ * Auto-generated documentation comment for core/engine/BoardKeyboardHandler.ts.
+ */
+
 import BoardElement from "./BoardElement";
 import Key from "./utils/Key";
 
+/**
+ * BoardKeyboardHandler
+ *
+ * Class for the engine.
+ */
 export default class BoardKeyboardHandler {
 
     protected keysPressed: Set<string>;

@@ -1,3 +1,9 @@
+/**
+ * Easing.ts
+ *
+ * Auto-generated documentation comment for core/engine/utils/Easing.ts.
+ */
+
 enum Easing {
     Linear = "linear",
     EaseIn = "ease-in",

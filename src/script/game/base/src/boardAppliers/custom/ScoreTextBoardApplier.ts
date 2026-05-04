@@ -1,7 +1,18 @@
+/**
+ * ScoreTextBoardApplier.ts
+ *
+ * Auto-generated documentation comment for script/game/base/src/boardAppliers/custom/ScoreTextBoardApplier.ts.
+ */
+
 import BoardElement from "core/engine/BoardElement";
 import BoardApplier from "core/engine/appliers/BoardApplier";
 import StyleBuilder from "core/engine/appliers/StyleBuilder";
 
+/**
+ * ScoreTextBoardApplier
+ *
+ * Class for the engine.
+ */
 export default class ScoreTextBoardApplier implements BoardApplier {
 
     private style = new StyleBuilder()
