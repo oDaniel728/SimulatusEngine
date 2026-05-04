@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "rm -rf build/* && echo \"Building...\"; tsc --noEmit && npx vite build && echo \"Copying scripts...\"; cp src/script/ -r build/script && echo \"Removing source files...\"; rm build/script/game/**/src/ -rf",
-    "build:js": "rm -rf build/* && echo \"Building JS/CSS only...\" && npx tsc --project tsconfig.json --noEmit false --outDir build/ --rootDir src && npx sass src/styles/main.scss build/main.css",
     "run": "vite preview",
     "typecheck": "tsc --noEmit"
   },

@@ -7,7 +7,6 @@
 import BasePreLoader from "@game/base/src/BasePreLoader";
 import BaseDOMLoader from "@game/base/src/BaseDOMLoader";
 import BaseLoader from "@game/base/src/BaseLoader";
-import "./styles/main.scss";
 import Loader from "core/structure/Loader";
 import PreLoader from "core/structure/PreLoader";
 import DOMLoader from "core/structure/DOMLoader";
