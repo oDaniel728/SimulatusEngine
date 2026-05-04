@@ -34,12 +34,15 @@ function obfuscatorPlugin() {
                 }
                 // Para HTML com JS inline (gerado pelo viteSingleFile)
                 if (file.type === 'asset' && file.fileName.endsWith('.html')) {
-                    console.log(`Processing HTML file: ${file.fileName}...`);
+                    console.log(`\n📦 Processing HTML file: ${file.fileName}...`);
                     let html = file.source.toString();
+                    let scriptCount = (html.match(/<script/g) || []).length;
+                    console.log(`   Found ${scriptCount} script tag(s)`);
                     
                     // Encontrar e obfuscar scripts inline
-                    html = html.replace(/<script[^>]*>([^<]+)<\/script>/gs, (match, scriptContent) => {
-                        console.log(`Obfuscating inline script...`);
+                    let obfuscatedCount = 0;
+                    html = html.replace(/<script([^>]*)>([^<]+)<\/script>/gs, (match, attrs, scriptContent) => {
+                        console.log(`   🔐 Obfuscating inline script (${Math.round(scriptContent.length / 1024)}KB)...`);
                         try {
                             const obfuscated = obfuscate(scriptContent, {
                                 compact: true,
@@ -58,13 +61,18 @@ function obfuscatorPlugin() {
                                 stringArrayThreshold: 0.75,
                                 unicodeEscapeSequence: false
                             }).getObfuscatedCode();
-                            return `<script>${obfuscated}</script>`;
+                            obfuscatedCount++;
+                            console.log(`   ✅ Obfuscated! Compressed from ${Math.round(scriptContent.length / 1024)}KB to ${Math.round(obfuscated.length / 1024)}KB`);
+                            return `<script${attrs}>${obfuscated}</script>`;
                         } catch (e) {
-                            console.error(`Erro ao obfuscar script: ${e.message}`);
+                            console.error(`   ❌ Error obfuscating script: ${e.message}`);
                             return match;
                         }
                     });
                     
+                    if (obfuscatedCount > 0) {
+                        console.log(`   ✨ Successfully obfuscated ${obfuscatedCount} script(s)\n`);
+                    }
                     file.source = html;
                 }
             }
