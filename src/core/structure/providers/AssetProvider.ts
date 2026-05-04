@@ -11,6 +11,7 @@ import Asset from "../assets/Asset";
 import ImageAsset from "../assets/ImageAsset";
 import VideoAsset from "../assets/VideoAsset";
 import SoundAsset from "../assets/SoundAsset";
+import FontAsset from "../assets/FontAsset";
 import ObjectAsset from "../assets/ObjectAsset";
 
 const assetUrlMap = new Map<string, string>();
@@ -65,6 +66,9 @@ export default class AssetProvider {
         }
         if (["mp3", "wav", "ogg", "aac", "flac"].includes(extension)) {
             return new SoundAsset(id, url);
+        }
+        if (["ttf", "woff", "woff2", "otf", "eot"].includes(extension)) {
+            return new FontAsset(id, url);
         }
         if (["json"].includes(extension)) {
             return new ObjectAsset(id, url);

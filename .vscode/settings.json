@@ -35,5 +35,6 @@
         "**/vite-env.d.ts": true
     },
 
-    "liveServer.settings.root": "/build"
+    "liveServer.settings.root": "/build",
+    "js/ts.preferences.importModuleSpecifierEnding": "js"
 }

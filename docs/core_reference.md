@@ -27,6 +27,7 @@
     - [ImageAsset](#imageasset)
     - [VideoAsset](#videoasset)
     - [SoundAsset](#soundasset)
+    - [FontAsset](#fontasset)
     - [ObjectAsset](#objectasset)
     - [Track](#track)
     - [SoundTrack](#soundtrack)
@@ -272,6 +273,17 @@ Loads video assets and exposes a preloaded video element.
 - `public getType(): string`
 
 Simple sound asset wrapper that creates an `HTMLAudioElement` on demand.
+
+#### FontAsset
+
+`src/core/structure/assets/FontAsset.ts`
+
+- `public readonly className: string`
+- `constructor(id: Identifier, url: string)`
+- `public static fontNameFromIdentifier(id: Identifier): string`
+- `public getType(): string`
+
+`FontAsset` represents a font file (e.g., `.ttf`, `.woff`, `.woff2`). It generates a CSS class name from the [Identifier](#identifier) to apply custom fonts to elements. Use `className` to apply the font via CSS or directly inject font-face rules.
 
 #### ObjectAsset
 

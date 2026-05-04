@@ -4,13 +4,13 @@
  * Auto-generated documentation comment for script/game/base/src/elements/custom/Cube.ts.
  */
 
-import BoardElement from "core/engine/BoardElement";
-import BaseLoader from "../../BaseLoader";
-import Area2 from "core/engine/game/Area2";
-import Vector2 from "core/engine/game/Vector2";
-import Mouse from "core/engine/utils/Mouse";
-import Color3 from "core/engine/utils/Color3";
-import CubeBoardApplier from "../../boardAppliers/custom/CubeBoardApplier";
+import BoardElement from "core/engine/BoardElement.js";
+import BaseLoader from "../../BaseLoader.js";
+import Area2 from "core/engine/game/Area2.js";
+import Vector2 from "core/engine/game/Vector2.js";
+import Mouse from "core/engine/utils/Mouse.js";
+import Color3 from "core/engine/utils/Color3.js";
+import CubeBoardApplier from "../../boardAppliers/custom/CubeBoardApplier.js";
 
 /**
  * Cube

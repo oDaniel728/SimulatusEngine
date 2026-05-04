@@ -9,6 +9,8 @@ import Applier from "./Applier";
 import Color3 from "../utils/Color3";
 import Easing from "../utils/Easing";
 import Animation from "../Animation";
+import StyleClass from "../utils/StyleClass.js";
+import BoardElement from "../BoardElement.js";
 
 class Builder {
     protected _style = {} as Properties;
@@ -480,5 +482,10 @@ export default class StyleBuilder implements Applier {
 
     applyToElement(element: { style: Properties; }): void {
         Object.assign(element.style, this.style);
+    }
+
+    public buildClass(cls: StyleClass): this {
+        Object.assign(this.style, cls.getProperties());
+        return this;
     }
 }
