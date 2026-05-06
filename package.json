@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "vite",
-    "build": "rm -rf build/* && echo \"Building...\"; tsc --noEmit && npx vite build && echo \"Copying scripts...\"; cp src/script/ -r build/script && echo \"Removing source files...\"; rm build/script/game/**/src/ -rf",
+    "build": "rm -rf build/* && echo \"Building...\"; tsc --noEmit && npx vite build && echo \"Copying scripts...\"; cp src/script/ -r build/script && echo \"Removing source files...\"; rm build/script/game/**/src/ -rf; rm build/script/game/*.ts -rf; echo \"Done!\"",
     "run": "vite preview",
     "typecheck": "tsc --noEmit"
   },
