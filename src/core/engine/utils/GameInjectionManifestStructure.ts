@@ -26,8 +26,8 @@ export default class GameInjectionManifestStructure {
         this.unloader = unloader;
     }
 
-    public register() {
+    public async register() {
         this.tryLog("Registering pack of data of name: " + this.loader.ID);
-        GameInjector.inject(this.preLoader, this.loader, this.domLoader, this.unloader);
+        await GameInjector.inject(this.preLoader, this.loader, this.domLoader, this.unloader);
     }
 }

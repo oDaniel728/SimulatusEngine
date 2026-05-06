@@ -61,17 +61,19 @@ class Pack():
 
         pack_folder.add_file(IFile("manifest.ts", f"""\
 import GameInjectionManifestStructure from \"core/engine/utils/GameInjectionManifestStructure.js\";
-import BasePreLoader from \"@game/base/src/BasePreLoader.js\";
-import BaseUnloader from \"@game/base/src/BaseUnloader.js\";
+import {self.namespace}PreLoader from \"./src/{self.namespace}PreLoader.js\";
+import {self.namespace}Unloader from \"./src/{self.namespace}Unloader.js\";
 import {self.namespace}Loader from \"./src/{self.namespace}Loader.js\";
 import {self.namespace}DOMLoader from \"./src/{self.namespace}DOMLoader.js\";
 
-new GameInjectionManifestStructure(
-    BasePreLoader,
-    {self.namespace}Loader,
-    {self.namespace}DOMLoader,
-    BaseUnloader
-).register();
+export async function main() {{
+    await new GameInjectionManifestStructure(
+        {self.namespace}PreLoader,
+        {self.namespace}Loader,
+        {self.namespace}DOMLoader,
+        {self.namespace}Unloader
+    ).register();
+}}
 """))
 
         pack_folder.add_folder(IFolder("src", [
@@ -106,7 +108,7 @@ export default class {self.namespace}Loader extends Loader {{
         await {self.namespace}LangProvider.useLanguage("en_us");
         this.SESSION.load();
 
-        this.LOGGER.info(Text.translatable(Identifier.of(this.ID, "text")));
+        this.LOGGER.info(Text.translatable(Identifier.of(this.ID, "hello_world")));
     }}
 
     public static appendChild<E extends BoardElement>(child: E): E {{
@@ -131,9 +133,7 @@ import Session from \"core/engine/utils/Session\";
 import Identifier from \"core/structure/Identifier\";
 import {self.namespace}Loader from \"./{self.namespace}Loader\";
 
-const initial{self.namespace}SessionData = {{
-    score: 0,
-}}
+const initial{self.namespace}SessionData = {{}}
 
 export type {self.namespace}SessionData = typeof initial{self.namespace}SessionData;
 
@@ -145,10 +145,6 @@ export type {self.namespace}SessionData = typeof initial{self.namespace}SessionD
 export default class {self.namespace}Session extends Session<{self.namespace}SessionData> {{
     constructor() {{
         super(Identifier.of("{self.id}", "session"), initial{self.namespace}SessionData);
-    }}
-
-    public incrementScore(amount: number): void {{
-        this.set("score", this.get("score") + amount);
     }}
 }}
 """),
@@ -165,6 +161,16 @@ import {self.namespace}Loader from "./{self.namespace}Loader";
 export default class {self.namespace}Unloader extends Unloader {{
     public static async main(): Promise<void> {{
         {self.namespace}Loader.SESSION.save();
+    }}
+}}
+"""),
+IFile(f"{self.namespace}PreLoader.ts", f"""\
+import PreLoader from "core/structure/PreLoader";
+import {self.namespace}Loader from "./{self.namespace}Loader";
+
+export default class {self.namespace}PreLoader extends PreLoader {{
+    public static async main(): Promise<void> {{
+        {self.namespace}Loader.LOGGER.info("Preloading resources...");
     }}
 }}
 """)
@@ -189,8 +195,8 @@ export default class {self.namespace}LangProvider extends LanguageProvider imple
 
         pack_folder.add_folder(IFolder("assets", [], [
             IFolder("lang", [
-                IFile("en_us.json", f"{{\n  \"{self.id}:text\": \"{self.namespace} loaded successfully.\"\n}}\n"),
-                IFile("pt_br.json", f"{{\n  \"{self.id}:text\": \"{self.namespace} carregado com sucesso.\"\n}}\n"),
+                IFile("en_us.json", f"{{\n  \"{self.id}:hello_world\": \"Hello, World!\"\n}}\n"),
+                IFile("pt_br.json", f"{{\n  \"{self.id}:hello_world\": \"Olá, mundo!\"\n}}\n"),
             ], []),
             IFolder("textures", [], []),
         ]))

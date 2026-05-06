@@ -20,7 +20,7 @@ import GameInjector from "core/engine/utils/GameInjector.js";
 async function loadManifests(): Promise<void> {
     const otherManifests = import.meta.glob('./script/game/**/manifest.{ts,js}');
     for (const path in otherManifests) {
-        await otherManifests[path]();
+        await (await otherManifests[path]() as any).main();
     }
 }
 

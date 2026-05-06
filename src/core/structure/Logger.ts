@@ -25,6 +25,7 @@ const appendMessage = (str: string, situation: "log" | "warn" | "error"): void =
 export default class Logger {
 
     constructor(private _id: string) {
+        this.info("Logger initialized with ID:", this._id);
     }
 
     private convertAllToString(...all: any[]): string[] {
