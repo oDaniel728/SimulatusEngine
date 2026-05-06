@@ -23,7 +23,7 @@ const assetUrlMap = new Map<string, string>();
  */
 export default class AssetProvider {
     private static cache: Map<string, Asset> = new Map();
-    private static readonly urlBase: string = "./script/game/";
+    private static readonly urlBase: string = "script/game/";
 
     public static async loadAsset(id: Identifier): Promise<Asset> {
         const key = id.toString();

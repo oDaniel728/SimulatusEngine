@@ -13,36 +13,22 @@ import DOMLoader from "core/structure/DOMLoader.js";
 import Unloader from "core/structure/Unloader.js";
 import BaseUnloader from "@game/base/src/BaseUnloader.js";
 import BoardElement from "core/engine/BoardElement.js";
+import EventList from "core/engine/utils/EventList.js";
+import GameInjectionManifestStructure from "core/engine/utils/GameInjectionManifestStructure.js";
+import GameInjector from "core/engine/utils/GameInjector.js";
 
-//#region 
-
-/**
- * GameInjector
- *
- * Class for the engine.
- */
-export class GameInjector {
-    public static async inject(
-        preLoader: typeof PreLoader,
-        loader: typeof Loader,
-        domLoader: typeof DOMLoader,
-        unloader: typeof Unloader
-    ) {
-        await preLoader.main();
-        await loader.main();
-        await domLoader.main();
-        window.addEventListener("beforeunload", async () => {
-            await unloader.main();
-        });
+async function loadManifests(): Promise<void> {
+    const otherManifests = import.meta.glob('./script/game/**/manifest.{ts,js}');
+    for (const path in otherManifests) {
+        await otherManifests[path]();
     }
 }
 
-//#endregion
-
 async function main(): Promise<void> {
     console.log("Hello, Simulatus Engine!");
-    
-    await GameInjector.inject(BasePreLoader, BaseLoader, BaseDOMLoader, BaseUnloader);
+
+    await loadManifests();
+    await GameInjector.init();
     document.getElementById("loading")?.classList.add("hidden");
     BoardElement.initAllLoops();
 }

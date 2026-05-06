@@ -17,8 +17,6 @@
     "ignoreDeprecations": "6.0",
     "baseUrl": "./src",
     "paths": {
-      "@simulatus/*": ["script/simulatus/*"],
-      "@simulatus": ["script/simulatus"],
       "@game/*": ["script/game/*"],
       "@game": ["script/game"],
     }

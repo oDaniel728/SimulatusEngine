@@ -50,4 +50,10 @@ export default class EventList<F extends (...args: any[]) => void> {
             event(...args);
         }
     }
+
+    public async triggerAsync(...args: Parameters<F>): Promise<void> {
+        for (const event of this.events) {
+            await event(...args);
+        }
+    }
 }
