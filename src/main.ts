@@ -4,14 +4,14 @@
  * Auto-generated documentation comment for main.ts.
  */
 
-import BasePreLoader from "@game/base/src/BasePreLoader.js";
-import BaseDOMLoader from "@game/base/src/BaseDOMLoader.js";
-import BaseLoader from "@game/base/src/BaseLoader.js";
+import BasePreLoader from "@game/Base/src/BasePreLoader.js";
+import BaseDOMLoader from "@game/Base/src/BaseDOMLoader.js";
+import BaseLoader from "@game/Base/src/BaseLoader.js";
 import Loader from "core/structure/Loader.js";
 import PreLoader from "core/structure/PreLoader.js";
 import DOMLoader from "core/structure/DOMLoader.js";
 import Unloader from "core/structure/Unloader.js";
-import BaseUnloader from "@game/base/src/BaseUnloader.js";
+import BaseUnloader from "@game/Base/src/BaseUnloader.js";
 import BoardElement from "core/engine/BoardElement.js";
 import EventList from "core/engine/utils/EventList.js";
 import GameInjectionManifestStructure from "core/engine/utils/GameInjectionManifestStructure.js";

@@ -23,7 +23,6 @@ const assetUrlMap = new Map<string, string>();
  */
 export default class AssetProvider {
     private static cache: Map<string, Asset> = new Map();
-    private static readonly urlBase: string = "script/game/";
 
     public static async loadAsset(id: Identifier): Promise<Asset> {
         const key = id.toString();
@@ -31,7 +30,7 @@ export default class AssetProvider {
             return this.cache.get(key)!;
         }
 
-        const url = assetUrlMap.get(key) ?? (this.urlBase + id.namespace + "/assets/" + id.name);
+        const url = assetUrlMap.get(key) ?? (id.getRoot() + "assets/" + id.name);
         const asset = this.createAsset(id, url);
         await this.preloadAsset(asset);
 

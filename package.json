@@ -5,7 +5,18 @@
   "main": "index.js",
   "scripts": {
     "dev": "vite",
-    "build": "rm -rf build/* && echo \"Building...\"; tsc --noEmit && npx vite build && echo \"Copying scripts...\"; cp src/script/ -r build/script && echo \"Removing source files...\"; rm build/script/game/**/src/ -rf; rm build/script/game/*.ts -rf; echo \"Done!\"",
+    "build": "rm -rf build/run/* && echo \"Building...\"; tsc --noEmit && npx vite build && echo \"Copying scripts...\"; cp src/script/ -r build/run/script && echo \"Removing source files...\"; rm build/run/script/game/**/src/ -rf; rm build/run/script/game/*.ts -rf; echo \"Done!\"",
+    
+    "build_packs": "python tools/build_packs.py",
+    "build_pack": "python tools/build_pack.py -i",
+
+    "create_pack": "python tools/create_pack.py -i",
+
+    "install_pack": "python tools/install_pack.py -i",
+    "install_packs": "python tools/install_packs.py",
+
+    "list_templates": "python tools/create_pack.py -lt",
+
     "run": "vite preview",
     "typecheck": "tsc --noEmit"
   },
@@ -35,6 +46,7 @@
   },
   "dependencies": {
     "csstype": "^3.2.3",
+    "python": "^0.0.4",
     "ts-key-enum": "^3.0.13"
   }
 }

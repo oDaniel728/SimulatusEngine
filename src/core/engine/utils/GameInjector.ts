@@ -4,6 +4,7 @@ import GameInjectionManifestStructure from "./GameInjectionManifestStructure.js"
 import Loader from "core/structure/Loader.js";
 import DOMLoader from "core/structure/DOMLoader.js";
 import Unloader from "core/structure/Unloader.js";
+import LanguageProvider from "core/structure/providers/LanguageProvider.js";
 
 export default class GameInjector {
     public static manifests: Map<string, GameInjectionManifestStructure> = new Map();

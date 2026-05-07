@@ -21,7 +21,7 @@ export default defineConfig(({ command }) => ({
         }
     },
     build: {
-        outDir: "../build",
+        outDir: "../build/run",
         emptyOutDir: true,
         assetsInlineLimit: 10000000
     },

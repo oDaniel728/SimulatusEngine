@@ -20,6 +20,7 @@ export default class ObjectAsset extends Asset {
     }
 
     public async load(): Promise<unknown> {
+        console.log(this.data)
         if (this.data !== null) {
             return this.data;
         }

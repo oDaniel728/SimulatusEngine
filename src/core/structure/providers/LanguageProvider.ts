@@ -10,6 +10,7 @@ import Registry, { registryMap } from "../Registry";
 import AssetProvider from "./AssetProvider";
 import ObjectAsset from "../assets/ObjectAsset";
 import EventList from "core/engine/utils/EventList";
+import Logger from "../Logger.js";
 
 const languageAssetModules = import.meta.glob('../../../script/game/**/assets/lang/*.json') as Record<string, () => Promise<unknown>>;
 
@@ -19,6 +20,7 @@ const languageAssetModules = import.meta.glob('../../../script/game/**/assets/la
  * Class for the engine.
  */
 export default class LanguageProvider {
+    protected static LOGGER = new Logger("LanguageProvider");
     public static get languages(): Map<string, Map<Identifier, string>> {
         return Registry.get(Registries.LANGUAGE) as unknown as Map<string, Map<Identifier, string>>;
     }
@@ -38,15 +40,17 @@ export default class LanguageProvider {
     }
 
     public static async loadLanguage(lang: string, namespace: string): Promise<void> {
+        namespace = Identifier.capitalizeName(namespace);
         try {
-            const asset = await AssetProvider.loadAsset(Identifier.of(namespace, `/lang/${lang}.json`));
+            this.LOGGER.info(`Loading language '${lang}' for namespace '${namespace}'...`);
+            const asset = await AssetProvider.loadAsset(Identifier.of(namespace, `lang/${lang}.json`));
             if (!(asset instanceof ObjectAsset)) {
-                console.warn(`Language asset '${lang}' is not a JSON object asset.`);
+                this.LOGGER.warn(`Language asset '${lang}' is not a JSON object asset.`);
                 return;
             }
             const data = await asset.load();
             if (typeof data !== "object" || data === null || Array.isArray(data)) {
-                console.warn(`Invalid language JSON in '${lang}' for namespace '${namespace}'.`);
+                this.LOGGER.warn(`Invalid language JSON in '${lang}' for namespace '${namespace}'.`);
                 return;
             }
 
@@ -57,7 +61,7 @@ export default class LanguageProvider {
                 }
                 const identifier = this.buildNamespacedIdentifier(namespace, key);
                 if (!identifier) {
-                    console.warn(`Invalid key '${key}' in language file for '${lang}'. Expected format 'namespace:name' or local key.`);
+                    this.LOGGER.warn(`Invalid key '${key}' in language file for '${lang}'. Expected format 'namespace:name' or local key.`);
                     continue;
                 }
                 existing.set(identifier, value);
@@ -65,7 +69,7 @@ export default class LanguageProvider {
 
             this.languages.set(lang, existing);
         } catch (error) {
-            console.error(`Error loading language '${lang}':`, error);
+            this.LOGGER.error(`Error loading language '${lang}':`, error);
         }
     }
 

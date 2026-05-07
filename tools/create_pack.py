@@ -1,35 +1,37 @@
 import os
+from pathlib import Path
 import sys
 from typing import Any
+import util
+from builtins import print as prt
 
-def info(*a: Any):
-    print("(pack-gen) [INFO]: ", ' '.join(map(str, a)))
+def print(*a: Any):
+    prt("(pack-gen) [INFO]: ", ' '.join(map(str, a)))
 
 class IFolder():
     def __init__(self, name: str, files: list["IFile"] | None = None, folders: list["IFolder"] | None = None):
         self.name = name
         self.files = files if files is not None else []
         self.folders = folders if folders is not None else []
-        info("Initialized folder:", self.name)
+        print("Initialized folder:", self.name)
 
     def add_file(self, file: "IFile"):
         self.files.append(file)
-        info("Added file:", file.name, "to folder:", self.name)
+        print("Added file:", file.name, "to folder:", self.name)
 
     def add_folder(self, folder: "IFolder"):
         self.folders.append(folder)
-        info("Added folder:", folder.name, "to folder:", self.name)
+        print("Added folder:", folder.name, "to folder:", self.name)
 
     def write(self, root: str):
         path = root + "/" + self.name
         os.makedirs(path, exist_ok=True)
         for file in self.files:
             file.write(path)
-            info("Written file:", file.name, "to path:", path)
+            print("Written file:", file.name, "to path:", path)
         for folder in self.folders:
             folder.write(path)
-            info("Written folder:", folder.name, "to path:", path)
-
+            print("Written folder:", folder.name, "to path:", path)
 
 class IFile():
     def __init__(self, name: str, content: str):
@@ -39,10 +41,29 @@ class IFile():
     def write(self, path: str):
         if not os.path.exists(path):
             os.makedirs(path)
-            info("Created directory:", path)
+            print("Created directory:", path)
         with open(path + "/" + self.name, "w") as f:
             f.write(self.content)
-            info("Written file:", self.name, "to path:", path)
+            print("Written file:", self.name, "to path:", path)
+
+template = "test-mod"
+
+def copy_folder(src: str, dst: str):
+    if not os.path.exists(dst):
+        os.makedirs(dst)
+        print("Created directory:", dst)
+    for item in os.listdir(src):
+        s = os.path.join(src, item)
+        d = os.path.join(dst, item)
+        if os.path.isdir(s):
+            copy_folder(s, d)
+            print("Copied folder:", s, "to", d)
+        else:
+            with open(s, "r") as f:
+                content = f.read()
+            with open(d, "w") as f:
+                f.write(content)
+            print("Copied file:", s, "to", d)
 
 scripts_path: str = "src/script/game/"
 class Pack():
@@ -50,162 +71,75 @@ class Pack():
     def __capitalize__(s: str):
         # word-after-word : WordAfterWord
         return "".join(word.capitalize() for word in s.split("-"))
+    
+    @staticmethod
+    def __decapitalize__(s: str):
+        # WordAfterWord : word-after-word
+        return ''.join(['-' + c.lower() if c.isupper() else c for c in s]).lstrip('-')
 
     def __init__(self, namespace: str):
         self.namespace = self.__capitalize__(namespace)
         self.id = namespace
-
+    
     def build(self):
-        info("Building pack with namespace:", self.namespace, "and id:", self.id)
-        pack_folder = IFolder(scripts_path + self.namespace, [], [])
 
-        pack_folder.add_file(IFile("manifest.ts", f"""\
-import GameInjectionManifestStructure from \"core/engine/utils/GameInjectionManifestStructure.js\";
-import {self.namespace}PreLoader from \"./src/{self.namespace}PreLoader.js\";
-import {self.namespace}Unloader from \"./src/{self.namespace}Unloader.js\";
-import {self.namespace}Loader from \"./src/{self.namespace}Loader.js\";
-import {self.namespace}DOMLoader from \"./src/{self.namespace}DOMLoader.js\";
+        cap_template = self.__capitalize__(template)
 
-export async function main() {{
-    await new GameInjectionManifestStructure(
-        {self.namespace}PreLoader,
-        {self.namespace}Loader,
-        {self.namespace}DOMLoader,
-        {self.namespace}Unloader
-    ).register();
-}}
-"""))
+        print(f"Unpacking template:")
+        zipped_path = Path(f"src/core/template/{cap_template}.sepack")
+        decompressed_path = Path(f"src/core/template/{cap_template}")
+        from build_pack import decompress
+        decompress(zipped_path, decompressed_path)
 
-        pack_folder.add_folder(IFolder("src", [
-            IFile(f"{self.namespace}Board.ts", f"""\
-import Board from \"core/engine/Board\";
-export default class {self.namespace}Board extends Board {{
-    constructor() {{
-        super(\"#root\");
-    }}
-}}
-"""),
-            IFile(f"{self.namespace}Loader.ts", f"""\
-import Identifier from \"core/structure/Identifier\";
-import Logger from \"core/structure/Logger\";
-import Text from \"core/elements/Text\";
-import {self.namespace}LangProvider from \"./providers/{self.namespace}LangProvider\";
-import {self.namespace}Board from \"./{self.namespace}Board\";
-import Loader from \"core/structure/Loader\";
-import BoardElement from \"core/engine/BoardElement\";
-import {self.namespace}Session from \"./{self.namespace}Session\";
+        print(f"Building pack with namespace: {self.namespace} and id: {self.id}")
+        copy_path = f"{scripts_path}{self.namespace}"
+        copy_folder(f"src/core/template/{cap_template}", copy_path)
+        copy = Path(copy_path)
+        util.replaceTextInFolder(cap_template, self.namespace, copy)
+        util.changeFileNamesInFolder(cap_template, self.namespace, copy)
+        util.replaceTextInFolder(template, self.id, copy)
+        util.changeFileNamesInFolder(template, self.id, copy)
 
-export default class {self.namespace}Loader extends Loader {{
-    public static readonly ID = "{self.id}";
-    public static readonly LOGGER = new Logger(this.ID);
-    public static BOARD = new {self.namespace}Board();
+        print("Deleting template.")
+        os.system(f"rm -rf {decompressed_path}") # type: ignore
 
-    public static readonly SESSION = new {self.namespace}Session();
+        print("Pack built with success!")
 
-    public static async main(): Promise<void> {{
-        this.LOGGER.info("Loaded main function called.");
-
-        await {self.namespace}LangProvider.useLanguage("en_us");
-        this.SESSION.load();
-
-        this.LOGGER.info(Text.translatable(Identifier.of(this.ID, "hello_world")));
-    }}
-
-    public static appendChild<E extends BoardElement>(child: E): E {{
-        this.BOARD.appendChild(child);
-        this.LOGGER.info("Appended child:", child.toString());
-        return child;
-    }}
-}}
-"""),
-            IFile(f"{self.namespace}DOMLoader.ts", f"""\
-import {self.namespace}Loader from \"./{self.namespace}Loader\";
-import DOMLoader from \"core/structure/DOMLoader\";
-
-export default class {self.namespace}DOMLoader extends DOMLoader {{
-    public static async main(): Promise<void> {{
-        {self.namespace}Loader.LOGGER.info("Loading Document");
-    }}
-}}
-"""),
-            IFile(f"{self.namespace}Session.ts", f"""\
-import Session from \"core/engine/utils/Session\";
-import Identifier from \"core/structure/Identifier\";
-import {self.namespace}Loader from \"./{self.namespace}Loader\";
-
-const initial{self.namespace}SessionData = {{}}
-
-export type {self.namespace}SessionData = typeof initial{self.namespace}SessionData;
-
-/**
- * {self.namespace}Session
- *
- * Default session implementation.
- */
-export default class {self.namespace}Session extends Session<{self.namespace}SessionData> {{
-    constructor() {{
-        super(Identifier.of("{self.id}", "session"), initial{self.namespace}SessionData);
-    }}
-}}
-"""),
-IFile(f"{self.namespace}Unloader.ts", f"""\
-import Unloader from "core/structure/Unloader";
-import {self.namespace}Session from "./{self.namespace}Session";
-import {self.namespace}Loader from "./{self.namespace}Loader";
-
-/**
- * {self.namespace}Unloader
- *
- * Class for the engine.
- */
-export default class {self.namespace}Unloader extends Unloader {{
-    public static async main(): Promise<void> {{
-        {self.namespace}Loader.SESSION.save();
-    }}
-}}
-"""),
-IFile(f"{self.namespace}PreLoader.ts", f"""\
-import PreLoader from "core/structure/PreLoader";
-import {self.namespace}Loader from "./{self.namespace}Loader";
-
-export default class {self.namespace}PreLoader extends PreLoader {{
-    public static async main(): Promise<void> {{
-        {self.namespace}Loader.LOGGER.info("Preloading resources...");
-    }}
-}}
-""")
-        ], [
-            IFolder("providers", [
-                IFile(f"{self.namespace}LangProvider.ts", f"""\
-import LanguageProvider from \"core/structure/providers/LanguageProvider\";
-import Registerable from \"core/structure/Registerable\";
-import {self.namespace}Loader from \"../{self.namespace}Loader\";
-
-export default class {self.namespace}LangProvider extends LanguageProvider implements Registerable {{
-    public static async register(): Promise<void> {{
-        {self.namespace}Loader.LOGGER.info("Registering languages...");
-        this.registerLanguage("en_us");
-        this.registerLanguage("pt_br");
-        await this.loadLanguages({self.namespace}Loader.ID);
-    }}
-}}
-"""),
-            ], []),
-        ]))
-
-        pack_folder.add_folder(IFolder("assets", [], [
-            IFolder("lang", [
-                IFile("en_us.json", f"{{\n  \"{self.id}:hello_world\": \"Hello, World!\"\n}}\n"),
-                IFile("pt_br.json", f"{{\n  \"{self.id}:hello_world\": \"Olá, mundo!\"\n}}\n"),
-            ], []),
-            IFolder("textures", [], []),
-        ]))
-
-        pack_folder.write(".")
+def print_templates():
+    templates = [f.stem for f in Path("src/core/template").glob("*.sepack")]
+    print("Available templates:")
+    for t in templates:
+        print(f" - {Pack.__decapitalize__(t)}")
 
 if __name__ == "__main__":
     namespace = sys.argv[1] if len(sys.argv) > 1 else "-h"
-    if (namespace == "-h" or namespace == "--help"):
-        print(f"Usage: python {sys.argv[0]} [namespace]")
+
+    if namespace == "-i":
+        print("Interactive mode:")
+        namespace = input("Enter namespace: ")
+        
+        print_templates()
+        template = input("Enter template (test-mod): ") or template
+        print("Using template:", template)
+        
+        Pack(namespace).build()
         sys.exit(0)
+
+    if namespace == "-lt" or namespace == "--list-templates":
+        print_templates()
+        sys.exit(0)
+
+    if (namespace == "-h" or namespace == "--help"):
+        print(f"Usage: python {sys.argv[0]} <namespace> [-t=template_name | --template=template_name]")
+        print(f"       python {sys.argv[0]} [-lt | --list-templates]")
+        sys.exit(0)
+
+    for arg in sys.argv[1:]:
+        if arg.startswith("-t=") or arg.startswith("--template="):
+            template = arg.split("=", 1)[1]
+            print("Using template:", template) 
+        elif arg.startswith("-"):
+            print(f"Unknown argument: {arg}")
+            sys.exit(1)
+
     Pack(namespace).build()

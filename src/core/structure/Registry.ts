@@ -26,8 +26,12 @@ export default class Registry {
     }
 
     public static init(): void {
-        this.registries.set(Registries.LANGUAGE, new Map());
-        this.registries.set(Registries.ASSET, new Map());
+        if (!this.registries.has(Registries.LANGUAGE)) {
+            this.registries.set(Registries.LANGUAGE, new Map());
+        }
+        if (!this.registries.has(Registries.ASSET)) {
+            this.registries.set(Registries.ASSET, new Map());
+        }
     }
     
     public static register<K extends keyof registryMap, V extends registryMap[K]>(registry: K, id: Identifier, value: V): void {
@@ -44,10 +48,10 @@ export default class Registry {
 
     public static get<T>(registry: Registries, id?: Identifier): T | Map<Identifier, T>{
         console.log(`Getting registry '${registry}'${id ? ` with id '${id}'` : ""}...`);
-        const reg = this.registries.get(registry);
+        let reg = this.registries.get(registry);
         if (!reg) {
-            console.warn(`Registry '${registry}' not found.`);
-            return id ? undefined as unknown as T : new Map() as unknown as Map<Identifier, T>;
+            reg = new Map();
+            this.registries.set(registry, reg);
         }
         if (id) {
             let value = reg.get(id);
