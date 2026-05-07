@@ -161,6 +161,25 @@ npm run dev
 
 `npm run typecheck` executa `tsc --noEmit` e captura problemas de TypeScript.
 
+## Criar packs com `npm run create_pack`
+
+Se você quer gerar um pack pronto para distribuição, use o comando:
+
+```bash
+npm run create_pack
+```
+
+Ele criará uma nova pasta de pack com a estrutura mínima necessária para construir um mod ou projeto baseado no engine.
+
+Passos básicos para começar:
+
+1. Execute `npm run create_pack` na raiz do repositório.
+2. Abra a pasta gerada pelo pack para ver os arquivos de exemplo e a estrutura criada.
+3. Substitua ou expanda o conteúdo do pack com seus próprios assets, códigos e traduções.
+4. Use `npm run build` para compilar o engine e preparar o pack para distribuição.
+
+> Dica: o pack gerado é um ponto de partida simples. Edite os arquivos criados para incluir seu jogo, assets e configurações específicas.
+
 ## Modding e Modelo `src/script/`
 
 `src/script/` é projetado como uma área de template para mods/jogos.
