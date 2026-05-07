@@ -1,16 +1,16 @@
-# Simulatus Engine Core Reference
+# Referência do Core do Simulatus Engine
 
-## Table of Contents
+## Sumário
 
-- [About](#about)
-- [Core Folder Purpose](#core-folder-purpose)
-- [Core Architecture](#core-architecture)
-  - [Structure](#structure)
+- [Sobre](#sobre)
+- [Propósito da Pasta Core](#proposito-da-pasta-core)
+- [Arquitetura do Core](#arquitetura-do-core)
+  - [Estrutura](#estrutura)
   - [Engine](#engine)
-  - [Elements](#elements)
-  - [Utilities](#utilities)
-- [Class Reference](#class-reference)
-  - [Structure Classes](#structure-classes)
+  - [Elementos](#elementos)
+  - [Utilitários](#utilitarios)
+- [Referência de Classes](#referencia-de-classes)
+  - [Classes de Estrutura](#classes-de-estrutura)
     - [Loader](#loader)
     - [PreLoader](#preloader)
     - [DOMLoader](#domloader)
@@ -22,7 +22,7 @@
     - [Registries](#registries)
     - [AssetProvider](#assetprovider)
     - [LanguageProvider](#languageprovider)
-  - [Asset Classes](#asset-classes)
+  - [Classes de Asset](#classes-de-asset)
     - [Asset](#asset)
     - [ImageAsset](#imageasset)
     - [VideoAsset](#videoasset)
@@ -33,7 +33,7 @@
     - [SoundTrack](#soundtrack)
     - [PlaylistSoundTrack](#playlistsoundtrack)
     - [SoundEffectsSoundTrack](#soundeffectssoundtrack)
-  - [Engine Classes](#engine-classes)
+  - [Classes de Engine](#classes-de-engine)
     - [BoardElement](#boardelement)
     - [Board](#board)
     - [BoardTextElement](#boardtextelement)
@@ -43,10 +43,10 @@
     - [BoardKeyboardHandler](#boardkeyboardhandler)
     - [Animation](#animation)
     - [AnimationProvider](#animationprovider)
-  - [Element Classes](#element-classes)
+  - [Classes de Elemento](#classes-de-elemento)
     - [Text](#text)
     - [GameElement](#gameelement)
-  - [Applier Interfaces and Builders](#applier-interfaces-and-builders)
+  - [Interfaces de Applier e Builders](#interfaces-de-applier-e-builders)
     - [Applier](#applier)
     - [BoardApplier](#boardapplier)
     - [StyleBuilder](#stylebuilder)
@@ -57,7 +57,7 @@
     - [ColorApplier](#colorapplier)
     - [SizeApplier](#sizeapplier)
     - [AnimationApplier](#animationapplier)
-  - [Utility Classes](#utility-classes)
+  - [Classes de Utilitário](#classes-de-utilitario)
     - [Color3](#color3)
     - [Vector2](#vector2)
     - [Area2](#area2)
@@ -70,42 +70,42 @@
     - [HashMap](#hashmap)
     - [elementUtils](#elementutils)
 
-## About
+## Sobre
 
-This document is the full engine reference for the core modules located under `src/core/`.
+Este documento é a referência completa do engine para os módulos do core localizados em `src/core/`.
 
-The `src/script/` folder is treated as a *game/template layer for each user*. The engine core itself is only in `src/core/`.
+A pasta `src/script/` é tratada como uma *camada de jogo/modelo para cada usuário*. O núcleo do engine em si está apenas em `src/core/`.
 
-## Core Folder Purpose
+## Propósito da Pasta Core
 
-The `src/core/` folder contains the engine implementation:
+A pasta `src/core/` contém a implementação do engine:
 
-- `structure/`: loaders, registries, asset providers, and language support.
-- `engine/`: DOM-based board system, animation helpers, event wrappers, and UI element classes.
-- `elements/`: reusable game element wrappers such as `Text` and `GameElement`.
-- `engine/utils/`: low-level helpers used across the engine.
+- `structure/`: loaders, registries, provedores de asset e suporte a idioma.
+- `engine/`: sistema de board baseado em DOM, helpers de animação, wrappers de evento e classes de elemento de UI.
+- `elements/`: wrappers reutilizáveis de elemento de jogo como `Text` e `GameElement`.
+- `engine/utils/`: helpers de baixo nível usados em todo o engine.
 
-## Core Architecture
+## Arquitetura do Core
 
-### Structure
+### Estrutura
 
-`src/core/structure/` defines the application lifecycle, registry system, assets, and language loading.
+`src/core/structure/` define o ciclo de vida da aplicação, o sistema de registries, assets e o carregamento de idiomas.
 
 ### Engine
 
-`src/core/engine/` defines the board, element wrappers, events, input handling, animations, and CSS appliers.
+`src/core/engine/` define o board, wrappers de elemento, eventos, tratamento de entrada, animações e appliers de CSS.
 
-### Elements
+### Elementos
 
-`src/core/elements/` defines objects that are reusable by games, such as translated text values and generic game elements.
+`src/core/elements/` define objetos reutilizáveis por jogos, como valores de texto traduzível e elementos genéricos de jogo.
 
-### Utilities
+### Utilitários
 
-`src/core/engine/utils/` contains helper classes for color, vectors, sessions, mouse events, and collections.
+`src/core/engine/utils/` contém classes helper para cores, vetores, sessões, eventos de mouse e coleções.
 
-## Class Reference
+## Referência de Classes
 
-### Structure Classes
+### Classes de Estrutura
 
 #### Loader
 
@@ -113,34 +113,34 @@ The `src/core/` folder contains the engine implementation:
 
 - `public static async main(): Promise<void>`
 
-This is the base loader abstraction used by all lifecycle loaders. It is intentionally empty in the core engine.
+Esta é a abstração base de loader usada por todos os loaders de ciclo de vida. Ela é intencionalmente vazia no core do engine.
 
 #### PreLoader
 
 `src/core/structure/PreLoader.ts`
 
-- Inherits from [Loader](#loader).
+- Herda de [Loader](#loader).
 - `public static async main(): Promise<void>`
 
-A placeholder class for preloading game resources before the main loader runs.
+Uma classe placeholder para pré-carregamento de recursos do jogo antes do loader principal ser executado.
 
 #### DOMLoader
 
 `src/core/structure/DOMLoader.ts`
 
-- Inherits from [Loader](#loader).
+- Herda de [Loader](#loader).
 - `public static async main(): Promise<void>`
 
-A placeholder class for DOM-specific loading logic after the main game logic has initialized.
+Uma classe placeholder para lógica de carregamento específica de DOM após a inicialização da lógica principal do jogo.
 
 #### Unloader
 
 `src/core/structure/Unloader.ts`
 
-- Inherits from [Loader](#loader).
+- Herda de [Loader](#loader).
 - `public static async main(): Promise<void>`
 
-A placeholder class for cleanup logic executed on the window `beforeunload` event.
+Uma classe placeholder para lógica de limpeza executada no evento `beforeunload` da janela.
 
 #### Logger
 
@@ -151,7 +151,7 @@ A placeholder class for cleanup logic executed on the window `beforeunload` even
 - `public warn(...args: any[]): void`
 - `public error(...args: any[]): void`
 
-`Logger` wraps console logging and also appends messages into the page loading overlay under `.loading ul`.
+`Logger` envolve o console e também adiciona mensagens no overlay de carregamento da página sob `.loading ul`.
 
 #### Registerable
 
@@ -159,7 +159,7 @@ A placeholder class for cleanup logic executed on the window `beforeunload` even
 
 - `public static async register(): Promise<void>`
 
-This abstract class requires subclasses to implement a static `register()` method. It is a core contract for registry-based registration.
+Esta classe abstrata exige que subclasses implementem um método estático `register()`. É um contrato central para registro via registries.
 
 #### Identifier
 
@@ -171,7 +171,7 @@ This abstract class requires subclasses to implement a static `register()` metho
 - `public static fromString(str: string): Identifier`
 - `public static of(namespace: string, name: string): Identifier`
 
-`Identifier` is the canonical engine identifier used for namespacing assets, translations, and other registry entries.
+`Identifier` é o identificador canônico do engine usado para criar namespaces de assets, traduções e outras entradas de registry.
 
 #### Registry
 
@@ -183,7 +183,7 @@ This abstract class requires subclasses to implement a static `register()` metho
 - `public static register<K extends keyof registryMap, V extends registryMap[K]>(registry: K, id: Identifier, value: V): void`
 - `public static get<T>(registry: Registries, id?: Identifier): T | Map<Identifier, T>`
 
-`Registry` manages engine global registry collections for languages and assets.
+`Registry` gerencia coleções globais do engine para linguagens e assets.
 
 #### Registries
 
@@ -192,7 +192,7 @@ This abstract class requires subclasses to implement a static `register()` metho
 - `LANGUAGE = "language"`
 - `ASSET = "asset"`
 
-A typed enumeration of available registry keys.
+Uma enumeração tipada das chaves de registry disponíveis.
 
 #### AssetProvider
 
@@ -206,9 +206,9 @@ A typed enumeration of available registry keys.
 - `private static createAsset(id: Identifier, url: string): Asset`
 - `private static async preloadAsset(asset: Asset): Promise<void>`
 
-`AssetProvider` resolves assets using `Identifier` values, chooses the asset subclass by file extension, and caches the loaded objects.
+`AssetProvider` resolve assets usando valores `Identifier`, seleciona a subclasse de asset pelo sufixo de arquivo e armazena em cache os objetos carregados.
 
-It uses `./script/game/` as the base URL for runtime assets, so game namespaces and assets are expected under that folder.
+Ele usa `./script/game/` como URL base para assets em tempo de execução, portanto namespaces de jogo e assets são esperados nessa pasta.
 
 #### LanguageProvider
 
@@ -227,9 +227,9 @@ It uses `./script/game/` as the base URL for runtime assets, so game namespaces 
 - `private static buildNamespacedIdentifier(namespace: string, key: string): Identifier | null`
 - `private static findIdentifierKey(langMap: Map<Identifier, string>, key: Identifier): Identifier | undefined`
 
-`LanguageProvider` is responsible for reading JSON translations and exposing localized text values. It uses the engine registry to store loaded language maps and triggers updates when the language changes.
+`LanguageProvider` é responsável por ler traduções JSON e expor valores de texto localizados. Ele usa o registry do engine para armazenar mapas de idioma carregados e dispara atualizações quando o idioma muda.
 
-### Asset Classes
+### Classes de Asset
 
 #### Asset
 
@@ -240,7 +240,7 @@ It uses `./script/game/` as the base URL for runtime assets, so game namespaces 
 - `constructor(id: Identifier, url: string)`
 - `public abstract getType(): string`
 
-Base abstract asset class for all asset types.
+Classe base abstrata para todos os tipos de asset.
 
 #### ImageAsset
 
@@ -251,7 +251,7 @@ Base abstract asset class for all asset types.
 - `public async load(): Promise<HTMLImageElement>`
 - `public getType(): string`
 
-Loads images using a native `HTMLImageElement`.
+Carrega imagens usando um `HTMLImageElement` nativo.
 
 #### VideoAsset
 
@@ -262,7 +262,7 @@ Loads images using a native `HTMLImageElement`.
 - `public async load(): Promise<HTMLVideoElement>`
 - `public getType(): string`
 
-Loads video assets and exposes a preloaded video element.
+Carrega assets de vídeo e expõe um elemento de vídeo pré-carregado.
 
 #### SoundAsset
 
@@ -272,7 +272,7 @@ Loads video assets and exposes a preloaded video element.
 - `public createAudio(): HTMLAudioElement`
 - `public getType(): string`
 
-Simple sound asset wrapper that creates an `HTMLAudioElement` on demand.
+Wrapper simples de asset de som que cria um `HTMLAudioElement` sob demanda.
 
 #### FontAsset
 
@@ -283,7 +283,7 @@ Simple sound asset wrapper that creates an `HTMLAudioElement` on demand.
 - `public static fontNameFromIdentifier(id: Identifier): string`
 - `public getType(): string`
 
-`FontAsset` represents a font file (e.g., `.ttf`, `.woff`, `.woff2`). It generates a CSS class name from the [Identifier](#identifier) to apply custom fonts to elements. Use `className` to apply the font via CSS or directly inject font-face rules.
+`FontAsset` representa um arquivo de fonte (por exemplo, `.ttf`, `.woff`, `.woff2`). Ele gera um nome de classe CSS a partir do [Identifier](#identifier) para aplicar fontes personalizadas aos elementos. Use `className` para aplicar a fonte via CSS ou injetar regras `@font-face` diretamente.
 
 #### ObjectAsset
 
@@ -294,7 +294,7 @@ Simple sound asset wrapper that creates an `HTMLAudioElement` on demand.
 - `public async load(): Promise<unknown>`
 - `public getType(): string`
 
-Loads JSON objects from asset URLs. Used by `LanguageProvider` and other JSON-based data assets.
+Carrega objetos JSON a partir de URLs de asset. Usado por `LanguageProvider` e outros dados baseados em JSON.
 
 #### Track
 
@@ -312,13 +312,13 @@ Loads JSON objects from asset URLs. Used by `LanguageProvider` and other JSON-ba
 - `public abstract getCurrentSoundTimestamp(): number`
 - `protected abstract applyVolume(): void`
 
-Abstract base for sound track implementations.
+Base abstrata para implementações de trilha sonora.
 
 #### SoundTrack
 
 `src/core/structure/assets/SoundTrack.ts`
 
-- Inherits from [Track](#track)
+- Herda de [Track](#track)
 - `protected currentAudio: HTMLAudioElement | null`
 - `protected currentSound: SoundAsset | null`
 - `public async playSound(sound: SoundAsset): Promise<void>`
@@ -327,13 +327,13 @@ Abstract base for sound track implementations.
 - `public getCurrentSoundTimestamp(): number`
 - `protected applyVolume(): void`
 
-A simple one-track sound manager that plays one sound at a time.
+Um gerenciador simples de trilha única que toca um som de cada vez.
 
 #### PlaylistSoundTrack
 
 `src/core/structure/assets/SoundTrack.ts`
 
-- Inherits from [SoundTrack](#soundtrack)
+- Herda de [SoundTrack](#soundtrack)
 - `private playlist: SoundAsset[]`
 - `private currentIndex: number`
 - `public addSound(sound: SoundAsset): void`
@@ -341,13 +341,13 @@ A simple one-track sound manager that plays one sound at a time.
 - `public async playNext(): Promise<void>`
 - `public async playPrevious(): Promise<void>`
 
-A track that keeps a playlist and advances between sounds.
+Uma trilha que mantém uma playlist e avança entre sons.
 
 #### SoundEffectsSoundTrack
 
 `src/core/structure/assets/SoundTrack.ts`
 
-- Inherits from [SoundTrack](#soundtrack)
+- Herda de [SoundTrack](#soundtrack)
 - `private activeSounds: HTMLAudioElement[]`
 - `public async playSound(sound: SoundAsset): Promise<void>`
 - `public stopCurrentSound(): void`
@@ -355,15 +355,15 @@ A track that keeps a playlist and advances between sounds.
 - `public getCurrentSoundTimestamp(): number`
 - `protected applyVolume(): void`
 
-A sound effects manager that can play multiple overlapping audio effects.
+Um gerenciador de efeitos sonoros que pode tocar múltiplos efeitos de áudio sobrepostos.
 
-### Engine Classes
+### Classes de Engine
 
 #### BoardElement
 
 `src/core/engine/BoardElement.ts`
 
-- Inherits from nothing directly, but forms the base of all board UI elements.
+- Herda de nada diretamente, mas forma a base de todos os elementos de UI do board.
 - `private el: E`
 - `public events: BoardDOMEvents`
 - `private _anchorPoint: Vector2`
@@ -411,23 +411,23 @@ A sound effects manager that can play multiple overlapping audio effects.
 - `public setParent(parent: BoardElement<HTMLElement>): void`
 - `public addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any): void`
 - `public removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any): void`
-- `protected onLoop(): void` (protected lifecycle hook)
+- `protected onLoop(): void` (hook de ciclo de vida protegido)
 - `public initOnLoop(): void`
 - `public static initAllLoops(): void`
 - `public get zIndex(): number`
 - `public set zIndex(value: number)`
-- `protected onAddedAsChild(parent: BoardElement<HTMLElement>): void` (protected hook)
-- `protected onRemovedAsChild(parent: BoardElement<HTMLElement>): void` (protected hook)
-- `protected deconstructor(): void` (protected cleanup hook)
+- `protected onAddedAsChild(parent: BoardElement<HTMLElement>): void` (hook protegido)
+- `protected onRemovedAsChild(parent: BoardElement<HTMLElement>): void` (hook protegido)
+- `protected deconstructor(): void` (hook de limpeza protegido)
 - `public toString(): string`
 
-`BoardElement` is the core DOM wrapper. It manages an HTML element, children, style access, event handling, and an internal loop system.
+`BoardElement` é o wrapper central de DOM. Ele gerencia um elemento HTML, filhos, acesso a estilos, manipulação de eventos e um sistema de loop interno.
 
 #### Board
 
 `src/core/engine/Board.ts`
 
-- Inherits from [BoardElement](#boardelement)
+- Herda de [BoardElement](#boardelement)
 - `constructor(board: HTMLDivElement | string)`
 - `public override getParent(): BoardElement<HTMLElement> | null`
 - `public setDocumentTitle(title: Text): void`
@@ -437,13 +437,13 @@ A sound effects manager that can play multiple overlapping audio effects.
 - `public applyAnimation(anim: Animation): HTMLStyleElement`
 - `public setDocumentFavicon(asset: ImageAsset): void`
 
-`Board` represents the top-level board container and includes page-level utilities such as title, favicon, and dynamic CSS injection.
+`Board` representa o container principal do board e inclui utilitários de nível de página como título, favicon e injeção dinâmica de CSS.
 
 #### BoardTextElement
 
 `src/core/engine/BoardTextElement.ts`
 
-- Inherits from [BoardElement](#boardelement)
+- Herda de [BoardElement](#boardelement)
 - `private _text: Text`
 - `private readonly languageChangeListener: (lang: string) => void`
 - `constructor(text: Text = Text.EMPTY)`
@@ -453,13 +453,13 @@ A sound effects manager that can play multiple overlapping audio effects.
 - `protected deconstructor(): void`
 - `public toString(): string`
 
-A board element that renders a `Text` instance and updates automatically on language change.
+Um elemento do board que renderiza uma instância de `Text` e atualiza automaticamente quando o idioma muda.
 
 #### BoardImageElement
 
 `src/core/engine/BoardImageElement.ts`
 
-- Inherits from [BoardElement](#boardelement)
+- Herda de [BoardElement](#boardelement)
 - `private _texture: ImageAsset`
 - `private _textureOffset: Vector2`
 - `private _repeats: Vector2`
@@ -475,13 +475,13 @@ A board element that renders a `Text` instance and updates automatically on lang
 - `private update(): void`
 - `constructor(imageAsset: ImageAsset)`
 
-A board element specialized to render image textures as background graphics.
+Um elemento do board especializado em renderizar texturas de imagem como gráficos de fundo.
 
 #### BoardMeshElement
 
 `src/core/engine/BoardMeshElement.ts`
 
-- Inherits from [BoardElement](#boardelement)
+- Herda de [BoardElement](#boardelement)
 - `public static readonly svgNS: string`
 - `public area: Area2`
 - `constructor()`
@@ -494,7 +494,7 @@ A board element specialized to render image textures as background graphics.
 - `public stroke(color: CSSColor, width: number = 1): this`
 - `public export(): SVGSVGElement`
 
-A specialized element for SVG drawing using `rect`, `circle`, and `line` primitives.
+Um elemento especializado para desenho SVG usando as primitivas `rect`, `circle` e `line`.
 
 #### BoardDOMEvents
 
@@ -575,7 +575,7 @@ A specialized element for SVG drawing using `rect`, `circle`, and `line` primiti
 - `public onPointerLeave(listener: ...): void`
 - `public offPointerLeave(listener: ...): void`
 
-`BoardDOMEvents` provides a thin wrapper around DOM event listeners for the engine board.
+`BoardDOMEvents` fornece um wrapper leve em torno de listeners de evento DOM para o board do engine.
 
 #### BoardKeyboardHandler
 
@@ -588,7 +588,7 @@ A specialized element for SVG drawing using `rect`, `circle`, and `line` primiti
 - `protected onKeyUp(event: KeyboardEvent): void`
 - `protected hook(element: HTMLElement | any): void`
 
-A key state helper that tracks currently pressed keys globally.
+Um helper de estado de teclas que rastreia as teclas atualmente pressionadas globalmente.
 
 #### Animation
 
@@ -608,7 +608,7 @@ A key state helper that tracks currently pressed keys globally.
 - `public addTimestamp(timestamp: number, properties: CSS.Properties): this`
 - `public export(): string`
 
-Represents a CSS keyframes definition built programmatically.
+Representa uma definição de keyframes CSS construída programaticamente.
 
 #### AnimationProvider
 
@@ -623,9 +623,9 @@ Represents a CSS keyframes definition built programmatically.
 - `private updateAnimationStyles(): void`
 - `public playAnimation(...anims: Animation[]): Promise<void>`
 
-Manages dynamically created CSS animation declarations and applies them to a board element.
+Gerencia declarações de animação CSS criadas dinamicamente e as aplica a um elemento do board.
 
-### Element Classes
+### Classes de Elemento
 
 #### Text
 
@@ -645,18 +645,18 @@ Manages dynamically created CSS animation declarations and applies them to a boa
 - `public toString(): string`
 - `public static concat(...texts: Text<TEXT>[]): Text<LITERAL>`
 
-A text wrapper that supports literal strings and translatable identifiers.
+Um wrapper de texto que suporta strings literais e identificadores traduzíveis.
 
 #### GameElement
 
 `src/core/elements/GameElement.ts`
 
-- Inherits from [BoardElement](#boardelement)
+- Herda de [BoardElement](#boardelement)
 - `constructor()`
 
-A convenience subclass for game objects that need a board-backed DOM element.
+Uma subclasse de conveniência para objetos de jogo que precisam de um elemento DOM vinculado ao board.
 
-### Applier Interfaces and Builders
+### Interfaces de Applier e Builders
 
 #### Applier
 
@@ -664,7 +664,7 @@ A convenience subclass for game objects that need a board-backed DOM element.
 
 - `applyToElement(element: StylableHTMLElement): void`
 
-Interface for classes that apply styles to plain style objects.
+Interface para classes que aplicam estilos a objetos de estilo simples.
 
 #### BoardApplier
 
@@ -672,7 +672,7 @@ Interface for classes that apply styles to plain style objects.
 
 - `applyToBoardElement(element: BoardElement): void`
 
-Interface for classes that apply presentation or content to `BoardElement` instances.
+Interface para classes que aplicam apresentação ou conteúdo a instâncias de `BoardElement`.
 
 #### StyleBuilder
 
@@ -686,7 +686,7 @@ Interface for classes that apply presentation or content to `BoardElement` insta
 - `public setContent(content: string): this`
 - `public applyToElement(element: { style: Properties; }): void`
 
-The `StyleBuilder` provides a fluent interface for building CSS properties. It composes multiple helper builders for colors, borders, transforms, transitions, animation, fonts, backgrounds, and alignment.
+O `StyleBuilder` fornece uma interface fluente para construir propriedades CSS. Ele compõe múltiplos builders auxiliares para cores, bordas, transformações, transições, animação, fontes, fundos e alinhamento.
 
 #### BackgroundColorApplier
 
@@ -698,7 +698,7 @@ The `StyleBuilder` provides a fluent interface for building CSS properties. It c
 - `constructor(backgroundColor: Properties["backgroundColor"] | Color3 = "transparent")`
 - `public applyToElement(element: { style: Properties }): void`
 
-Applies a background color to an element.
+Aplica uma cor de fundo a um elemento.
 
 #### TextApplier
 
@@ -710,7 +710,7 @@ Applies a background color to an element.
 - `constructor(text: Text | string = Text.EMPTY)`
 - `public applyToBoardElement(element: BoardElement): void`
 
-Applies text content to a `BoardElement`.
+Aplica conteúdo de texto a um `BoardElement`.
 
 #### ImageApplier
 
@@ -723,7 +723,7 @@ Applies text content to a `BoardElement`.
 - `constructor(url: string)`
 - `public applyToBoardElement(element: BoardElement): void`
 
-Applies an image background style to a board element.
+Aplica um estilo de fundo de imagem a um elemento do board.
 
 #### TextureApplier
 
@@ -744,7 +744,7 @@ Applies an image background style to a board element.
 - `constructor(texture: ImageAsset)`
 - `public applyToBoardElement(element: BoardElement): void`
 
-Applies a loaded image asset as a texture with repeat, size, and position controls.
+Aplica um asset de imagem carregado como textura com controles de repetição, tamanho e posição.
 
 #### ColorApplier
 
@@ -756,7 +756,7 @@ Applies a loaded image asset as a texture with repeat, size, and position contro
 - `constructor(color: Properties["color"] | Color3 = "inherit")`
 - `public applyToElement(element: { style: Properties }): void`
 
-Applies a text color to an element.
+Aplica uma cor de texto a um elemento.
 
 #### SizeApplier
 
@@ -771,7 +771,7 @@ Applies a text color to an element.
 - `constructor(width: Properties["width"] = "auto", height: Properties["height"] = "auto")`
 - `public applyToElement(element: { style: Properties }): void`
 
-Applies element width and height styles.
+Aplica estilos de largura e altura a um elemento.
 
 #### AnimationApplier
 
@@ -782,9 +782,9 @@ Applies element width and height styles.
 - `constructor(name: string)`
 - `public applyToElement(element: { style: Properties; }): void`
 
-This class is a shell for animation-based element appliers and currently creates an empty animation instance.
+Esta classe é um shell para appliers de elemento baseados em animação e atualmente cria uma instância de animação vazia.
 
-### Utility Classes
+### Classes de Utilitário
 
 #### Color3
 
@@ -814,7 +814,7 @@ This class is a shell for animation-based element appliers and currently creates
 - `public applyIntoHTMLElement(element: HTMLElement): void`
 - `public applyToElement(element: { style: CSS.Properties }): void`
 
-A color utility that supports hex, RGB, RGBA, HSL, and named color inputs.
+Um utilitário de cor que suporta entradas em hex, RGB, RGBA, HSL e cores nomeadas.
 
 #### Vector2
 
@@ -834,13 +834,13 @@ A color utility that supports hex, RGB, RGBA, HSL, and named color inputs.
 - `public toString(): string`
 - `public clone(): Vector2`
 
-A 2D vector used for position, size, and movement.
+Um vetor 2D usado para posição, tamanho e movimento.
 
 #### Area2
 
 `src/core/engine/game/Area2.ts`
 
-- Inherits from [Applier](#applier)
+- Herda de [Applier](#applier)
 - `public position: Vector2`
 - `public size: Vector2`
 - `public anchorPoint: Vector2`
@@ -866,7 +866,7 @@ A 2D vector used for position, size, and movement.
 - `public applyToElement(element: StylableHTMLElement): void`
 - `public applyCenterToElement(element: StylableHTMLElement): void`
 
-Represents a 2D rectangular region with position, size, and anchor point.
+Representa uma região retangular 2D com posição, tamanho e ponto de ancoragem.
 
 #### Vector2Controller
 
@@ -888,20 +888,20 @@ Represents a 2D rectangular region with position, size, and anchor point.
 - `public left(amount: number): void`
 - `public right(amount: number): void`
 
-A helper for mutable `Vector2` operations that triggers callbacks on updates.
+Um helper para operações mutáveis de `Vector2` que dispara callbacks em atualizações.
 
 #### Key
 
 `src/core/engine/utils/Key.ts`
 
-- Re-exports `Key` from `ts-key-enum`.
+- Reexporta `Key` de `ts-key-enum`.
 
 #### Mouse
 
 `src/core/engine/utils/Mouse.ts`
 
-- `public static readonly Util` helper with `isInsideOfBoardElement` and `isInsideOfElement`
-- `public static readonly BUTTON` buttons map
+- `public static readonly Util` helper com `isInsideOfBoardElement` e `isInsideOfElement`
+- `public static readonly BUTTON` mapa de botões
 - `protected static position: Vector2`
 - `public static whenMoved = new EventList<(delta: Vector2) => void>()`
 - `public static whenScrolled = new EventList<(delta: Vector2, event: WheelEvent) => void>()`
@@ -922,7 +922,7 @@ A helper for mutable `Vector2` operations that triggers callbacks on updates.
 - `public static whenMouseEnters`, `whenMouseLeaves`, `whenMouseMovesInside`, `whenMouseClicksInside`, `whenMouseRightClicksInside`
 - `public static clearEventsOfElement(element: hasElement | HTMLElement): void`
 
-A global mouse helper with event hooks, position tracking, pointer lock, and hit testing.
+Um helper global de mouse com hooks de evento, rastreamento de posição, bloqueio do pointer e detecção de colisão.
 
 #### EventList
 
@@ -935,7 +935,7 @@ A global mouse helper with event hooks, position tracking, pointer lock, and hit
 - `public remove(event: F): void`
 - `public trigger(...args: Parameters<F>): void`
 
-A generic event list helper that supports add/remove/trigger and once semantics.
+Um helper genérico de lista de eventos que suporta adicionar/remover/disparar e semântica de once.
 
 #### Session
 
@@ -957,7 +957,7 @@ A generic event list helper that supports add/remove/trigger and once semantics.
 - `public save(): void`
 - `public load(): void`
 
-A typed session container that can save/load data through `SessionManager`.
+Um container tipado de sessão que pode salvar/carregar dados por meio do `SessionManager`.
 
 #### SessionManager
 
@@ -968,7 +968,7 @@ A typed session container that can save/load data through `SessionManager`.
 - `public static deleteSession(id: Identifier): void`
 - `public static getValue<T extends any>(id: Identifier, path: string): T | null`
 
-Simple localStorage-backed session persistence.
+Persistência simples de sessão baseada em localStorage.
 
 #### HashMap
 
@@ -1000,7 +1000,7 @@ Simple localStorage-backed session persistence.
 - `public map<U>(mapper: (value: V, key: K, map: Map<K, V>) => U): HashMap<K, U>`
 - `public reduce<U>(reducer: (accumulator: U, value: V, key: K, map: Map<K, V>) => U, initialValue: U): U`
 
-A `Map`-style helper with convenience conversion methods.
+Um helper no estilo `Map` com métodos de conversão convenientes.
 
 #### elementUtils
 
@@ -1012,4 +1012,4 @@ A `Map`-style helper with convenience conversion methods.
 - `export function changeElementCSSProperty<K extends keyof CSS.Properties>(element: HTMLElement, propertyName: K, value: CSS.Properties[K]): void`
 - `export function changeDocumentCSSVariable(variableName: string, value: CSSValue): void`
 
-DOM helper utilities for manipulating elements and CSS variables.
+Utilitários DOM para manipular elementos e variáveis CSS.

@@ -1,106 +1,106 @@
 # Simulatus Engine
 
-## Table of Contents
+## Sumário
 
-- [About](#about)
-- [Engine Scope](#engine-scope)
-- [Project Structure](#project-structure)
+- [Sobre](#sobre)
+- [Escopo do Engine](#escopo-do-engine)
+- [Estrutura do Projeto](#estrutura-do-projeto)
 - [Index.html](#indexhtml)
 - [main.ts](#maints)
-- [Styles and SCSS](#styles-and-scss)
-- [Build and Testing](#build-and-testing)
-- [Modding and `src/script/` Template](#modding-and-srcscript-template)
-- [Core Reference](#core-reference)
+- [Estilos e SCSS](#estilos-e-scss)
+- [Build e Testes](#build-e-testes)
+- [Modding e Modelo `src/script/`](#modding-e-modelo-scrscript)
+- [Referência do Core](#referencia-do-core)
 
-## About
+## Sobre
 
-This repository contains the Simulatus Engine core implementation at `src/core/`.
+Este repositório contém a implementação do núcleo do Simulatus Engine em `src/core/`.
 
-The folder `src/script/` is a user-facing game/template layer. It is intended to be replaced or extended by each project or mod author. The engine core itself is in `src/core/`.
+A pasta `src/script/` é uma camada de jogo/modelo voltada para o usuário. Ela deve ser substituída ou estendida por cada projeto ou autor de mod. O núcleo do engine em si está em `src/core/`.
 
-## Engine Scope
+## Escopo do Engine
 
-- `src/core/`: engine implementation, utilities, asset loading, board rendering, DOM event wrappers, animations, sessions, color utilities, and registries.
-- `src/script/`: example game code and engine template data for user projects.
-- `src/styles/`: global SCSS used by the engine shell.
-- `src/index.html`: HTML shell and root container.
-- `src/main.ts`: engine bootstrap and game injection logic.
+- `src/core/`: implementação do engine, utilitários, carregamento de assets, renderização do board, wrappers de eventos DOM, animações, sessões, utilitários de cor e registries.
+- `src/script/`: código de exemplo do jogo e dados de modelo do engine para projetos de usuário.
+- `src/styles/`: SCSS global usado pelo shell do engine.
+- `src/index.html`: shell HTML e container raiz.
+- `src/main.ts`: bootstrap do engine e lógica de injeção do jogo.
 
-## Project Structure
+## Estrutura do Projeto
 
 - `build/`
-  - Output folder created by `npm run build`.
+  - Pasta de saída criada por `npm run build`.
 - `src/core/`
-  - Engine modules and runtime core.
+  - Módulos do engine e núcleo em tempo de execução.
 - `src/script/`
-  - Template game assets and sample loader classes. Treat this as a customizable game/mod area, not engine core.
+  - Assets de jogo de modelo e classes de loader de exemplo. Trate isto como uma área personalizável de jogo/mod, não como núcleo do engine.
 - `src/styles/`
-  - Global SCSS styles imported by `main.ts`.
+  - Estilos SCSS globais importados por `main.ts`.
 - `src/index.html`
-  - HTML application shell.
+  - Shell da aplicação HTML.
 - `src/main.ts`
-  - Main application bootstrap.
+  - Bootstrap principal da aplicação.
 - `vite.config.js`
-  - Path aliases and Vite build settings.
+  - Aliases de caminho e configurações do Vite.
 
 ## Index.html
 
-The `src/index.html` file is the engine shell. It contains:
+O arquivo `src/index.html` é o shell do engine. Ele contém:
 
-- `<!DOCTYPE html>` and standard metadata.
-- `<div class="loading" id="loading">`: a loading overlay used by the engine.
-- `<div class="board" id="root"></div>`: the main board root for engine rendering.
-- `<script src="./main.ts" type="module"></script>`: the entry point for the application.
+- `<!DOCTYPE html>` e metadados padrão.
+- `<div class="loading" id="loading">`: um overlay de carregamento usado pelo engine.
+- `<div class="board" id="root"></div>`: a raiz principal do board para renderização do engine.
+- `<script src="./main.ts" type="module"></script>`: o ponto de entrada da aplicação.
 
-### How to customize `index.html`
+### Como personalizar `index.html`
 
-- Change `<title>` to your game or mod name.
-- Update `<link rel="shortcut icon" ...>` to point to your favicon.
-- Add additional HTML or markup inside the body if your game needs custom menus or overlays.
-- Keep `src="./main.ts" type="module"` or update it to your own entry file if you change the bootstrap path.
+- Altere `<title>` para o nome do seu jogo ou mod.
+- Atualize `<link rel="shortcut icon" ...>` para apontar para o seu favicon.
+- Adicione HTML ou marcação adicional dentro do body se seu jogo precisar de menus ou overlays personalizados.
+- Mantenha `src="./main.ts" type="module"` ou atualize para seu próprio arquivo de entrada se você alterar o caminho do bootstrap.
 
 ## main.ts
 
-`src/main.ts` is the bootstrap script.
+`src/main.ts` é o script de bootstrap.
 
-It does the following:
+Ele faz o seguinte:
 
-1. Imports base loader classes from `@game/base/src/`.
-2. Imports core engine classes from `@core` and `core` aliases.
-3. Imports `src/styles/main.scss` so Vite compiles the SCSS.
-4. Defines `GameInjector.inject(...)` to run:
+1. Importa classes de loader base de `@game/base/src/`.
+2. Importa classes do núcleo do engine de alias `@core` e `core`.
+3. Importa `src/styles/main.scss` para que o Vite compile o SCSS.
+4. Define `GameInjector.inject(...)` para executar:
    - `preLoader.main()`
    - `loader.main()`
    - `domLoader.main()`
-   - `unloader.main()` on `beforeunload`
-5. Hides `.loading` after injection.
-6. Starts board loops with `BoardElement.initAllLoops()`.
+   - `unloader.main()` no `beforeunload`
+5. Oculta `.loading` após a injeção.
+6. Inicia os loops do board com `BoardElement.initAllLoops()`.
 
-### How to customize `main.ts`
+### Como personalizar `main.ts`
 
-- Replace `BasePreLoader`, `BaseLoader`, `BaseDOMLoader`, and `BaseUnloader` with your own classes.
-- Keep the injection sequence: preloader → loader → DOM loader → unloader.
-- If you relocate your game code, update the import aliases or relative paths.
-- If you want a different root element, update `index.html` and your game code accordingly.
+- Substitua `BasePreLoader`, `BaseLoader`, `BaseDOMLoader` e `BaseUnloader` pelas suas próprias classes.
+- Mantenha a sequência de injeção: preloader → loader → DOM loader → unloader.
+- Se você realocar o código do jogo, atualize os aliases de importação ou caminhos relativos.
+- Se quiser um elemento raiz diferente, atualize `index.html` e o código do seu jogo de acordo.
 
-## Styles and SCSS
+## Estilos e SCSS
 
-`src/styles/main.scss` is the engine shell stylesheet.
+`src/styles/main.scss` é a folha de estilo do shell do engine.
 
-It defines:
+Ele define:
 
-- root colors and theme variables.
-- base layout for the board container `.board`.
-- fixed loading overlay styles.
-- basic page reset and typography.
+- cores raiz e variáveis de tema.
+- layout base para o container do board `.board`.
+- estilos fixos do overlay de carregamento.
+- reset básico de página e tipografia.
 
-### How SCSS works
+### Como o SCSS funciona
 
-- Vite processes `src/styles/main.scss` because it is imported in `src/main.ts`.
-- You can add more SCSS files under `src/styles/` and import them from `main.ts`.
-- Use SCSS variables, nesting, mixins, or included partials if desired.
+- O Vite processa `src/styles/main.scss` porque ele é importado em `src/main.ts`.
+- Você pode adicionar mais arquivos SCSS em `src/styles/` e importá-los a partir de `main.ts`.
+- Use variáveis SCSS, aninhamento, mixins ou partials incluídos, se desejar.
 
-## Build and Testing
+## Build e Testes
 
 ### Build
 
@@ -110,16 +110,16 @@ Use:
 npm run build
 ```
 
-This script does:
+Este script faz:
 
-1. `tsc --noEmit` to type-check the project.
-2. `npx vite build` to generate production assets into `build/`.
-3. Copy `src/script/` into `build/script/`.
-4. Remove nested `src/` folders inside `build/script/game/**/src/`.
+1. `tsc --noEmit` para verificar o projeto com TypeScript.
+2. `npx vite build` para gerar os assets de produção em `build/`.
+3. Copiar `src/script/` para `build/script/`.
+4. Remover pastas `src/` aninhadas dentro de `build/script/game/**/src/`.
 
-This produces the normal production bundle, where Vite may combine and optimize code into a final HTML/JS/CSS output.
+Isso produz o bundle de produção normal, onde o Vite pode combinar e otimizar código em um output final de HTML/JS/CSS.
 
-### Build without bundling
+### Build sem empacotamento
 
 Use:
 
@@ -127,14 +127,14 @@ Use:
 npm run build:js
 ```
 
-This script performs a JS/CSS-only compilation without the production bundling step:
+Este script realiza uma compilação apenas de JS/CSS sem a etapa de empacotamento de produção:
 
-1. `tsc --noEmit false --outDir build/js` compiles TypeScript into JavaScript under `build/js`.
-2. `npx sass src/styles/main.scss build/js/main.css` compiles the SCSS into CSS.
+1. `tsc --noEmit false --outDir build/js` compila TypeScript em JavaScript dentro de `build/js`.
+2. `npx sass src/styles/main.scss build/js/main.css` compila o SCSS em CSS.
 
-This is useful for inspecting the generated code and assets in a non-bundled form. It does not produce the same single-file/obfuscated production output as `npm run build`.
+Isso é útil para inspecionar o código e os assets gerados em uma forma não empacotada. Não produz o mesmo output final de arquivo único/obfuscado que `npm run build`.
 
-### Run development server
+### Executar servidor de desenvolvimento
 
 Use:
 
@@ -142,7 +142,7 @@ Use:
 npm run dev
 ```
 
-### Preview
+### Visualizar
 
 Use:
 
@@ -150,40 +150,40 @@ Use:
 npm run run
 ```
 
-### Test
+### Testar
 
-There is no dedicated test suite in this repository yet. For now, verify the engine by:
+Ainda não há suíte de testes dedicada neste repositório. Por enquanto, verifique o engine com:
 
 ```bash
 npm run typecheck
 npm run dev
 ```
 
-`npm run typecheck` runs `tsc --noEmit` and catches TypeScript issues.
+`npm run typecheck` executa `tsc --noEmit` e captura problemas de TypeScript.
 
-## Modding and `src/script/` Template
+## Modding e Modelo `src/script/`
 
-`src/script/` is designed as a mod/game template area.
+`src/script/` é projetado como uma área de template para mods/jogos.
 
-- Do not treat `src/script/` as engine core.
-- The engine core lives in `src/core/`.
-- Your mod should provide its own game namespace under `src/script/game/YourMod`.
+- Não trate `src/script/` como núcleo do engine.
+- O núcleo do engine vive em `src/core/`.
+- Seu mod deve fornecer seu próprio namespace de jogo em `src/script/game/YourMod`.
 
-### How to create a mod
+### Como criar um mod
 
-1. Create a new folder under `src/script/game/<your-mod>`.
-2. Add assets under `src/script/game/<your-mod>/assets/`.
-3. Add language JSON files under `src/script/game/<your-mod>/assets/lang/`.
-4. Add your loader classes under `src/script/game/<your-mod>/src/`.
-5. Update `src/main.ts` to import your custom loader classes instead of the base template.
-6. Use `Identifier.of("<your-mod>", "<asset-name>")` to load assets with `AssetProvider`.
+1. Crie uma nova pasta em `src/script/game/<your-mod>`.
+2. Adicione assets em `src/script/game/<your-mod>/assets/`.
+3. Adicione arquivos JSON de idioma em `src/script/game/<your-mod>/assets/lang/`.
+4. Adicione suas classes de loader em `src/script/game/<your-mod>/src/`.
+5. Atualize `src/main.ts` para importar suas classes de loader personalizadas em vez do modelo base.
+6. Use `Identifier.of("<your-mod>", "<asset-name>")` para carregar assets com `AssetProvider`.
 
-### How to load a mod
+### Como carregar um mod
 
-- Use the loader classes you created to initialize mod-specific content.
-- `AssetProvider` will resolve asset URLs relative to `./script/game/<namespace>/assets/`.
-- `LanguageProvider` loads translations from JSON files inside `assets/lang/`.
+- Use as classes de loader que você criou para inicializar conteúdo específico do mod.
+- `AssetProvider` resolve URLs de assets relativos a `./script/game/<namespace>/assets/`.
+- `LanguageProvider` carrega traduções de arquivos JSON dentro de `assets/lang/`.
 
-## Core Reference
+## Referência do Core
 
-The full engine class and API reference is available in [docs/core_reference.md](docs/core_reference.md).
+A referência completa de classes e APIs do engine está disponível em [docs/core_reference.md](docs/core_reference.md).
