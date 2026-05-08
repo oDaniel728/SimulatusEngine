@@ -61,6 +61,19 @@ h1 {
     position: fixed;
     z-index: 999999999999999999999;
 }
+.loading >ul {
+    width: min(90%, 800px);
+    max-height: 70%;
+    margin: 0;
+    padding: 1rem;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.75rem;
+    font-family: "Segoe UI Mono", "Courier New", monospace;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
 .loading >ul >li.warn {
     color: #ffae00;
 }
@@ -75,4 +88,6 @@ h1 {
 }
 .loading >ul >li {
     list-style: none;
+    margin: 0.25rem 0;
+    white-space: pre-wrap;
 }
