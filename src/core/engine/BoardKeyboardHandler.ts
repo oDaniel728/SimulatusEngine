@@ -16,6 +16,7 @@ export default class BoardKeyboardHandler {
 
     protected keysPressed: Set<string>;
     protected hooked: boolean = false;
+    private lastLoopTime?: number;
 
     constructor(bel?: BoardElement) {
         this.keysPressed = new Set();
@@ -25,10 +26,13 @@ export default class BoardKeyboardHandler {
         this.initOnLoop();
     }
 
-    protected onLoop(): void {}
+    protected onLoop(deltaTime: number = 0): void {}
     private initOnLoop() {
         setInterval(() => {
-            this.onLoop();
+            const now = performance.now();
+            const deltaTime = this.lastLoopTime === undefined ? 0 : now - this.lastLoopTime;
+            this.lastLoopTime = now;
+            this.onLoop(deltaTime);
         }, 1000 / 60); // 60 FPS
     };
 

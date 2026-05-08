@@ -26,6 +26,8 @@ export default class BoardElement<E extends HTMLElement = HTMLElement> {
     private _anchorPoint: Vector2 = new Vector2(0, 0);
     public keyboardHandler: BoardKeyboardHandler;
     public static Instances = new Set<BoardElement>();
+    public deltaTime: number = 0;
+    private lastLoopTime?: number;
 
     private _opacity: number = 1;
     public get opacity(): number {
@@ -241,11 +243,16 @@ export default class BoardElement<E extends HTMLElement = HTMLElement> {
         this.el.removeEventListener(type, listener);
     }
 
-    protected onLoop(): void {}
+    protected onLoop(deltaTime: number = 0): void {}
 
     public initOnLoop(): void {
-        this.onLoop();
-        [...this.events.listenersOfLoop].forEach((v) => { v(); });
+        const now = performance.now();
+        const deltaTime = this.lastLoopTime === undefined ? 0 : now - this.lastLoopTime;
+        this.lastLoopTime = now;
+        this.deltaTime = deltaTime;
+
+        this.onLoop(deltaTime);
+        [...this.events.listenersOfLoop].forEach((v) => { v(deltaTime); });
 
         setTimeout(this.initOnLoop.bind(this), 1000 / 60); // 60 FPS
     }

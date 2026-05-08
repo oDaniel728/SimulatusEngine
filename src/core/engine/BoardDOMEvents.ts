@@ -14,7 +14,7 @@ import BoardElement from "./BoardElement";
 export default class BoardDOMEvents {
     private board: BoardElement<HTMLElement>;
     public keysPressed: Set<string> = new Set();
-    public listenersOfLoop: Set<() => void> = new Set();
+    public listenersOfLoop: Set<(deltaTime?: number) => void> = new Set();
 
     constructor(board: BoardElement<HTMLElement>) {
         this.board = board;
@@ -35,10 +35,10 @@ export default class BoardDOMEvents {
         window.removeEventListener("load", listener);
     }
 
-    public onLoop(listener: () => void): void {
+    public onLoop(listener: (deltaTime?: number) => void): void {
         this.listenersOfLoop.add(listener);
     }
-    public offLoop(listener: () => void): void {
+    public offLoop(listener: (deltaTime?: number) => void): void {
         this.listenersOfLoop.delete(listener);
     }
 
