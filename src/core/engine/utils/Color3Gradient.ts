@@ -1,10 +1,12 @@
 import { Properties } from "csstype";
 import Applier from "../appliers/Applier.js";
 import Color3 from "./Color3.js";
+import BoardApplier from "../appliers/BoardApplier.js";
+import BoardElement from "../BoardElement.js";
 
 type Direction = "top" | "bottom" | "left" | "right" | "top left" | "top right" | "bottom left" | "bottom right";
 
-export default class Color3Gradient implements Applier {
+export default class Color3Gradient implements Applier, BoardApplier {
     private colors: Color3[] = [];
     private angle: number = 0;
 
@@ -96,10 +98,9 @@ export default class Color3Gradient implements Applier {
         return this;
     }
 
-    public apply(element: { style: Properties }): void {
+    public applyToBoardElement(element: BoardElement): void {
         this.applyToElement(element);
     }
-
     public applyToElement(element: { style: Properties; }): void {
         element.style.background = this.toString();
     }
