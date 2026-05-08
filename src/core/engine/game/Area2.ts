@@ -29,7 +29,7 @@ export class Area2 implements Applier {
      * area.position.y = 150; // Move a área 50 pixels para baixo.
      * console.log(area.position.x, area.position.y); // Imprime a posição X e Y da área.
      * 
-     * @public
+     * 
      * @type {Vector2}
      */
     public position: Vector2;
@@ -47,7 +47,7 @@ export class Area2 implements Applier {
      * area.size.y = 150; // Aumenta a altura da área para 150 pixels.
      * console.log(area.size.x, area.size.y); // Imprime a largura e altura da área.
      * 
-     * @public
+     * 
      * @type {Vector2}
      */
     public size: Vector2;
@@ -59,7 +59,7 @@ export class Area2 implements Applier {
      * const area = new Area2();
      * area.anchorPoint = new Vector2(0.5, 0.5); // Define o ponto de âncora para o centro da área.
      * 
-     * @public
+     * 
      * @type {Vector2}
      */
     public anchorPoint: Vector2;
@@ -117,7 +117,7 @@ export class Area2 implements Applier {
     /**
      * Posição X da Area.
      *
-     * @public
+     * 
      * @type {number} - A posição X da área, representada pela componente X da posição da área.
      */
     public get x(): number { return this.position.x; }
@@ -127,7 +127,7 @@ export class Area2 implements Applier {
     /**
      * Posição Y da Area.
      *
-     * @public
+     * 
      * @type {number} - A posição Y da área, representada pela componente Y da posição da área.
      */
     public get y(): number { return this.position.y; }
@@ -137,7 +137,7 @@ export class Area2 implements Applier {
     /**
      * Tamanho X, Largura da Area.
      *
-     * @public
+     * 
      * @type {number} - A largura da área, representada pela componente X do tamanho da área.
      */
     public get w(): number { return this.size.x; }
@@ -146,7 +146,7 @@ export class Area2 implements Applier {
     /**
      * Tamanho Y, Altura da Area.
      *
-     * @public
+     * 
      * @type {number} - A altura da área, representada pela componente Y do tamanho da área.
      */
     public get h(): number { return this.size.y; }
@@ -155,7 +155,7 @@ export class Area2 implements Applier {
     /**
      * Posição esquerda da Area.
      *
-     * @public
+     * 
      * @type {number} - A posição X do lado esquerdo da área, calculada como a posição X da área.
      */
     public get left(): number { return this.position.x; }
@@ -163,7 +163,7 @@ export class Area2 implements Applier {
     /**
      * Posição direita da Area.
      *
-     * @public
+     * 
      * @type {number} - A posição X do lado direito da área, calculada como a posição X mais a largura da área.
      */
     public get right(): number { return this.position.x + this.size.x; }
@@ -171,7 +171,7 @@ export class Area2 implements Applier {
     /**
      * Posição superior da Area.
      *
-     * @public
+     * 
      * @type {number} - A posição Y do topo da área, calculada como a posição Y da área.
      */
     public get top(): number { return this.position.y; }
@@ -179,7 +179,7 @@ export class Area2 implements Applier {
     /**
      * Posição inferior da Area.
      *
-     * @public
+     * 
      * @type {number} - A posição Y do fundo da área, calculada como a posição Y mais a altura da área.
      */
     public get bottom(): number { return this.position.y + this.size.y; }
@@ -196,7 +196,7 @@ export class Area2 implements Applier {
      * // Imprime a posição X e Y do ponto relativo dentro da área.
      * console.log(relativePoint.x, relativePoint.y); 
      *
-     * @public
+     * 
      * @param {Vector2} point - O ponto relativo dentro da área, onde (0, 0) é o canto superior esquerdo e (1, 1) é o canto inferior direito.
      * @returns {Vector2} - O ponto absoluto dentro da área correspondente ao ponto relativo fornecido.
      */
@@ -222,7 +222,7 @@ export class Area2 implements Applier {
      * // se isContained: "Ponto está dentro da área"
      * // senão: "Ponto não está dentro da área"
      * 
-     * @public
+     * 
      * @param {Vector2} point - O ponto a ser verificado, representado como um Vector2 com coordenadas X e Y.
      * @returns {boolean} - Retorna true se o ponto estiver contido dentro da área, ou false caso contrário.
      */
@@ -244,7 +244,7 @@ export class Area2 implements Applier {
      * // se isInside: "Ponto colide com a área"
      * // senão: "Ponto não colide com a área"
      * 
-     * @public
+     * 
      * @param {Vector2} point 
      * @returns {boolean} 
      */
@@ -266,7 +266,7 @@ export class Area2 implements Applier {
      * // se isColliding: "As áreas colidem"
      * // senão: "As áreas não colidem"
      * 
-     * @public
+     * 
      * @param {Area2} collision - A outra área a ser verificada para colisão, representada como uma instância de Area2.
      * @returns {boolean} - Retorna true se as áreas colidem, ou false caso contrário.
      */
@@ -285,7 +285,7 @@ export class Area2 implements Applier {
      * // se isColliding: "O ponto colide com a área"
      * // senão: "O ponto não colide com a área"
      * 
-     * @public
+     * 
      * @param {Vector2} point - O ponto a ser verificado, representado como um Vector2 com coordenadas X e Y.
      * @returns {boolean} - Retorna true se o ponto colidir com a área, ou false caso contrário.
      */
@@ -312,7 +312,7 @@ export class Area2 implements Applier {
      * // se isIntersecting: "As áreas se intersectam"
      * // senão: "As áreas não se intersectam"
      * 
-     * @public
+     * 
      * @param {Area2} other - A outra área a ser verificada para interseção, representada como uma instância de Area2.
      * @returns {boolean} - Retorna true se as áreas se intersectam, ou false caso contrário.
      */
@@ -333,7 +333,7 @@ export class Area2 implements Applier {
      * 
      * console.log(center.x, center.y); // Imprime a posição X e Y do ponto central da área.
      * 
-     * @public
+     * 
      * @returns {Vector2} - O ponto central da área, representado como um Vector2 com coordenadas X e Y.
      */
     public getCenter(): Vector2 {
@@ -351,7 +351,7 @@ export class Area2 implements Applier {
      * 
      * console.log(area.toString()); // Imprime "Area2(position: (100, 100), size: (200, 100), anchorPoint: (0.5, 0.5))"
      * 
-     * @public
+     * 
      * @returns {string} - Uma string representando a área, no formato "Area2(position: (x, y), size: (width, height), anchorPoint: (anchorX, anchorY))".
      */
     public toString(): string {
@@ -367,7 +367,7 @@ export class Area2 implements Applier {
      * 
      * area.applyToElement(boardElement.getElement()); // Aplica as propriedades da área ao elemento HTML, centralizando o elemento em relação à área.
      * 
-     * @public 
+     *  
      * @implements {Applier}
      * @param {StylableHTMLElement} element - O elemento HTML ao qual as propriedades da área serão aplicadas, representado como um objeto que possui uma propriedade style do tipo CSS.Properties.
      */
@@ -380,7 +380,7 @@ export class Area2 implements Applier {
      *
      * @deprecated Use o método applyToElement para aplicar as propriedades da área a um elemento HTML, ou use os métodos updateElementSize e updateElementPosition para atualizar o estilo do tamanho e posição do elemento HTML separadamente.
      * 
-     * @public
+     * 
      * @param {StylableHTMLElement} element - O elemento HTML ao qual as propriedades da área serão aplicadas, representado como um objeto que possui uma propriedade style do tipo CSS.Properties.
      */
     public applyCenterToElement(element: StylableHTMLElement): void {

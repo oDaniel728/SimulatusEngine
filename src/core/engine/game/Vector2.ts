@@ -25,7 +25,7 @@ export class Vector2 {
      * position.x = 150; // Define a coordenada X do vetor para 150.
      * console.log(position.x); // Output: 150
      * 
-     * @public
+     * 
      * @type {number}
      */
     public get x(): number {
@@ -45,7 +45,7 @@ export class Vector2 {
      * position.y = 75; // Define a coordenada Y do vetor para 75.
      * console.log(position.y); // Output: 75
      * 
-     * @public
+     * 
      * @type {number}
      */
     public get y(): number {
@@ -113,7 +113,7 @@ export class Vector2 {
      * const result = position1.add(position2); // Retorna um novo vetor com coordenadas (120, 80).
      * console.log(result.x, result.y); // Output: 120 80
      * 
-     * @public
+     * 
      * @param {Vector2} other - Outro vetor cujas coordenadas serão adicionadas às coordenadas do vetor atual, resultando em um novo vetor que representa a soma dos dois vetores.
      * @returns {Vector2} - Um novo vetor resultante da adição do vetor atual com o vetor fornecido, representando a soma das coordenadas dos dois vetores.
      */
@@ -127,7 +127,7 @@ export class Vector2 {
      * const result = position.add(10); // Retorna um novo vetor com coordenadas (110, 60).
      * console.log(result.x, result.y); // Output: 110 60
      * 
-     * @public
+     * 
      * @param {number} other - Um valor numérico que será adicionado às coordenadas X e Y do vetor atual, resultando em um novo vetor que representa a soma do vetor atual com o valor numérico fornecido.
      */
     public add(other: number): Vector2
@@ -140,7 +140,7 @@ export class Vector2 {
      * const result = position.add(20, 30); // Retorna um novo vetor com coordenadas (120, 80).
      * console.log(result.x, result.y); // Output: 120 80
      *
-     * @public
+     * 
      * @param {number} x - O valor que será adicionado à coordenada X do vetor atual.
      * @param {number} y - O valor que será adicionado à coordenada Y do vetor atual.
      * @returns {Vector2} - Um novo vetor resultante da adição das coordenadas do vetor atual com os valores numéricos fornecidos.
@@ -167,7 +167,7 @@ export class Vector2 {
      * const result = position1.subtract(position2); // Retorna um novo vetor com coordenadas (80, 20).
      * console.log(result.x, result.y); // Output: 80 20
      *
-     * @public
+     * 
      * @param {Vector2} other - Outro vetor cujas coordenadas serão subtraídas das coordenadas do vetor atual, resultando em um novo vetor que representa a diferença dos dois vetores.
      * @returns {Vector2} - Um novo vetor resultante da subtração do vetor atual com o vetor fornecido, representando a diferença das coordenadas dos dois vetores.
      */
@@ -181,7 +181,7 @@ export class Vector2 {
      * const result = position.subtract(10); // Retorna um novo vetor com coordenadas (90, 40).
      * console.log(result.x, result.y); // Output: 90 40
      * 
-     * @public
+     * 
      * @param {number} other - Um valor numérico que será subtraído das coordenadas X e Y do vetor atual, resultando em um novo vetor que representa a diferença do vetor atual com o valor numérico fornecido.
      */
     public subtract(other: number): Vector2
@@ -194,7 +194,7 @@ export class Vector2 {
      * const result = position.subtract(20, 30); // Retorna um novo vetor com coordenadas (80, 20).
      * console.log(result.x, result.y); // Output: 80 20
      * 
-     * @public
+     * 
      * @param {number} x - O valor que será subtraído da coordenada X do vetor atual.
      * @param {number} y - O valor que será subtraído da coordenada Y do vetor atual.
      * @returns {Vector2} - Um novo vetor resultante da subtração das coordenadas do vetor atual com os valores numéricos fornecidos.
@@ -219,7 +219,7 @@ export class Vector2 {
      * 
      * console.log(position2.x, position2.y); // Output: 200 100
      *
-     * @public
+     * 
      * @param {number} other 
      * @returns {Vector2} 
      */
@@ -234,7 +234,7 @@ export class Vector2 {
      * const result = position1.multiply(position2); // Retorna um novo vetor com coordenadas (200, 150).
      * console.log(result.x, result.y); // Output: 200 150
      *
-     * @public
+     * 
      * @param {Vector2} other - Outro vetor cujas coordenadas serão multiplicadas pelas coordenadas do vetor atual, resultando em um novo vetor que representa o produto dos dois vetores.
      * @returns {Vector2} - Um novo vetor resultante da multiplicação do vetor atual com o vetor fornecido, representando o produto das coordenadas dos dois vetores.
      */
@@ -248,7 +248,7 @@ export class Vector2 {
      * const result = position1.multiply(2, 3); // Retorna um novo vetor com coordenadas (200, 150).
      * console.log(result.x, result.y); // Output: 200 150
      *
-     * @public
+     * 
      * @param {number} x - O valor que será multiplicado pela coordenada X do vetor atual.
      * @param {number} y - O valor que será multiplicado pela coordenada Y do vetor atual.
      * @returns {Vector2} - Um novo vetor resultante da multiplicação das coordenadas do vetor atual com os valores numéricos fornecidos.
@@ -272,7 +272,7 @@ export class Vector2 {
      * const position2 = position1.divide(2); // Retorna um novo vetor com coordenadas (50, 25).
      * console.log(position2.x, position2.y); // Output: 50 25
      *
-     * @public
+     * 
      * @param {number} other - Um valor numérico que será usado para dividir as coordenadas do vetor atual, resultando em um novo vetor que representa a divisão do vetor atual pelo valor numérico fornecido.
      * @returns {Vector2} - Um novo vetor resultante da divisão do vetor atual pelo valor numérico fornecido, representando a divisão das coordenadas do vetor atual por esse valor.
      */
@@ -287,7 +287,7 @@ export class Vector2 {
      * const result = position1.divide(position2); // Retorna um novo vetor com coordenadas (50, 10).
      * console.log(result.x, result.y); // Output: 50 10
      *
-     * @public
+     * 
      * @param {Vector2} other - Outro vetor cujas coordenadas serão usadas para dividir as coordenadas do vetor atual, resultando em um novo vetor que representa a divisão do vetor atual pelo vetor fornecido.
      * @returns {Vector2} - Um novo vetor resultante da divisão do vetor atual pelo vetor fornecido, representando a divisão das coordenadas do vetor atual pelas coordenadas do vetor fornecido.
      */
@@ -302,7 +302,7 @@ export class Vector2 {
      * 
      * console.log(result.x, result.y); // Output: 50 10
      * 
-     * @public
+     * 
      * @param {number} x - O valor que será usado para dividir a coordenada X do vetor atual.
      * @param {number} y - O valor que será usado para dividir a coordenada Y do vetor atual.
      * @return {Vector2} - Um novo vetor resultante da divisão das coordenadas do vetor atual pelos valores numéricos fornecidos, representando a divisão das coordenadas do vetor atual por esses valores.
@@ -326,7 +326,7 @@ export class Vector2 {
      * const magnitude = position.magnitude(); // Retorna 5, que é a distância do ponto (3, 4) à origem (0, 0).
      * console.log(magnitude); // Output: 5
      *
-     * @public
+     * 
      * @returns {number} - A magnitude do vetor, representando a distância do ponto representado pelo vetor à origem (0, 0) no espaço bidimensional.
      */
     public magnitude(): number {
@@ -341,7 +341,7 @@ export class Vector2 {
      * const normalized = position.normalize(); // Retorna um novo vetor com coordenadas (0.6, 0.8), que é o vetor normalizado de (3, 4).
      * console.log(normalized.x, normalized.y); // Output: 0.6 0.8
      * 
-     * @public
+     * 
      * @returns {Vector2} - Um novo vetor normalizado, representando a mesma direção do vetor atual, mas com magnitude igual a 1.
      */
     public normalize(): Vector2 {
@@ -359,7 +359,7 @@ export class Vector2 {
      * const position = new Vector2(100, 50);
      * console.log(position.toString()); // Output: "Vector2(100, 50)"
      *
-     * @public
+     * 
      * @returns {string} - Uma string representando o vetor, no formato "Vector2(x, y)", onde x e y são as coordenadas do vetor.
      */
     public toString(): string {
@@ -374,7 +374,7 @@ export class Vector2 {
      * const position2 = position1.clone(); // Retorna um novo vetor com as mesmas coordenadas de position1.
      * console.log(position2.x, position2.y); // Output: 100 50
      *
-     * @public
+     * 
      * @returns {Vector2} 
      */
     public clone(): Vector2 {
