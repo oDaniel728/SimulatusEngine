@@ -205,4 +205,4 @@ Passos básicos para começar:
 
 ## Referência do Core
 
-A referência completa de classes e APIs do engine está disponível em [docs/core_reference.md](docs/core_reference.md).
+A referência completa de classes e APIs do engine está disponível em [core_reference.md](core_reference.md).
