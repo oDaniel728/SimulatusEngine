@@ -27,6 +27,8 @@ const NAMED_COLORS = {
     brown: "#a52a2a"
 }
 
+const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+
 /**
  * Color3
  *
@@ -43,10 +45,36 @@ export default class Color3 {
 
     private static readonly NAMED_COLORS: Record<string, string> = NAMED_COLORS;
 
-    public r: number;
-    public g: number;
-    public b: number;
-    public a: number;
+    private _r!: number;
+    private _g!: number;
+    private _b!: number;
+    private _a!: number;
+
+    public get r(): number {
+        return Math.round(clamp(this._r, 0, 255));
+    }
+    public get g(): number {
+        return Math.round(clamp(this._g, 0, 255));
+    }
+    public get b(): number {
+        return Math.round(clamp(this._b, 0, 255));
+    }
+    public get a(): number {
+        return clamp(this._a, 0, 1);
+    }
+
+    public set r(value: number) {
+        this._r = Math.round(clamp(value, 0, 255));
+    }
+    public set g(value: number) {
+        this._g = Math.round(clamp(value, 0, 255));
+    }
+    public set b(value: number) {
+        this._b = Math.round(clamp(value, 0, 255));
+    }
+    public set a(value: number) {
+        this._a = clamp(value, 0, 1);
+    }
 
     constructor();
     constructor(namedColor: NamedCSSColor);
