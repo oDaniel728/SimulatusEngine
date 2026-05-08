@@ -24,7 +24,7 @@ import Vector2 from "../game/Vector2";
  * controller.add(new Vector2(1, 1)); // Isso acionará o callback e imprimirá: O vetor foi modificado: 2 3
  * controller.up(1); // Isso acionará o callback e imprimirá: O vetor foi modificado: 2 2
  */
-export default class Vector2Controller {
+export class Vector2Controller {
     private vec: Vector2;
     public _callback: () => void = () => {};
 
@@ -169,3 +169,4 @@ export default class Vector2Controller {
         this._callback();
     }
 }
+export default Vector2Controller;

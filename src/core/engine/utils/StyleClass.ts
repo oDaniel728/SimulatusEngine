@@ -17,7 +17,7 @@ import { CSSLikeProperties } from "./StyleManager";
  * styleClass.setProperty("backgroundColor", "red"); // Isso atualizará a propriedade de fundo para vermelho, e a classe será atualizada automaticamente para refletir a mudança.
  * styleClass.remove(someBoardElement); // Isso removerá a classe "my-style" do elemento do tabuleiro, revertendo as alterações de estilo aplicadas.
  */
-export default class StyleClass implements BoardApplier {
+export class StyleClass implements BoardApplier {
 
     /**
      * O nome da classe CSS gerada, que é usado para aplicar as regras de estilo aos elementos do tabuleiro. Este nome é único para cada instância da StyleClass e é usado como seletor CSS para definir as regras de estilo associadas a essa classe.
@@ -287,3 +287,4 @@ export default class StyleClass implements BoardApplier {
         }
     }
 }
+export default StyleClass;

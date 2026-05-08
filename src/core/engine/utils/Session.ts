@@ -24,7 +24,7 @@ import SessionManager from "./SessionManager";
  * session.load(); // Carrega a sessão usando o SessionManager
  * console.log(session.getData()); // Output: { score: 0, level: 1 } (ou os dados salvos anteriormente)
  */
-export default class Session<T extends Record<string, any>> {
+export class Session<T extends Record<string, any>> {
     private data: T;
     private readonly initialData: T;
     public readonly id: Identifier;
@@ -232,3 +232,4 @@ export default class Session<T extends Record<string, any>> {
         }
     }
 }
+export default Session;

@@ -11,7 +11,7 @@ export type HasSomeHTMLElement = { getElement() : HTMLElement }
  * @export
  * @class StyleManager
  */
-export default class StyleManager {
+export class StyleManager {
 
     private static get styleClassInstances() {
         return StyleClass.getInstances();
@@ -75,3 +75,4 @@ export default class StyleManager {
         el.classList.add(styleClass.className);
     }
 }
+export default StyleManager;

@@ -17,7 +17,7 @@ type hasElement = { getElement(): HTMLElement };
  *
  * Class for the engine.
  */
-export default class Mouse {
+export class Mouse {
 
     public static readonly Util = class {
         public static isInsideOfBoardElement(bel: BoardElement): boolean {
@@ -301,3 +301,4 @@ export default class Mouse {
         element.parentNode?.replaceChild(clone, element);
     }
 }
+export default Mouse;

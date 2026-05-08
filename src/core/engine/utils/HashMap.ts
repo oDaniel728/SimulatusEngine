@@ -6,7 +6,7 @@
  * @typeParam K - Tipo das chaves
  * @typeParam V - Tipo dos valores
  */
-export default class HashMap<K, V> {
+export class HashMap<K, V> {
     private hmap: Map<K, V>;
 
     /**
@@ -466,3 +466,4 @@ export default class HashMap<K, V> {
         return accumulator;
     }
 }
+export default HashMap;  

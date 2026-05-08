@@ -6,7 +6,7 @@ import Session from "./Session";
  *
  * Classe responsável por gerenciar a persistência e recuperação de sessões usando o localStorage do navegador. O SessionManager fornece métodos para salvar, carregar e deletar sessões, bem como para obter valores específicos de uma sessão usando um caminho de chave. Ele é projetado para trabalhar com a classe Session, permitindo que os dados da sessão sejam armazenados e recuperados de forma persistente entre as sessões do navegador.
  */
-export default class SessionManager {
+export class SessionManager {
     
     /**
      * Salva os dados da sessão usando o localStorage do navegador. Este método é responsável por serializar os dados da sessão em formato JSON e armazená-los no localStorage usando uma chave única baseada no identificador da sessão. Ele também inclui tratamento de erros para garantir que quaisquer problemas durante o processo de salvamento sejam registrados no console.
@@ -120,3 +120,4 @@ export default class SessionManager {
         }
     }
 }
+export default SessionManager;
