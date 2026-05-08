@@ -5,7 +5,7 @@ from build_pack import decompress
 
 def main(args: list[str]) -> None:
     py_file = args[0]
-    if py_file == "-i":
+    if args[1] == "-i":
         print("Interactive mode:")
         pack_to_install = input("Enter pack to install: ")
         args = [py_file, pack_to_install]
