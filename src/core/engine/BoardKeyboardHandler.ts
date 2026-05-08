@@ -22,7 +22,15 @@ export default class BoardKeyboardHandler {
         this.onKeyDown = this.onKeyDown.bind(this);
         this.onKeyUp = this.onKeyUp.bind(this);
         this.hook(document);
+        this.initOnLoop();
     }
+
+    protected onLoop(): void {}
+    private initOnLoop() {
+        setInterval(() => {
+            this.onLoop();
+        }, 1000 / 60); // 60 FPS
+    };
 
     public isPressing(...keys: (string | Key)[]): boolean {
         for (const key of keys) {
