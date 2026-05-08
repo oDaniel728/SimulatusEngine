@@ -15,6 +15,7 @@ import Key from "./utils/Key";
 export default class BoardKeyboardHandler {
 
     protected keysPressed: Set<string>;
+    protected hooked: boolean = false;
 
     constructor(bel?: BoardElement) {
         this.keysPressed = new Set();
@@ -36,7 +37,10 @@ export default class BoardKeyboardHandler {
     }
 
     protected hook(element: HTMLElement | any): void {
-        element.addEventListener("keydown", this.onKeyDown);
-        element.addEventListener("keyup", this.onKeyUp);
+        if (!this.hooked) {
+            element.addEventListener("keydown", this.onKeyDown);
+            element.addEventListener("keyup", this.onKeyUp);
+            this.hooked = true;
+        }
     }
 }
