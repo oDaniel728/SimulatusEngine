@@ -4,7 +4,7 @@
  * Auto-generated documentation comment for core/engine/utils/Easing.ts.
  */
 
-enum Easing {
+export enum Easing {
     Linear = "linear",
     EaseIn = "ease-in",
     EaseOut = "ease-out",

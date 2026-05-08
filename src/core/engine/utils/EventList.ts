@@ -13,7 +13,7 @@ type EventListenerProps = {
  *
  * Class for the engine.
  */
-export default class EventList<F extends (...args: any[]) => void> {
+export class EventList<F extends (...args: any[]) => void> {
     private events: F[];
 
     /**
@@ -153,3 +153,4 @@ export default class EventList<F extends (...args: any[]) => void> {
         }
     }
 }
+export default EventList;

@@ -1,0 +1,8 @@
+{
+    "entryPoints": [
+        "src/core",
+        "src/corex"
+    ],
+    "entryPointStrategy": "expand",
+    "out": "docs"
+}

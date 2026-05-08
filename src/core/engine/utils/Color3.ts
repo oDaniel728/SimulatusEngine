@@ -39,7 +39,7 @@ const clamp = (value: number, min: number, max: number) => Math.min(max, Math.ma
  * const cor = new Color3(128, 64, 255);
  * console.log(cor.toString()); // rgba(128, 64, 255, 1)
  */
-export default class Color3 {
+export class Color3 {
 
     /** Cor transparente (0, 0, 0, 0). */
     public static readonly TRANSPARENT = new Color3(0, 0, 0, 0);
@@ -554,3 +554,5 @@ export default class Color3 {
         element.style.backgroundColor = this.toString();
     }
 }
+
+export default Color3;

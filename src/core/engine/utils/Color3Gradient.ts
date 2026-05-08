@@ -6,7 +6,7 @@ import BoardElement from "../BoardElement.js";
 
 type Direction = "top" | "bottom" | "left" | "right" | "top left" | "top right" | "bottom left" | "bottom right";
 
-export default class Color3Gradient implements Applier, BoardApplier {
+export class Color3Gradient implements Applier, BoardApplier {
     private colors: Color3[] = [];
     private angle: number = 0;
 
@@ -302,3 +302,4 @@ export default class Color3Gradient implements Applier, BoardApplier {
         element.style.background = this.toString();
     }
 }
+export default Color3Gradient;

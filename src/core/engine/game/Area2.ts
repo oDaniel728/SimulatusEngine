@@ -15,7 +15,7 @@ type StylableHTMLElement = { style: CSS.Properties };
  *
  * Class for the engine.
  */
-export default class Area2 implements Applier {
+export class Area2 implements Applier {
 
     /**
      * Posição da Area
@@ -392,3 +392,4 @@ export default class Area2 implements Applier {
         element.style.height = `${this.size.y}px`;
     }
 }
+export default Area2;

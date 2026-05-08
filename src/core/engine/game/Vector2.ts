@@ -9,7 +9,7 @@
  *
  * Class for the engine.
  */
-export default class Vector2 {
+export class Vector2 {
 
     private _x!: number;
     private _y!: number;
@@ -381,3 +381,5 @@ export default class Vector2 {
         return new Vector2(this.x, this.y);
     }
 }
+
+export default Vector2;
