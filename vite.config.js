@@ -8,6 +8,8 @@ export default defineConfig(({ command }) => ({
         alias: {
             "core": resolve(__dirname, "src/core"),
             "core/": resolve(__dirname, "src/core/"),
+            "corex": resolve(__dirname, "src/corex"),
+            "corex/": resolve(__dirname, "src/corex/"),
             "@game": resolve(__dirname, "src/script/game"),
             "@game/": resolve(__dirname, "src/script/game")
         }
