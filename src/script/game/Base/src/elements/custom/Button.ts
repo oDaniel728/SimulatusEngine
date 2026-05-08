@@ -16,6 +16,7 @@ import StyleBuilder from "core/engine/appliers/StyleBuilder";
 import BoardTextElement from "core/engine/BoardTextElement";
 import Identifier from "core/structure/Identifier";
 import Mouse from "core/engine/utils/Mouse";
+import Color3Gradient from "core/engine/utils/Color3Gradient.js";
 
 /**
  * Button
@@ -38,7 +39,11 @@ export default class Button extends BoardTextElement {
         .buildAlignment(g =>
             g.horizontal("center")
              .vertical("center")
-        );
+        )
+        .buildBorder(g => 
+            g.radius("20px")
+        )
+        ;
 
     public content = Text.translatable(Identifier.of(BaseLoader.ID, "text"));
 
@@ -120,7 +125,12 @@ export default class Button extends BoardTextElement {
     }
 
     protected onLoop(): void {
-        this.bg = new BackgroundColorApplier(this.bgcolor);
+        this.bg = new BackgroundColorApplier(
+            new Color3Gradient()
+                .append(this.bgcolor.applyBrightness(.6))
+                .append(this.bgcolor.applyBrightness(0.3))
+                .setAngle("bottom")
+            );
         this.apply(this.bg);
     }
 

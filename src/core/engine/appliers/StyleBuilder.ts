@@ -11,6 +11,7 @@ import Easing from "../utils/Easing";
 import Animation from "../Animation";
 import StyleClass from "../utils/StyleClass.js";
 import BoardElement from "../BoardElement.js";
+import Color3Gradient from "../utils/Color3Gradient.js";
 
 class Builder {
     protected _style = {} as Properties;
@@ -313,6 +314,11 @@ class BackgroundBuilder extends Builder {
 
     public clip(value: Properties["backgroundClip"]): this {
         this._style.backgroundClip = value;
+        return this;
+    }
+
+    public colorGradient(value: Color3Gradient): this {
+        this._style.background = value.toString();
         return this;
     }
 }

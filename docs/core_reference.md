@@ -55,10 +55,12 @@
     - [ImageApplier](#imageapplier)
     - [TextureApplier](#textureapplier)
     - [ColorApplier](#colorapplier)
+    - [BorderApplier](#borderapplier)
     - [SizeApplier](#sizeapplier)
     - [AnimationApplier](#animationapplier)
   - [Classes de Utilitário](#classes-de-utilitario)
     - [Color3](#color3)
+    - [Color3Gradient](#color3gradient)
     - [Vector2](#vector2)
     - [Area2](#area2)
     - [Vector2Controller](#vector2controller)
@@ -751,12 +753,45 @@ Aplica um asset de imagem carregado como textura com controles de repetição, t
 `src/core/engine/appliers/ColorApplier.ts`
 
 - `private _color: Properties["color"]`
+- `private _gradient: Color3Gradient | null`
 - `public get color(): Properties["color"]`
-- `public set color(value: Properties["color"] | Color3)`
-- `constructor(color: Properties["color"] | Color3 = "inherit")`
+- `public set color(value: Properties["color"] | Color3 | Color3Gradient)`
+- `constructor(color: Properties["color"] | Color3 | Color3Gradient = "inherit")`
 - `public applyToElement(element: { style: Properties }): void`
 
-Aplica uma cor de texto a um elemento.
+Aplica uma cor de texto a um elemento. Se `Color3Gradient` for fornecido, aplica um gradiente de texto usando `background-clip: text`.
+
+#### BorderApplier
+
+`src/core/engine/appliers/BorderApplier.ts`
+
+- `private _style: Properties`
+- `public get/set border(): Properties["border"]`
+- `public get/set borderWidth(): Properties["borderWidth"]`
+- `public get/set borderStyle(): Properties["borderStyle"]`
+- `public get/set borderColor(value: Properties["borderColor"] | Color3)`
+- `public get/set borderRadius(): Properties["borderRadius"]`
+- `public get/set borderTopWidth(): Properties["borderTopWidth"]`
+- `public get/set borderRightWidth(): Properties["borderRightWidth"]`
+- `public get/set borderBottomWidth(): Properties["borderBottomWidth"]`
+- `public get/set borderLeftWidth(): Properties["borderLeftWidth"]`
+- `public get/set borderTopStyle(): Properties["borderTopStyle"]`
+- `public get/set borderRightStyle(): Properties["borderRightStyle"]`
+- `public get/set borderBottomStyle(): Properties["borderBottomStyle"]`
+- `public get/set borderLeftStyle(): Properties["borderLeftStyle"]`
+- `public get/set borderTopColor(value: Properties["borderTopColor"] | Color3)`
+- `public get/set borderRightColor(value: Properties["borderRightColor"] | Color3)`
+- `public get/set borderBottomColor(value: Properties["borderBottomColor"] | Color3)`
+- `public get/set borderLeftColor(value: Properties["borderLeftColor"] | Color3)`
+- `public get/set borderImage(): Properties["borderImage"] | Color3Gradient`
+- `public get/set borderImageSource(): Properties["borderImageSource"] | Color3Gradient`
+- `public get/set borderImageSlice(): Properties["borderImageSlice"]`
+- `public get/set borderImageWidth(): Properties["borderImageWidth"]`
+- `public get/set borderImageOutset(): Properties["borderImageOutset"]`
+- `public get/set borderImageRepeat(): Properties["borderImageRepeat"]`
+- `public applyToElement(element: { style: Properties }): void`
+
+Aplica propriedades de borda CSS a um elemento. Suporta `Color3Gradient` em `borderImage` e `borderImageSource`.
 
 #### SizeApplier
 
@@ -815,6 +850,25 @@ Esta classe é um shell para appliers de elemento baseados em animação e atual
 - `public applyToElement(element: { style: CSS.Properties }): void`
 
 Um utilitário de cor que suporta entradas em hex, RGB, RGBA, HSL e cores nomeadas.
+
+#### Color3Gradient
+
+`src/core/engine/utils/Color3Gradient.ts`
+
+- `constructor(colors?: Color3[], angle?: number | Direction)`
+- `public append(color: Color3): this`
+- `public setAngle(angle: number | Direction): this`
+- `public toString(): string`
+- `public applyBrightness(factor: number): Color3Gradient`
+- `public applyDarkness(factor: number): Color3Gradient`
+- `public applySaturation(factor: number): Color3Gradient`
+- `public applyAlpha(factor: number): Color3Gradient`
+- `public applyContrast(factor: number): Color3Gradient`
+- `public applyGrayscale(): Color3Gradient`
+- `public applySepia(): Color3Gradient`
+- `public applyToElement(element: { style: Properties; }): void`
+
+Representa um gradiente linear de `Color3` que pode ser aplicado como background.
 
 #### Vector2
 
