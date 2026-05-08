@@ -62,6 +62,18 @@ export default class Area2 implements Applier {
                point.y >= this.position.y &&
                point.y <= this.position.y + this.size.y;
     }
+    public containsPoint(point: Vector2): boolean {
+        return this.contains(point);
+    }
+    public collidesWith(collision: Area2): boolean
+    public collidesWith(point: Vector2): boolean
+    public collidesWith(other: Area2 | Vector2): boolean {
+        if (other instanceof Area2) {
+            return this.intersects(other);
+        } else {
+            return this.containsPoint(other);
+        }
+    }
 
     public intersects(other: Area2): boolean {
         return !(other.position.x > this.position.x + this.size.x ||

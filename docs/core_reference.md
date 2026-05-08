@@ -914,6 +914,10 @@ Um vetor 2D usado para posição, tamanho e movimento.
 - `public get bottom(): number`
 - `public getRelativePoint(point: Vector2): Vector2`
 - `public contains(point: Vector2): boolean`
+- `public containsPoint(point: Vector2): boolean`
+- `public collidesWith(collision: Area2): boolean`
+- `public collidesWith(point: Vector2): boolean`
+- `public collidesWith(other: Area2 | Vector2): boolean`
 - `public intersects(other: Area2): boolean`
 - `public getCenter(): Vector2`
 - `public toString(): string`
