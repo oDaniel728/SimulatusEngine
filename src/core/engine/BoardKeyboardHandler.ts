@@ -25,7 +25,24 @@ export default class BoardKeyboardHandler {
     }
 
     public isPressing(...keys: (string | Key)[]): boolean {
-        return keys.every(key => this.keysPressed.has(key));
+        for (const key of keys) {
+            if (typeof key === "string") {
+                if (this.keysPressed.has(key)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public isPressingAll(...keys: (string | Key)[]): boolean {
+        for (const key of keys) {
+            if (typeof key === "string") {
+                if (!this.keysPressed.has(key)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     protected onKeyDown(event: KeyboardEvent): void {
