@@ -48,13 +48,14 @@ export default class Vector2 {
     public add(other: number): Vector2
     public add(x: number, y: number): Vector2
     public add(x: Vector2 | number, y?: number): Vector2 {
-        if (typeof x === "number") {
+        if (typeof x === "number" && y === undefined) {
             return new Vector2(this.x + x, this.y + x);
         } else if (y !== undefined && typeof x === "number") {
             return new Vector2(this.x + x, this.y + y);
-        } else {
+        } else if (x instanceof Vector2) {
             return new Vector2(this.x + x.x, this.y + x.y);
         }
+        return new Vector2;
     }
 
     public subtract(other: Vector2): Vector2
