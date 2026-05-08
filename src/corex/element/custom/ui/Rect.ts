@@ -36,18 +36,20 @@ export default class Rect extends BoardElement<HTMLDivElement> {
     }
 
     public getPosition(): Vector2 {
-        return this.area.position;
+        return new Vector2(this.area.x, this.area.y);
     }
 
     public setPosition(position: Vector2): void
     public setPosition(x: number, y: number): void
     public setPosition(x: number | Vector2, y?: number): void {
         if (x instanceof Vector2) {
-            this.area.position = x;
+            this.area.x = x.x;
+            this.area.y = x.y;
         } else {
-            this.area.position = new Vector2(x, y ?? 0);
+            this.area.x = x;
+            this.area.y = y ?? 0;
         }
-        this.updateElementPosition()
+        this.update()
     }
 
     public setSize(size: Vector2): void
@@ -58,7 +60,7 @@ export default class Rect extends BoardElement<HTMLDivElement> {
         } else {
             this.area.size = new Vector2(width, height ?? 0);
         }
-        this.updateElementSize();
+        this.update();
     }
 
     constructor(initialArea?: Area2) {
