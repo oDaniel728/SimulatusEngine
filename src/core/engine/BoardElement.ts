@@ -44,10 +44,10 @@ export default class BoardElement<E extends HTMLElement = HTMLElement> {
         } else {
             this.el = board;
         }
-
+        
         this.events = new BoardDOMEvents(this as unknown as BoardElement<HTMLElement>);
         this.syncAnchorPoint();
-
+        
         this.keyboardHandler = new BoardKeyboardHandler(this as unknown as BoardElement<HTMLElement>);
         BoardElement.Instances.add(this);
     }
