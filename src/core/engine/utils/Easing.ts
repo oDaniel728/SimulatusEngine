@@ -1,9 +1,6 @@
 /**
- * Easing.ts
- *
- * Auto-generated documentation comment for core/engine/utils/Easing.ts.
+ * Define um conjunto de funções de easing para animações, utilizando curvas de Bezier para criar transições suaves e naturais. Essas funções podem ser usadas para controlar a velocidade e o ritmo das animações, proporcionando uma experiência visual mais agradável. As opções incluem easing linear, ease-in, ease-out, ease-in-out, bem como variações exponenciais, quadráticas, cúbicas, quarticas, quínticas, senoidais e de retorno (back). Cada função é representada por uma string que define a curva de Bezier correspondente.
  */
-
 export enum Easing {
     Linear = "linear",
     EaseIn = "ease-in",
