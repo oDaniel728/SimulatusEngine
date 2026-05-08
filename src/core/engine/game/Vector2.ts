@@ -46,44 +46,53 @@ export default class Vector2 {
 
     public add(other: Vector2): Vector2
     public add(other: number): Vector2
-    public add(other: Vector2 | number): Vector2 {
-        if (typeof other === "number") {
-            return new Vector2(this.x + other, this.y + other);
+    public add(x: number, y: number): Vector2
+    public add(x: Vector2 | number, y?: number): Vector2 {
+        if (typeof x === "number") {
+            return new Vector2(this.x + x, this.y + x);
+        } else if (y !== undefined && typeof x === "number") {
+            return new Vector2(this.x + x, this.y + y);
         } else {
-            return new Vector2(this.x + other.x, this.y + other.y);
+            return new Vector2(this.x + x.x, this.y + x.y);
         }
     }
 
     public subtract(other: Vector2): Vector2
     public subtract(other: number): Vector2
-    public subtract(other: Vector2 | number): Vector2 {
-        if (typeof other === "number") {
-            return new Vector2(this.x - other, this.y - other);
+    public subtract(x: number, y: number): Vector2
+    public subtract(x: Vector2 | number, y?: number): Vector2 {
+        if (typeof x === "number") {
+            return new Vector2(this.x - x, this.y - x);
+        } else if (y !== undefined && typeof x === "number") {
+            return new Vector2(this.x - x, this.y - y);
         } else {
-            return new Vector2(this.x - other.x, this.y - other.y);
+            return new Vector2(this.x - x.x, this.y - x.y);
         }
     }
 
     public multiply(other: number): Vector2
     public multiply(other: Vector2): Vector2
-    public multiply(other: number | Vector2): Vector2 {
-        if (typeof other === "number") {
-            return new Vector2(this.x * other, this.y * other);
+    public multiply(x: number, y: number): Vector2
+    public multiply(x: Vector2 | number, y?: number): Vector2 {
+        if (typeof x === "number") {
+            return new Vector2(this.x * x, this.y * x);
+        } else if (y !== undefined && typeof x === "number") {
+            return new Vector2(this.x * x, this.y * y);
         } else {
-            return new Vector2(this.x * other.x, this.y * other.y);
+            return new Vector2(this.x * x.x, this.y * x.y);
         }
     }
 
     public divide(other: number): Vector2
     public divide(other: Vector2): Vector2
-    public divide(other: number | Vector2): Vector2 {
-        if (typeof other === "number") {
-            if (other === 0) {
-                throw new Error("Cannot divide by zero.");
-            }
-            return new Vector2(this.x / other, this.y / other);
+    public divide(x: number, y: number): Vector2
+    public divide(x: Vector2 | number, y?: number): Vector2 {
+        if (typeof x === "number") {
+            return new Vector2(this.x / x, this.y / x);
+        } else if (y !== undefined && typeof x === "number") {
+            return new Vector2(this.x / x, this.y / y);
         } else {
-            return new Vector2(this.x / other.x, this.y / other.y);
+            return new Vector2(this.x / x.x, this.y / x.y);
         }
     }
 
