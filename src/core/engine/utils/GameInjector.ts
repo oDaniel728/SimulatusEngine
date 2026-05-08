@@ -33,6 +33,10 @@ export class GameInjector {
      * @async
      * @param {string} name - O nome do namespace a ser carregado.
      * @returns {Promise<void>} - Uma promessa que é resolvida quando o processo de carregamento do namespace é concluído.
+     * 
+     * @example
+     * GameInjector.manifests.set("main", new GameInjectionManifestStructure(MainPreLoader, MainLoader, MainDOMLoader, MainUnloader));
+     * await GameInjector.loadNamespace("main"); // Isso carregará o namespace "main" e executará o processo de injeção dos componentes listados no manifesto correspondente.
      */
     public static async loadNamespace(name: string): Promise<void> {
         const manifest = GameInjector.manifests.get(name);
@@ -52,6 +56,9 @@ export class GameInjector {
      * @static
      * @async
      * @returns {Promise<void>} - Uma promessa que é resolvida quando o processo de inicialização do GameInjector é concluído.
+     * 
+     * @example
+     * await GameInjector.init(); // Isso inicializará o GameInjector, configurando o evento antes do carregamento para carregar os namespaces registrados no mapa de manifestos e acionando o evento para permitir que outras partes do código se inscrevam para executar ações antes do início do processo de injeção.
      */
     public static async init(): Promise<void> {
         GameInjector.beforeLoad.addEventListener(async () => {
@@ -81,14 +88,17 @@ export class GameInjector {
      * @param {typeof Loader} loader - Referência ao Loader, que gerencia o carregamento dos recursos principais do jogo.
      * @param {typeof DOMLoader} domLoader - Referência ao DOMLoader, encarregado de manipular elementos do DOM relacionados ao jogo.
      * @param {typeof Unloader} unloader - Referência ao Unloader, que lida com a limpeza e descarregamento dos recursos quando necessário.
-     * @returns {*} 
+     * @returns {Promise<void>} - Uma promessa que é resolvida quando o processo de injeção é concluído.
+     * 
+     * @example
+     * await GameInjector.inject(MainPreLoader, MainLoader, MainDOMLoader, MainUnloader); // Isso realizará o processo de injeção dos componentes fornecidos, garantindo que eles sejam configurados corretamente para o ciclo de vida do jogo e adicionando um ouvinte para o evento "beforeunload" para garantir que o Unloader seja chamado quando o usuário sair da página ou fechar o navegador.
      */
     public static async inject(
         preLoader: typeof PreLoader,
         loader: typeof Loader,
         domLoader: typeof DOMLoader,
         unloader: typeof Unloader
-    ) {
+    ): Promise<void> {
         await preLoader.main();
         await loader.main();
         await domLoader.main();
