@@ -11,8 +11,30 @@ type StylableHTMLElement = { style: CSS.Properties };
 /**
  * Applier
  *
- * Interface for the engine.
+ * Interface para aplicar estilos a elementos HTML.
+ * 
+ * @example
+ * class ContentApplier implements Applier {
+ *     content: string;
+ * 
+ *     constructor(content: string) {
+ *         this.content = content;
+ *     }
+ *  
+ *     applyToElement(element: StylableHTMLElement): void {
+ *         element.style.content = this.content;
+ *     }
+ * }
+ * // --- // --- //
+ * boardElement.apply(new ContentApplier("Olá, mundo!"));
  */
-export default interface Applier {
+export interface Applier {
+
+    /**
+     * Aplica os estilos ao elemento HTML fornecido.
+     *
+     * @param {StylableHTMLElement} element - O BoardElement ou HTML Element a ser estilizado.
+     */
     applyToElement(element: StylableHTMLElement): void;
 }
+export default Applier;
